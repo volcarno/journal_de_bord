@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Trail - Perdiguère</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
+          	integrity="sha512-K…(truncated)…" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Leaflet CSS pour carte -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 400px; margin: 2em 0; }
+    </style>
+</head>
+<body class="no-sidebar is-preload">
+<div id="page-wrapper">
+
+     <!-- Header -->
+    <div id="header">
+        <div class="inner">
+            <header>
+                <h1>
+                <a href="../index.html" id="logo">
+                    <img src="../images/maison.png" alt="Accueil" style="height: 70px; vertical-align: middle;">
+                </a>
+                </h1>
+            </header>
+        </div>
+    </div>
+
+    <div class="bandeau">
+        <div class="texte-defilant">
+            <span>Distance : xx km</span>
+            <span>Dénivelé : xx km</span>
+            <span>Météo : nuageux, menace d'orage puis découvert.</span>
+            <span>Durée : x h x min</span>  
+        </div>
+    </div>
+    
+    <!-- Main -->
+    <div class="wrapper style1">
+        <div class="container">
+            <article id="main" class="special">
+                <header>
+                    <h2><a href="#">Literole et pic de Perdiguère (3222m)</a></h2>
+                    <p>Granges d'Astau - Septembre 2025</p>
+                </header>
+                <p>
+                    Un trail sur le plus haut pic du Luchonnais, entre sentiers autoroutes et aériens
+                </p>
+
+                <section>
+                    <header>
+                        <h3>Mon trail</h3>
+                    </header>
+                    <p>
+                        Départ 7h de Toulouse. Après un arrêt sur la route pour acheter un sandwich, arrivée aux granges d'Astau, départ de l'itinéraire du jour.
+                        On commence en courant mais ca tape déjà les jambes. C'est le genre de parcours où on fait que monter, puis on arrive au sommet, puis on fait 
+                        que descendre. Lac d'Oô après 30 minutes. Lac d'Espingo après 1h, puis Portillon après 2h15.
+                    </p>
+                    <p>
+                      De là, un boucle de 7km pour atteindre le sommet du Perdiguère, en passant par le col inférieur de literole, puis sa crête, et une redescente par 
+                      le col supérieur. Que du caillou !! Impossible de courir, ca tape les jambes. Marmottes énormes. Arrivé au col, la vue côté espagnol est déjà superbe.
+                      Le passage sur la crête, plutôt aérien, est splendide. La crête est assez simple. Pico Royo, puis ascension finale un peu sous estimée jusqu'au Perdiguère (encore 200m D+). Vue à 360°. Repas avec un suisse en formation de guide de 
+                      montagne. Discussion en epsagnol avec deux randonneurs venant de Bénasque. Puis redescente, à un rythme évidemment plus rapide qu'à la montée !
+                      Il fait chaud en redescendant, puis on peut dérouler du lac d'espingo jusqu'au parking, où le sentier est moins technique. Retour voiture 28km et 2200m de 
+                      dénivelé plus tard. Gros dodo le soir !!
+                    </p>
+                </section>
+
+                <section>
+                    <header>
+                        <h3>Carte de la sortie</h3>
+                    </header>
+                    <div id="map"></div>
+                    <p>Cette carte peut afficher vos données GPX. Utilisez le contrôle en haut à droite pour changer de fond de carte.</p>
+                </section>
+
+                <!-- Scripts Leaflet et GPX -->
+                <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+                <script>
+                    // Cartes de fond
+                    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors'
+                    });
+
+                    var satellite = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                        subdomains:['mt0','mt1','mt2','mt3'],
+                        attribution: '© Google Maps'
+                    });
+
+                    // Carte centrée sur le trail
+                    var map = L.map('map', {
+                        center: [42.692024, 0.518239], // coordonnées approximatives du perdiguère
+                        zoom: 12,
+                        layers: [osm] // couche par défaut
+                    });
+
+                    // Contrôle pour switcher les fonds
+                    var baseMaps = {
+                        "OpenStreetMap": osm,
+                        "Satellite": satellite
+                    };
+                    L.control.layers(baseMaps).addTo(map);
+
+                    // Ajouter le GPX
+                    var gpx = '../data/literole.gpx'; // fichier GPX dans le même dossier relatif
+                    new L.GPX(gpx, { async: true }).on('loaded', function(e) {
+                        map.fitBounds(e.target.getBounds());
+                    }).addTo(map);
+                </script>
+
+                <section>
+                    <header>
+                        <h3>Conseils et astuces</h3>
+                    </header>
+                    <ul>
+                        <li>Tip 1 : suivre les cairns mais ayez l'itinéraire.</li>
+                        <li>Tip 2 : si vous faites la boucle, le passage par l'aiguille de literole après le col inférieur est délicat</li>
+                        <li>Tip 3 : pour randonneur / traileur expérimenté !</li>
+                        <li>Tip 4 : Pas mal de refuge pour l'eau, mais partir avec de quoi bien se nourir</li>
+                        <li>Tip 5 : Quelques points de bivouac au sommet, la vue doit être pas mal</li>
+                    </ul>
+                </section>                
+            </article>
+
+            <hr />
+
+            <!-- Galerie simple -->
+            <section id="galerie">
+                <header>
+                    <h2><a href="../galerie.html?tag=literole&tag=perdiguere&tag=trail">Galerie photo - Literole</a></h2>
+                </header>
+                <div class="row gtr-25">
+                    <div class="col-4">
+                        <span class="image fit"><img src="../images/literole/01.jpg" alt="Galerie 1" /></span>
+                    </div>
+                    <div class="col-4">
+                        <span class="image fit"><img src="../images/literole/02.jpg" alt="Galerie 2" /></span>
+                    </div>
+                    <div class="col-4">
+                        <span class="image fit"><img src="../images/literole/14.jpg" alt="Galerie 3" /></span>
+                    </div>
+                </div>
+            </section>
+
+            <hr />
+
+            <!-- Section à trois colonnes -->
+            <header>
+                <h2>Autres trails</h2>
+            </header>
+            <div class="row">
+                <article class="col-4 col-12-mobile special">
+                    <a href="rando-besines.html" class="image fit"><img src="../images/besines/03.jpg" alt="" /></a>
+                    <header>
+                        <h3><a href="rando-besines.html">Rando des étangs de Besines</a></h3>
+                    </header>
+                </article>
+                <article class="col-4 col-12-mobile special">
+                    <a href="rando-montcalm.html" class="image fit"><img src="../images/montcalm/13.jpg" alt="" /></a>
+                    <header>
+                        <h3><a href="rando-montcalm.html">Rando sommet du Montcalm</a></h3>
+                    </header>
+                </article>
+                <article class="col-4 col-12-mobile special">
+                    <a href="rando-turon-neouvielle.html" class="image fit"><img src="../images/neouvielle/11.jpg" alt="" /></a>
+                    <header>
+                        <h3><a href="rando-turon-neouvielle.html">Rando Turon de Néouville</a></h3>
+                    </header>
+                </article>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+			<div id="footer">
+				<div class="container">
+
+					<!-- Ligne 1 : Contact -->
+					<div class="row">
+						<div class="col-12">
+							<section class="contact">
+								<header>
+									<h3>Contactez-moi</h3>
+								</header>
+								<p>Pour toute question, information ou suggestion, n'hésitez pas à me contacter : arno.rabault@gmail.com</p>
+								<ul class="icons">
+									<li><a href="https://www.linkedin.com/in/arno-rabault-a2b931212" class="icon brands fa-linkedin-in"></a></li>
+									<li><a href="https://www.instagram.com/arno_rblt" class="icon brands fa-instagram"></a></li>
+									<li><a href="https://www.polarsteps.com/arnocracheurdefeu" class="fa-solid fa-earth-americas"></a></li>
+									<li><a href="https://www.cagnotte.com/lien" class="icon fa-credit-card"></a></li>
+								</ul>
+							</section>
+						</div>
+					</div>
+
+					<hr />
+
+					<!-- Ligne 2 : Galerie photo -->
+					<div class="row">
+						<div class="col-12">
+							<section class="footer-gallery">
+								<header>
+									<h3><a href="../galerie.html">Galerie</a></h3>
+								</header>
+								<div class="row gtr-25">
+									<div class="col-3">
+										<a href="../galerie.html" class="image fit"><img src="../images/pic10.jpg" alt="" /></a>
+									</div>
+									<div class="col-3">
+										<a href="../galerie.html" class="image fit"><img src="../images/pic11.jpg" alt="" /></a>
+									</div>
+									<div class="col-3">
+										<a href="../galerie.html" class="image fit"><img src="../images/pic12.jpg" alt="" /></a>
+									</div>
+									<div class="col-3">
+										<a href="../galerie.html" class="image fit"><img src="../images/pic13.jpg" alt="" /></a>
+									</div>
+								</div>
+							</section>
+						</div>
+					</div>
+
+					<hr />
+
+					<!-- Copyright -->
+					<div class="row">
+						<div class="col-12">
+							<div class="copyright">
+								<ul class="menu">
+									<li>&copy; Volcarno. All rights reserved.</li>
+									<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+<!-- Scripts -->
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/jquery.dropotron.min.js"></script>
+<script src="../assets/js/jquery.scrolly.min.js"></script>
+<script src="../assets/js/jquery.scrollex.min.js"></script>
+<script src="../assets/js/browser.min.js"></script>
+<script src="../assets/js/breakpoints.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/main.js"></script>
+
+<!-- Leaflet JS pour GPX -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
+<script>
+    // Carte
+    var map = L.map('map').setView([10.0, -84.0], 7); // Exemple Costa Rica
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Ajouter un fichier GPX
+    var gpx = 'data/mon_parcours.gpx'; // chemin relatif depuis ce fichier
+    new L.GPX(gpx, { async: true }).on('loaded', function(e) {
+        map.fitBounds(e.target.getBounds());
+    }).addTo(map);
+</script>
+
+</body>
+</html>

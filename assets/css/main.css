@@ -196,8 +196,8 @@ input, select, textarea {
 		position: relative;
 		display: block;
 		border: 0;
-		top: 4.5em;
-		margin-bottom: 9em;
+		top: 1em;
+		margin-bottom: 2em;
 		height: 6px;
 		border-top: solid 1px rgba(128, 128, 128, 0.2);
 		border-bottom: solid 1px rgba(128, 128, 128, 0.2);
@@ -273,6 +273,35 @@ input, select, textarea {
 			}
 
 		}
+
+		/* Bandeau défilant */
+		.bandeau {
+		background: black;
+		color: white;
+		overflow: hidden;
+		white-space: nowrap;
+		box-sizing: border-box;
+		width: 100%;
+		padding: 10px 0;
+		position: relative;
+		}
+
+		.texte-defilant {
+		display: inline-block;
+		padding-left: 100%;
+		animation: defilement 20s linear infinite;
+		}
+
+		.texte-defilant span {
+		margin-right: 50px; /* espace entre les mots */
+		}
+
+
+		@keyframes defilement {
+		from { transform: translateX(0); }
+		to   { transform: translateX(-100%); }
+		}
+
 
 /* Row */
 
@@ -2180,9 +2209,9 @@ input, select, textarea {
 		background-size: cover;
 		background-position: center center;
 		background-attachment: fixed;
-		color: #fff;
+		color: #020202;
 		text-align: center;
-		padding: 7.5em 0 2em 0;
+		padding: 2em 0 2em 0;
 		cursor: default;
 	}
 
@@ -2211,10 +2240,15 @@ input, select, textarea {
 			}
 
 		#header h1 {
-			color: #fff;
+			color: #fef9f9;
 			font-size: 3em;
 			line-height: 1em;
-		}
+			text-shadow:
+				-1px -1px 0 black,
+				1px -1px 0 black,
+				-1px  1px 0 black,
+				1px  1px 0 black;
+			}
 
 			#header h1 a {
 				color: inherit;
@@ -2444,6 +2478,32 @@ input, select, textarea {
 		margin-bottom: 0;
 	}
 
+
+	.sidebar-article {
+		position: relative;
+		height: 150px; /* hauteur de chaque article */
+		margin-bottom: 15px;
+		background-size: cover;
+		background-position: center;
+		border-radius: 10px;
+		overflow: hidden;
+	}
+
+	.sidebar-article header {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		text-align: center;
+		background: rgba(0,0,0,0.5); /* fond semi-transparent pour le titre */
+		padding: 10px 0;
+	}
+
+	.sidebar-article h3 a {
+		color: #fff;
+		text-decoration: none;
+		font-size: 1.2em;
+	}
+
 /* Main */
 
 	#main {
@@ -2453,6 +2513,7 @@ input, select, textarea {
 		#main section:first-of-type {
 			padding-top: 2em;
 		}
+
 
 /* Footer */
 
@@ -3096,6 +3157,16 @@ input, select, textarea {
 				padding: 3em 2em 3em 2em;
 			}
 
+			#banner p {
+				margin-top: 0;  /* retire la marge du paragraphe */
+				margin-bottom :0;
+			}
+
+			#banner h2 {
+				margin-bottom: 0.5em;
+				margin-top: 0.5em;
+			}
+
 		/* Sidebar */
 
 			#sidebar > hr:first-of-type {
@@ -3136,3 +3207,40 @@ input, select, textarea {
 					}
 
 	}
+
+
+.conteneur {
+  display: flex;
+  align-items: center; /* centre verticalement */
+  gap: 20px; /* espace entre l'image et le texte */
+}
+
+.photo {
+  width: 150px; /* ou n'importe quelle taille adaptée */
+  height: auto;
+}
+
+.texte {
+  font-size: 16px;
+}
+
+/*barre de progression */
+.progress {
+  background: #eee;
+  border-radius: 15px;
+  overflow: hidden;
+  height: 15px;
+  width: 80%;          /* largeur de la barre */
+  margin: 20px auto;   /* centrée */
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.progress-bar {
+  height: 100%;
+  line-height: 15px;
+  color: white;
+  text-align: center;
+  background: linear-gradient(90deg, #70f807, #fc0606);
+  font-weight: bold;
+  transition: width 10s ease; /* animation fluide */
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Galerie photos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    .gallery { display: flex; flex-wrap: wrap; gap: 1em; }
+    .gallery .image { width: 20%; }
+    .gallery img { width: 100%; border-radius: 8px; }
+    .hidden { display: none; }
+    .filter { margin: 1em 0; }
+  </style>
+</head>
+<body>
+  <div id="page-wrapper">
+    <div id="header">
+      <div class="inner">
+        <header>
+          <h1>
+            <a href="index.html" id="logo">
+              <img src="images/maison.png" alt="Accueil" style="height: 70px; vertical-align: middle;">
+            </a>
+          </h1>
+        </header>
+      </div>
+    </div>
+
+    <div class="wrapper style1">
+      <div class="container">
+        <header>
+          <h2>Galerie photos</h2>
+          <p> Toutes mes photos favorites et disponibles dans chaque article sont regroupées ici. Choisissez un filtre pour trouver les photos que vous cherchez.</p>
+        </header>
+
+        <!-- Menu filtre -->
+        <div class="filter">
+          <label for="tagFilter">Filtrer par mot-clé :</label>
+          <select id="tagFilter">
+            <option value="all">Tous</option>
+            <option value="volcan">Volcan</option>
+            <option value="guatemala">Guatemala</option>
+            <option value="Santiaguito">Santiaguito</option>
+            <option value="randonnée">Randonnée</option>
+            <option value="literole">Literole</option>
+            <option value="perdiguere">Perdiguere</option>
+            <option value="trail">Trail</option>
+          </select>
+        </div>
+
+        <!-- Galerie -->
+        <div class="gallery" id="gallery">
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/01.jpg" alt="Santiaguito volcan">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/02.jpg" alt="Santiaguito volcan">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/03.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/04.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/05.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/06.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/07.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/08.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/09.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/10.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/11.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/12.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/13.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/14.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/15.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/16.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/17.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/18.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/19.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/20.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/21.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/22.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/23.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/24.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/25.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/26.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/27.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/28.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/29.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/30.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="Santiaguito volcan">
+            <img src="images/santiaguito/31.jpg" alt="Santiaguito">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/01.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/02.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/03.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/04.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/05.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/06.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/07.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/08.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/09.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/10.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/11.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/12.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/13.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/14.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/15.jpg" alt="literole">
+          </div>
+          <div class="image" data-tags="literole perdiguere trail">
+            <img src="images/literole/16.jpg" alt="literole">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const filter = document.getElementById('tagFilter');
+    const images = document.querySelectorAll('#gallery .image');
+
+    function applyFilter(value) {
+      images.forEach(img => {
+        const tags = img.dataset.tags.split(' ');
+        if (value === 'all' || tags.includes(value)) {
+          img.classList.remove('hidden');
+        } else {
+          img.classList.add('hidden');
+        }
+      });
+      filter.value = value; // met à jour le menu déroulant
+    }
+
+    // Filtrage quand on change le menu
+    filter.addEventListener('change', () => {
+      applyFilter(filter.value);
+    });
+
+    // Lecture du paramètre d'URL
+    const params = new URLSearchParams(window.location.search);
+    const tag = params.get('tag');
+    if (tag) {
+      applyFilter(tag);
+    } else {
+      applyFilter('all');
+    }
+  </script>
+
+</body>
+</html>
