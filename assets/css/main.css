@@ -1,11 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,400italic,600");
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap');
 @import url("fontawesome-all.min.css");
 
-/*
-	Helios by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
 
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
@@ -129,6 +126,10 @@ input, select, textarea {
 		font-size: 2.85em;
 	}
 
+	.wrapper h2 {
+		margin-bottom: 0.5em;
+	}
+
 	h3 {
 		font-size: 1.25em;
 	}
@@ -158,7 +159,7 @@ input, select, textarea {
 	}
 
 		a:hover {
-			color: #ef8376;
+			color: #d35400;
 			border-bottom-color: transparent;
 		}
 
@@ -289,7 +290,7 @@ input, select, textarea {
 		.texte-defilant {
 		display: inline-block;
 		padding-left: 100%;
-		animation: defilement 20s linear infinite;
+		animation: defilement 30s linear infinite;
 		}
 
 		.texte-defilant span {
@@ -1844,6 +1845,19 @@ input, select, textarea {
 				margin: 0 auto;
 				width: auto;
 			}
+		
+			.image.test {
+				display: block;
+				width: 100%;
+				overflow: hidden;
+				margin:2em 0 2em 0;
+			}
+
+			.image.test img {
+				width: 100%;
+				height: 300px;
+				object-fit: cover;
+			}
 
 /* List */
 
@@ -1864,6 +1878,18 @@ input, select, textarea {
 		ol li {
 			padding-left: 0.25em;
 		}
+
+
+.list-tech {
+    list-style-type: disc; /* Force les points */
+    margin-left: 1.5em;    /* Décale la liste vers la droite */
+    margin-bottom: 1.5em;  /* Espace avec le paragraphe suivant */
+}
+
+.list-tech li {
+    padding-left: 0.5em;
+    margin-bottom: 0.5em;
+}
 
 /* Actions */
 
@@ -1964,7 +1990,7 @@ input, select, textarea {
 			}
 
 				ul.icons li a:hover {
-					color: #ef8376;
+					color: #d35400;
 				}
 
 /* Form */
@@ -2001,7 +2027,7 @@ input, select, textarea {
 		form select:focus,
 		form textarea:focus {
 			background: #fff;
-			border-color: #df7366;
+			border-color: #d35400;
 		}
 
 	form input[type="text"],
@@ -2084,7 +2110,7 @@ input, select, textarea {
 	.button {
 		position: relative;
 		display: inline-block;
-		background: #df7366;
+		background: #000000;
 		color: #fff;
 		text-align: center;
 		border-radius: 0.5em;
@@ -2106,7 +2132,7 @@ input, select, textarea {
 		button:hover,
 		.button:hover {
 			color: #fff;
-			background: #ef8376;
+			background: #d35400;
 		}
 
 		input[type="button"].alt,
@@ -2197,25 +2223,31 @@ input, select, textarea {
 		padding: 6em 0 6em 0;
 	}
 
+		.wrapper.style1 {
+			padding-top: 3em !important;
+		}
+
 		.wrapper.style2 {
 			padding-top: 0;
 		}
 
+
 /* Header */
+#header {
+    position: relative;
+    text-align: center;
+	padding-bottom: 2em;
+    cursor: default;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1;
+    /* Image par défaut (Pages secondaires) */
+    background-color: #ffffff;
+}
 
-	#header {
-		position: relative;
-		background-image: url("../../images/header.jpg");
-		background-size: cover;
-		background-position: center center;
-		background-attachment: fixed;
-		color: #020202;
-		text-align: center;
-		padding: 2em 0 2em 0;
-		cursor: default;
-	}
-
-		#header:before {
+#header:before {
 			content: '';
 			display: inline-block;
 			vertical-align: middle;
@@ -2240,15 +2272,10 @@ input, select, textarea {
 			}
 
 		#header h1 {
-			color: #fef9f9;
+			color: #fff;
 			font-size: 3em;
 			line-height: 1em;
-			text-shadow:
-				-1px -1px 0 black,
-				1px -1px 0 black,
-				-1px  1px 0 black,
-				1px  1px 0 black;
-			}
+		}
 
 			#header h1 a {
 				color: inherit;
@@ -2280,38 +2307,57 @@ input, select, textarea {
 			margin: 1em 0 0 0;
 		}
 
-	body.homepage #header {
-		height: 100vh;
-		min-height: 40em;
-	}
+/* --- 2. LOGIQUE HOMEPAGE (Photo + Overlay) --- */
 
-		body.homepage #header h1 {
-			font-size: 4em;
-		}
+body.homepage #header {
+    height: 100vh;
+    min-height: 40em;
+    background-image: url("../../images/header.jpg");
+    color: #0f0202;
+}
 
-		body.homepage #header:after {
-			content: '';
-			background: #1C0920;
-			display: block;
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			opacity: 0;
-			-moz-transition: opacity 2.5s ease-in-out;
-			-webkit-transition: opacity 2.5s ease-in-out;
-			-ms-transition: opacity 2.5s ease-in-out;
-			transition: opacity 2.5s ease-in-out;
-			-moz-transition-delay: 0.5s;
-			-webkit-transition-delay: 0.5s;
-			-ms-transition-delay: 0.5s;
-			transition-delay: 0.5s;
-		}
+/* L'overlay de chargement (Le voile qui s'efface) */
+body.homepage #header:after {
+    content: '';
+    background: #1C0920;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    -moz-transition: opacity 2.5s ease-in-out;
+	-webkit-transition: opacity 2.5s ease-in-out;
+	-ms-transition: opacity 2.5s ease-in-out;
+	transition: opacity 2.5s ease-in-out;
+	-moz-transition-delay: 0.5s;
+	-webkit-transition-delay: 0.5s;
+	-ms-transition-delay: 0.5s;
+	transition-delay: 0.5s;
+    z-index: 1;
+	pointer-events: none;
+}
 
-	body.homepage.is-preload #header:after {
-		opacity: 1;
-	}
+/* État pendant que la page charge (is-preload est ajouté par le JS) */
+body.homepage.is-preload #header:after {
+    opacity: 1;
+}
+
+/* 1. Masque le bouton GO (le footer) */
+body:not(.homepage) #header footer {
+    display: none;
+}
+
+/* 2. Masque le texte de description (le <p>) */
+body:not(.homepage) #header header > p {
+    display: none;
+}
+
+/* 3. Masque la ligne de séparation (le <hr />) */
+body:not(.homepage) #header hr {
+    display: none;
+}
 
 /* Nav */
 
@@ -2321,9 +2367,17 @@ input, select, textarea {
 		left: 0;
 		width: 100%;
 		text-align: center;
-		padding: 1.5em 0 1.5em 0;
-		z-index: 1;
+		padding: 1.5em 0 2em 0;
+		z-index: 10;
 		overflow: hidden;
+		background-image: url("/images/volcan-trait.svg");
+		background-position: bottom;
+		background-repeat: no-repeat;
+		pointer-events: none;
+	}
+
+	#nav ul {
+		pointer-events: auto;
 	}
 
 		#nav > ul {
@@ -2332,8 +2386,8 @@ input, select, textarea {
 			display: inline-block;
 			margin: 0;
 			height: 21px;
-			border-left: solid 1px rgba(192, 192, 192, 0.35);
-			border-right: solid 1px rgba(192, 192, 192, 0.35);
+			/*border-left: solid 1px rgba(192, 192, 192, 0.35);
+			border-right: solid 1px rgba(192, 192, 192, 0.35);*/
 		}
 
 			#nav > ul:before, #nav > ul:after {
@@ -2344,8 +2398,8 @@ input, select, textarea {
 				top: 50%;
 				margin-top: -2px;
 				height: 5px;
-				border-top: solid 1px rgba(192, 192, 192, 0.35);
-				border-bottom: solid 1px rgba(192, 192, 192, 0.35);
+				/*border-top: solid 1px rgba(192, 192, 192, 0.35);
+				border-bottom: solid 1px rgba(192, 192, 192, 0.35);*/
 			}
 
 			#nav > ul:before {
@@ -2386,6 +2440,7 @@ input, select, textarea {
 					display: none;
 				}
 
+
 	.dropotron {
 		background: rgba(255, 255, 255, 0.975);
 		padding: 1em 1.25em 1em 1.25em;
@@ -2410,7 +2465,7 @@ input, select, textarea {
 			}
 
 			.dropotron li:hover {
-				color: #ef8376;
+				color: #d35400;
 			}
 
 			.dropotron li a, .dropotron li span {
@@ -2444,13 +2499,133 @@ input, select, textarea {
 	#banner {
 		background: #fff;
 		text-align: center;
-		padding: 4.5em 0 4.5em 0;
+		padding: 3em 0 3em 0;
 		margin-bottom: 0;
 	}
 
 		#banner header > p {
 			margin-bottom: 0;
 		}
+
+
+
+.hero-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30vh;
+	margin-bottom: 0;
+    text-align: center;
+    color: #ffffff;
+    
+	position: relative;
+    /* L'image et l'effet */
+    background-image: url("/images/a-propos-bandeau.jpg");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+	.hero-custom h2{
+		color: #ffffff;
+	}
+
+.banner-santiaguito{
+    background-image: url("/images/santiaguito/santiaguito-daytime-guatemala.png");
+	background-position: bottom;
+}
+
+.credit-photo{
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 0.7em;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+	padding: 1px 6px;
+	border-radius: 4px;
+}
+
+.credit{
+    font-style: normal;
+	font-size: 0.5em;
+}
+
+/* --- NOUVEAU BANDEAU PAYS --- */
+
+.hero-country {
+    position: relative;
+	margin-bottom: 0;
+    display: flex;
+    align-items: center;    /* Centre verticalement le texte */
+    justify-content: center; /* Centre horizontalement le texte */
+    min-height: 85vh;        /* Plus large (60% de la hauteur de l'écran) */
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+    
+    /* Gestion du background */
+    background-size: cover;
+    background-position: 0px -150px;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Effet parallaxe (l'image bouge moins vite) */
+}
+
+/* Le voile sombre protecteur pour la lisibilité */
+.hero-country::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.2); /* Noir à 30% d'opacité */
+    z-index: 1;
+}
+
+/* Le contenu (titre et texte) */
+.hero-container {
+    position: relative;
+    z-index: 2; /* Pour passer au-dessus du voile sombre */
+    max-width: 800px;
+    padding: 20px;
+}
+
+.hero-country h1 {
+    font-size: 4em;      /* Très gros titre impactant */
+    color: #ffffff;
+    margin-bottom: 0.2em;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5); /* Ombre portée pour le style */
+    font-family: 'Alegreya', serif; /* Utilise ta police volcan si tu veux */
+}
+
+.hero-country p {
+    font-size: 1.5em;
+    font-weight: 300;
+    letter-spacing: 1px;
+	text-align: center;
+}
+
+/* Crédit photo identique à ton style habituel */
+.hero-country .credit-photo {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    z-index: 2;
+    font-size: 0.6em;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 3px 3px;
+    border-radius: 4px;
+    margin: 0; /* Évite les décalages de marge */
+}
+
+/* Responsive : On réduit la taille sur mobile */
+@media screen and (max-width: 736px) {
+    .hero-country {
+        min-height: 40vh;
+    }
+    .hero-country h1 {
+        font-size: 2.5em;
+    }
+}
 
 /* Content */
 
@@ -2668,12 +2843,14 @@ input, select, textarea {
 			}
 
 			.carousel article .image {
-				position: relative;
-				left: -1em;
-				top: 0;
-				width: auto;
-				margin-right: -2em;
-				margin-bottom: 3em;
+				height: 350px;
+				overflow: hidden;
+			}
+
+			.carousel article .image img {
+				height: 100%;
+				object-fit: cover;
+				object-position: bottom;
 			}
 
 			.carousel article p {
@@ -3226,7 +3403,7 @@ input, select, textarea {
 
 /*barre de progression */
 .progress {
-  background: #eee;
+  background: #ddd;
   border-radius: 15px;
   overflow: hidden;
   height: 15px;
@@ -3240,7 +3417,594 @@ input, select, textarea {
   line-height: 15px;
   color: white;
   text-align: center;
-  background: linear-gradient(90deg, #70f807, #fc0606);
+  background: #555;
   font-weight: bold;
   transition: width 10s ease; /* animation fluide */
 }
+
+.progress-title {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  color: #333;
+}
+
+/* Logo accueil dans menu Helios */
+#nav ul li.home-logo {
+	padding: 0;
+}
+
+#nav ul li.home-logo a {
+	border: none;
+}
+
+#nav ul li.home-logo img {
+	height: 80px;
+	opacity: 0;
+	transition: opacity 5s ease;
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: -10px;
+}
+
+#nav ul li.home-logo img:hover {
+    opacity: 1; /* Devient opaque quand on passe la souris dessus */
+}
+
+/* Recadre une image */
+.image-cover {
+  height: 100%;
+  border-radius: 20px; /* Coins bien arrondis */
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.1); /* Ombre décalée style "sticker" */
+  border: 3px solid #ffffff;
+}
+
+.image-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+/* --- STYLE 1 : PHOTO POLAROÏD --- */
+/* S'applique sur la DIV qui entoure l'image */
+.photo-polaroid {
+    background: #ffffff;
+    padding: 12px 12px 40px 12px; /* Bordure blanche plus large en bas */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transform: rotate(-3deg); /* Effet un peu "jeté" sur la page */
+    max-width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.photo-polaroid:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.photo-polaroid img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Force le format carré (Cover) */
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+/* --- STYLE 2 : PHOTO ARRONDIE --- */
+/* S'applique sur la DIV qui entoure l'image */
+.photo-rounded {
+    overflow: hidden;
+    border-radius: 30px; /* Bords très arrondis */
+    border: 4px solid #ffffff; /* Bordure blanche pour ressortir sur l'orange */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+}
+
+.photo-rounded img {
+    display: block;
+    width: 100%;
+	object-fit: cover;
+}
+
+/* Style personnalisé : fond orange foncé et texte blanc */
+.section-orange {
+    background-color: #d35400; /* Orange foncé */
+	margin-top: 0;
+	margin-bottom: 0;
+    color: #ffffff;            /* Texte blanc */
+    padding: 2em;              /* Ajoute de l'espace interne pour que le texte ne touche pas les bords */
+	padding-top:5em;
+	padding-bottom: 5em;
+    border-radius: 8px;        /* Optionnel : arrondit les coins */
+	position: relative;
+	overflow: hidden;
+}
+/*section + .section-orange {
+    margin-top: -3em !important;
+}*/
+
+/* S'assurer que les titres à l'intérieur de cette section soient aussi blancs */
+.section-orange h1, 
+.section-orange h2, 
+.section-orange h3, 
+.section-orange h4, 
+.section-orange h5, 
+.section-orange h6,
+.section-orange strong {
+    color: #ffffff;
+}
+
+/* Changer la couleur des liens pour qu'ils soient lisibles sur l'orange */
+.section-orange a {
+    color: #ffdcb9; /* Un orange très clair ou crème */
+    border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.section-orange a:hover {
+    color: #ffffff;
+}
+
+
+.custom-shape-divider-top-1772917837 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1772917837 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 150px;
+}
+
+.custom-shape-divider-top-1772917837 .shape-fill {
+    fill: #ffffff;
+}
+
+
+.custom-shape-divider-bottom-inverted {
+    position: absolute;
+    bottom: 0;   /* On le cale en bas */
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    /* On le retourne à 180 degrés pour l'effet miroir */
+    transform: rotate(180deg); 
+}
+
+.custom-shape-divider-bottom-inverted svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 100px; /* Tu peux réduire un peu la hauteur pour le bas si tu veux */
+}
+
+.custom-shape-divider-bottom-inverted .shape-fill {
+    fill: #ffffff; /* Doit être la couleur de la section suivante */
+}
+
+
+.footer-sq {
+	width: 100% !important;
+	aspect-ratio: 1 / 1 !important;
+	object-fit: cover !important;
+	transition: opacity 0.6s ease-in-out;
+}
+
+.titre-style-volcan {
+    font-family: 'Alegreya', cursive;
+    font-size: 2.5em;
+    background: #d35400;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+}
+
+
+.image-article {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.image-article img {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+figcaption {
+    font-size: 0.9em;
+    color: #666;
+    border-left: 3px solid #d35400;
+    padding-left: 10px;
+    margin-top: 10px;
+	font-style: italic;
+}
+
+
+/* --- CONFIGURATION DE LA TIMELINE --- */
+
+/* Conteneur principal qui décale tout le contenu pour laisser la place à la ligne */
+.timeline-wrapper {
+    position: relative;
+    padding-left: 80px; /* Plus d'espace pour les gros points avec icônes */
+    margin-top: 3em;
+	overflow: visible;
+}
+
+/* La ligne courbe : affinée et allongée */
+.guide-line {
+    position: absolute;
+    left: 25px;         /* Position de la ligne */
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    /* SVG : stroke-width='1' pour la finesse, 100% 400px pour une ondulation très longue */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 200' preserveAspectRatio='none'%3E%3Cpath d='M10,0 Q20,50 10,100 T10,200' fill='none' stroke='%23d35400' stroke-width='1'/%3E%3C/svg%3E");
+    background-repeat: repeat-y;
+    background-size: 100% 400px; 
+    z-index: 1;
+}
+
+.journey-step {
+    position: relative;
+    margin-bottom: 4em;
+}
+
+/* Le point indicateur (Style de ta première version) */
+.step-dot {
+    position: absolute;
+    left: -65px;        /* Centré sur la ligne à gauche */
+    top: 15px;
+    width: 45px;        /* Plus grand pour accueillir une icône */
+    height: 45px;
+    background: #fff;
+    border: 2px solid #d35400;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    color: #d35400;
+    font-size: 0.9em;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Variante pour les points importants (orange plein) */
+.step-dot.highlight {
+    background: #d35400;
+    color: #fff;
+}
+
+/* --- LES BOITES DE CONTENU --- */
+
+.step-box {
+    padding: 2em;
+    margin-bottom: 3em;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.2); /* Ombre très légère */
+}
+
+.step-box h3{
+	padding-bottom: 0.7em;
+}
+
+.step-box img:hover{
+	transition: transform 0.6s ease;
+	transform: scale(1.1);
+}
+
+.step-box-date {
+	display: inline-block;
+	padding: 0.4em 1em;
+	margin-bottom: 1em;	
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.2); /* Ombre très légère */
+}
+
+/* Variante : Fond Blanc / Texte Noir */
+.style-white {
+    background: #ffffff;
+    color: #444;
+    border: 1px solid #eee;
+}
+
+/* Variante : Fond Orange Clair / Texte Blanc */
+.style-orange {
+    background: #8f775b; /* Orange plus doux/clair */
+    color: #ffffff;
+}
+.style-orange h3, .style-orange .date { color: #fff !important; }
+
+/* --- VARIANTES DE COULEURS POUR LES BOITES (TEXTE BLANC) --- */
+
+/* 1. Terracotta Adouci - Très cohérent avec ton orange principal */
+.style-terracotta {
+    background-color: #E67E22;
+    color: #ffffff !important;
+    border: none;
+    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.2);
+}
+.style-terracotta h3, .style-terracotta .date { color: #ffffff !important; }
+
+.style-sable-orient {
+    background-color: #C29B6D;
+    color: #ffffff !important;
+    border: none;
+    box-shadow: 0 4px 12px rgba(194, 155, 109, 0.2);
+}
+.style-sable-orient h3, .style-sable-orient .date { color: #ffffff !important; }
+
+/* 3. Vert Sauge - Le contraste "Nature & Jungle" (Mon favori) */
+.style-sauge {
+    background-color: #829B89;
+    color: #ffffff !important;
+    border: none;
+    box-shadow: 0 4px 12px rgba(130, 155, 137, 0.2);
+}
+.style-sauge h3, .style-sauge .date { color: #ffffff !important; }
+
+/* 4. Gris Ardoise Chaud - Le plus sobre et élégant */
+.style-ascension {
+    background-color: #707B7C;
+    color: #ffffff !important;
+    border: none;
+    box-shadow: 0 4px 12px rgba(112, 123, 124, 0.2);
+}
+.style-ascension h3, .style-ascension .date { color: #ffffff !important; }
+
+/* --- GESTION DES IMAGES --- */
+.image.small, .image.medium {
+    display: block;
+    margin-left: auto;  /* Centre l'image */
+    margin-right: auto; /* Centre l'image */
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.image.small { width: 40%; }   /* Image discrète */
+.image.medium { width: 65%; }  /* Image moyenne */
+.image.fit { width: 100%; display: block; } /* Image pleine largeur */
+/* --- AJUSTEMENTS TEXTE --- */
+.date {
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    color: #d35400;
+}
+
+/* --- SECTION SOMMAIRE --- */
+
+.wrapper.style-summary {
+    background-color: #ffffff; 
+    padding: 4em 0;
+	margin-bottom: 0;
+}
+
+.summary-content {
+    padding-right: 2em;
+}
+
+/* Le titre du sommaire */
+.summary-title {
+    color: #d35400 !important; /* Ton orange volcanique */
+    font-size: 2em;
+    margin-bottom: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* La liste des liens */
+.summary-links {
+    list-style: none; /* Enlève les puces par défaut */
+    padding-left: 0;
+}
+
+.summary-links li {
+    padding: 0.8em 0;
+    border-bottom: 1px solid #e0e0e0; /* Petite ligne de séparation grise */
+}
+
+.summary-links li:last-child {
+    border-bottom: none;
+}
+
+.summary-links a {
+    color: #d35400; /* Liens en orange */
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: block;
+    border-bottom: none; /* Enlève le soulignement par défaut du template */
+}
+
+/* Effet au survol des titres */
+.summary-links a:hover {
+    color: #e67e22;
+    padding-left: 10px; /* Petit décalage vers la droite au survol */
+}
+
+/* Adaptation mobile */
+@media screen and (max-width: 736px) {
+    .summary-content {
+        padding-right: 0;
+        text-align: center;
+        margin-bottom: 2em;
+    }
+}
+
+
+/* --- NOUVELLE TRANSITION AVION --- */
+
+.airplane-trail-container {
+    position: relative;
+    width: 100%;
+    height: 100px; /* Hauteur de la transition */
+    background-color: #d35400; /* TA COULEUR ORANGE (à ajuster si besoin) */
+    margin-top: -2px; /* Évite un filet vide entre les sections */
+    overflow: hidden;
+}
+
+.trail-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* L'avion */
+.airplane-icon {
+    position: absolute;
+    /* On le place au sommet de la courbe (en haut à droite) */
+    top: 37%;
+    right: 51%;
+    color: #000000;
+    font-size: 2em;
+    z-index: 5;
+    /* Inclinaison pour simuler la montée */
+    transform: rotate(-15deg); 
+}
+
+
+@keyframes planeHover {
+    0%, 100% { transform: rotate(-35deg) translateY(0); }
+    50% { transform: rotate(-33deg) translateY(-5px); }
+}
+
+/* Mobile */
+@media screen and (max-width: 736px) {
+    .airplane-trail-container { height: 80px; }
+    .airplane-icon { font-size: 1.2em; right: 5%; }
+}
+
+
+
+/* --- SECTION CARTES PAYS --- */
+
+.country-card {
+    position: relative;
+    display: block;
+    border-radius: 12px;
+    overflow: hidden; /* Important pour que l'image ne dépasse pas en zoomant */
+    height: 300px;    /* Tu peux ajuster la hauteur ici */
+    text-decoration: none;
+    border-bottom: none !important; /* Enlève le trait sous les liens du template */
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* L'image remplit tout le cadre sans se déformer */
+    transition: transform 0.6s ease; /* Animation fluide du zoom */
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.15); /* Voile sombre pour lire le texte */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.card-overlay h3 {
+    color: #ffffff !important;
+    font-size: 1.6em;
+    font-weight: 700;
+	text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0;
+    transition: transform 0.4s ease; /* Animation du texte */
+}
+
+/* --- EFFETS AU SURVOL (HOVER) --- */
+
+/* L'image zoom légèrement */
+.country-card:hover .card-image img {
+    transform: scale(1.1);
+}
+
+/* Le voile s'assombrit un peu plus */
+.country-card:hover .card-overlay {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Le texte grossit */
+.country-card:hover .card-overlay h3 {
+    transform: scale(1.3); /* Le texte grossit de 20% */
+}
+
+/* Responsive mobile */
+@media screen and (max-width: 736px) {
+    .country-card {
+        height: 200px;
+        margin-bottom: 20px;
+    }
+}
+
+
+.quote-featured {
+    text-align: center;
+    padding: 1em 2em 0 2em;
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* L'icône de guillemet en fond */
+.quote-featured i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 8em;
+    color: rgba(211, 84, 0, 0.2); /* Orange très transparent */
+    z-index: 0;
+}
+
+.quote-featured blockquote {
+    position: relative;
+    z-index: 1;
+    border: none;
+    font-family: "Alegreya", serif; /* Ou une police élégante que tu as */
+    font-size: 2.5em;
+    font-style: italic;
+    color: #333;
+}
+
+.quote-featured cite {
+	display: block;
+    margin-top: 1em;
+    font-size: 0.5em; /* On le met petit car le texte est gros */
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #d35400;
+}
+
+
+
+.tab {
+    display: inline-block;
+    margin-left: 40px; /* C'est ton espace "Tab" */
+}
+
+/*  * { outline: 1px solid rgba(255, 0, 0, 0.3) !important; } */

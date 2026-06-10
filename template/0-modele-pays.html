@@ -1,23 +1,19 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Costa Rica</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="../assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
-          	integrity="sha512-K…(truncated)…" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        /* Bouton "Voir plus" pour afficher plus d'articles */
-        .more-articles { display: none; }
-        .show-more-btn { margin-top: 10px; cursor: pointer; display: inline-block; background: #27ae60; color: white; padding: 5px 10px; border-radius: 5px; text-decoration: none; }
-    </style>
+	<title>voyage ou pays</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="../assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
+         	integrity="sha512-K…(truncated)…" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="icon" href="../images/favicon-16x16.png" type="image/png">
+
     <script>
         function toggleArticles() {
-            var articles = document.querySelectorAll('.more-articles');
-            articles.forEach(a => {
-                a.style.display = (a.style.display === 'none') ? 'block' : 'none';
+            document.querySelectorAll('.more-articles').forEach(a => {
+                a.style.display = (a.style.display === 'none' || a.style.display === '') ? 'block' : 'none';
             });
         }
     </script>
@@ -30,9 +26,9 @@
         <div class="inner">
             <header>
                 <h1>
-                <a href="../index.html" id="logo">
-                    <img src="../images/maison.png" alt="Accueil" style="height: 70px; vertical-align: middle;">
-                </a>
+                    <a href="../index.html" id="logo">
+                        <img src="../images/maison.png" alt="Accueil" style="height: 70px; vertical-align: middle;">
+                    </a>
                 </h1>
             </header>
         </div>
@@ -43,106 +39,125 @@
         <div class="container">
             <div class="row gtr-200">
 
-                <!-- Sidebar avec titres sur fond d'image -->
-                <div class="col-4 col-12-mobile" id="sidebar">
-                    <h3>Les différents volcans</h3>
-                    <hr class="first" />
-
-                    <!-- Premier article -->
-                    <section class="sidebar-article" style="background-image: url('../images/arenal.jpg');">
-                        <header>
-                            <h3><a href="#">Arenal</a></h3>
-                        </header>
-                    </section>
-                    <section class="sidebar-article" style="background-image: url('../images/irazu.jpg');">
-                        <header>
-                            <h3><a href="#">Irazu</a></h3>
-                        </header>
-                    </section>
-                    <section class="sidebar-article" style="background-image: url('../images/rincon.jpg');">
-                        <header>
-                            <h3><a href="#">Rincon de la Vieja</a></h3>
-                        </header>
-                    </section>
-
-                    <!-- Articles supplémentaires à cacher/dérouler -->
-                    <section class="sidebar-article more-articles" style="background-image: url('../images/tenorio.jpg');">
-                        <header>
-                            <h3><a href="#">Tenorio</a></h3>
-                        </header>
-                    </section>
-                    <section class="sidebar-article more-articles" style="background-image: url('../images/poas.jpg');">
-                        <header>
-                            <h3><a href="#">Poas</a></h3>
-                        </header>
-                    </section>
-                    <section class="sidebar-article more-articles" style="background-image: url('../images/turrialba.jpg');">
-                        <header>
-                            <h3><a href="#">Turrialba</a></h3>
-                        </header>
-                    </section>
-
-                    <!-- Bouton Voir plus -->
-                    <a class="show-more-btn" onclick="toggleArticles()">Voir plus d'articles</a>
-                </div>
-
-
                 <!-- Contenu principal -->
-                <div class="col-8 col-12-mobile imp-mobile" id="content">
+                <div class="col-9 col-12-mobile imp-mobile" id="content">
                     <article id="main">
+
+                        <!-- Titre principal -->
                         <header>
-                            <h2><a href="#">Costa Rica</a></h2>
-                            <p>Explorez les merveilles naturelles et culturelles de ce pays d’Amérique centrale.</p>
+                            <h2><a href="#">Nom du pays ou du voyage</a></h2>
+                            <p>Brève introduction (ex : un aperçu du pays, de son ambiance ou du type de voyage proposé).</p>
                         </header>
 
-                        <a href="#" class="image featured"><img src="../images/pic06.jpg" alt="" /></a>
+                        <a href="#" class="image featured"><img src="../images/pic06.jpg" alt="Image principale" /></a>
 
-                        <!-- Sections principales -->
+                        <!-- SOMMAIRE -->
                         <section>
                             <header>
-                                <h3>Le pays</h3>
+                                <h3>Sommaire</h3>
                             </header>
-                            <p>xx</p>
+                            <ul>
+                                <li><a href="#presentation">Présentation générale</a></li>
+                                <li><a href="#incontournables">Lieux ou étapes incontournables</a></li>
+                                <li><a href="#culture">Culture et vie locale</a></li>
+                                <li><a href="#itineraire">Exemple d’itinéraire</a></li>
+                                <li><a href="#infos">Informations pratiques</a></li>
+                                <li><a href="#conseils">Conseils et astuces</a></li>
+                            </ul>
                         </section>
 
-                        <section>
+                        <!-- ENCARt D’INFOS -->
+                        <section id="infos">
                             <header>
-                                <h3>Volcanisme</h3>
+                                <h3>Informations essentielles</h3>
                             </header>
-                            <p>xx</p>
+                            <div class="row gtr-50 gtr-uniform">
+                                <div class="col-8 col-12-mobile">
+                                    <ul>
+                                        <li><strong>Capitale :</strong> Exempleville</li>
+                                        <li><strong>Langue officielle :</strong> Exempleois</li>
+                                        <li><strong>Monnaie :</strong> Exemple Dollar (EXD)</li>
+                                        <li><strong>Superficie :</strong> 123 000 km²</li>
+                                        <li><strong>Population :</strong> 12 millions d’habitants</li>
+                                        <li><strong>Climat :</strong> Tropical / tempéré / désertique (selon le cas)</li>
+                                        <li><strong>Période idéale pour voyager :</strong> De mai à septembre</li>
+                                    </ul>
+                                </div>
+                                <div class="col-4 col-12-mobile">
+                                    <span class="image fit">
+                                        <img src="../images/drapeau.png" alt="Drapeau du pays" />
+                                    </span>
+                                </div>
+                            </div>
                         </section>
 
-                        <section>
-                            <header>
-                                <h3>Parc Nationaux</h3>
-                            </header>
-                            <p>xx</p>
+                        <!-- SECTIONS PRINCIPALES -->
+                        <section id="presentation">
+                            <header><h3>Présentation générale</h3></header>
+                            <p>Présentation du pays ou du voyage : géographie, ambiance générale, attraits naturels ou culturels. Décris ici ce qui rend l’endroit unique ou ce que ton voyage explore.</p>
                         </section>
 
-                        <section>
-                            <header>
-                                <h3>Mon expérience</h3>
-                            </header>
-                            <p>xx</p>
+                        <section id="incontournables">
+                            <header><h3>Lieux ou étapes incontournables</h3></header>
+                            <p>Liste ou description des lieux à ne pas manquer. Exemples : parcs nationaux, montagnes, plages, monuments historiques, etc.</p>
                         </section>
 
+                        <section id="culture">
+                            <header><h3>Culture et vie locale</h3></header>
+                            <p>Traditions, gastronomie, musique, coutumes, manière de vivre, ou encore activités typiques que les visiteurs peuvent découvrir.</p>
+                        </section>
+
+                        <section id="itineraire">
+                            <header><h3>Exemple d’itinéraire</h3></header>
+                            <p>Présente ici un parcours type : par exemple un circuit d’une ou deux semaines avec les grandes étapes, durées et centres d’intérêt.</p>
+                        </section>
+
+                        <section id="conseils">
+                            <header><h3>Conseils et astuces</h3></header>
+                            <p>Informations pratiques : sécurité, transports, santé, budget, équipement, etc. Idéal pour donner des repères utiles aux futurs visiteurs.</p>
+                        </section>
+
+                        <hr>
                         <section>
-                            <header>
-                                <h3>Conseils de Voyage</h3>
-                            </header>
-                            <p>xx</p>
+                            <header><h4>Crédits</h4></header>
+                            <ul>
+                                <li><a href="">crédit 1</a></li>
+                                <li><a href="">crédit 2</a></li>
+                                <li><a href="">crédit 3</a></li>
+                            </ul>
                         </section>
 
                     </article>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-3 col-12-mobile" id="sidebar">
+                    <h3>À voir</h3>
+                    <hr class="first" />
+
+                    <!-- Exemples d'articles latéraux -->
+                    <section class="sidebar-article" style="background-image: url('../images/exemple1.jpg');">
+                        <header><h3><a href="#">Lieu 1</a></h3></header>
+                    </section>
+                    <section class="sidebar-article" style="background-image: url('../images/exemple2.jpg');">
+                        <header><h3><a href="#">Lieu 2</a></h3></header>
+                    </section>
+                    <section class="sidebar-article" style="background-image: url('../images/exemple3.jpg');">
+                        <header><h3><a href="#">Lieu 3</a></h3></header>
+                    </section>
+
+                    <section class="sidebar-article more-articles" style="background-image: url('../images/exemple4.jpg'); display:none;">
+                        <header><h3><a href="#">Lieu 4</a></h3></header>
+                    </section>
+
+                    <a class="button small" onclick="toggleArticles()">Voir plus d'articles</a>
                 </div>
 
             </div>
         </div>
     </div>
 
-</div>
-
-<!-- Footer -->
+    <!-- Footer -->
 			<div id="footer">
 				<div class="container">
 
@@ -171,20 +186,20 @@
 						<div class="col-12">
 							<section class="footer-gallery">
 								<header>
-									<h3><a href="../galerie.html">Galerie</a></h3>
+									<h3><a href="galerie.html">Galerie</a></h3>
 								</header>
 								<div class="row gtr-25">
 									<div class="col-3">
-										<a href="../galerie.html" class="image fit"><img src="../images/pic10.jpg" alt="" /></a>
+										<a href="galerie.html" class="image fit"><img src="../images/pic10.jpg" alt="" /></a>
 									</div>
 									<div class="col-3">
-										<a href="../galerie.html" class="image fit"><img src="../images/pic11.jpg" alt="" /></a>
+										<a href="galerie.html" class="image fit"><img src="../images/pic11.jpg" alt="" /></a>
 									</div>
 									<div class="col-3">
-										<a href="../galerie.html" class="image fit"><img src="../images/pic12.jpg" alt="" /></a>
+										<a href="galerie.html" class="image fit"><img src="../images/pic12.jpg" alt="" /></a>
 									</div>
 									<div class="col-3">
-										<a href="../galerie.html" class="image fit"><img src="../images/pic13.jpg" alt="" /></a>
+										<a href="galerie.html" class="image fit"><img src="../images/pic13.jpg" alt="" /></a>
 									</div>
 								</div>
 							</section>
@@ -209,15 +224,15 @@
 			</div>
 
 
-<!-- Scripts -->
-<script src="../assets/js/jquery.min.js"></script>
-<script src="../assets/js/jquery.dropotron.min.js"></script>
-<script src="../assets/js/jquery.scrolly.min.js"></script>
-<script src="../assets/js/jquery.scrollex.min.js"></script>
-<script src="../assets/js/browser.min.js"></script>
-<script src="../assets/js/breakpoints.min.js"></script>
-<script src="../assets/js/util.js"></script>
-<script src="../assets/js/main.js"></script>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 
-</body>
+	</body>
 </html>

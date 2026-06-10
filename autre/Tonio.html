@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Page en construction</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<body class="no-sidebar is-preload">
+    <!-- Header -->
+<div id="header-placeholder"></div>
+
+<section class="wrapper style1">
+  <div class="container aln-middle">
+    <span class="image small photo-polaroid">
+        <img src="/images/tonio/tonio.jpg">
+    </span>
+    <p>Bienvenou ici c'est les aventures dou meilleur Toniou.
+        Je suis un ours ou chien, je traffique dou sourcre avec les autres nounours
+        J'aime voyager avec mes deux parents, mais toujours on se retrouve dans des lieux fous 
+        J'ai hate de vous montrer les lieux que j'ai vu 
+    </p>
+    <p></p>
+    <span class="image medium">
+      <img src="/images/nicaragua/39.jpg" alt="Tonio à l'auberge à Big Corn">
+    </span>
+  </div>
+  </section>
+
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+  <!-- Scripts -->
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/jquery.dropotron.min.js"></script>
+  <script src="../assets/js/jquery.scrolly.min.js"></script>
+  <script src="../assets/js/jquery.scrollex.min.js"></script>
+  <script src="../assets/js/browser.min.js"></script>
+  <script src="../assets/js/breakpoints.min.js"></script>
+  <script src="../assets/js/util.js"></script>
+  <script src="../assets/js/main.js"></script>
+   <script>
+			fetch("/header.html")
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById("header-placeholder").outerHTML = data;
+
+					$('#nav > ul').dropotron({
+					alignment: 'center',
+					selector: '> li:not(.home-logo)'
+				});
+			});
+
+			fetch("/footer.html")
+				.then(response => response.text())
+				.then(data => {
+					document.getElementById("footer-placeholder").outerHTML = data;
+				});
+	</script>
+</body>
+</html>

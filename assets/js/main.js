@@ -214,4 +214,72 @@
 
 		});
 
+		// --- CONFIGURATION DU SLIDER FOOTER ---
+	var imagesDisponibles = [
+		"/images/santiaguito/01.jpg", "/images/santiaguito/05.jpg", 
+		"/images/santiaguito/10.jpg", "/images/santiaguito/18.jpg",
+		"/images/literole/01.jpg", "/images/literole/06.jpg",
+		"/images/literole/12.jpg", "/images/literole/15.jpg"
+	];
+
+	// --- FONCTION POUR CHARGER LE FOOTER ET LANCER LE SLIDER ---
+	function loadAndInitFooter() {
+		var $placeholder = $('#footer-placeholder');
+		if ($placeholder.length > 0) {
+			fetch('footer.html')
+				.then(response => response.text())
+				.then(data => {
+					$placeholder.html(data);
+					
+					// Une fois injecté, on lance la boucle de défilement
+					var startIdx = 0;
+					var $container = $('#footer-slideshow');
+					
+					if ($container.length > 0) {
+						var $imgElements = $container.find('img');
+						
+						setInterval(function() {
+							$imgElements.each(function(i) {
+								var $img = $(this);
+								var nextImg = imagesDisponibles[(startIdx + i) % imagesDisponibles.length];
+								
+								$img.css('opacity', '0');
+								setTimeout(function() {
+									$img.attr('src', nextImg);
+									$img.css('opacity', '1');
+								}, 600);
+							});
+							startIdx = (startIdx + 1) % imagesDisponibles.length;
+						}, 5000);
+					}
+				});
+		}
+	}
+
+	// --- FONCTION POUR LA GALERIE (LIGHTBOX) ---
+	function initGalleryLightbox() {
+		var $lightbox = $('#lightbox');
+		var $lightboxImg = $('#lightbox-img');
+
+		if ($lightbox.length > 0) {
+			// Au clic sur une image de la galerie
+			$(document).on('click', '.gallery img', function() {
+				var src = $(this).attr('src');
+				$lightboxImg.attr('src', src);
+				$lightbox.css('display', 'flex');
+			});
+
+			// Fermer la lightbox
+			$lightbox.on('click', function() {
+				$(this).hide();
+			});
+		}
+	}
+
+	// --- LANCEMENT ---
+	$window.on('load', function() {
+		loadAndInitFooter();
+		initGalleryLightbox();
+	});
+
 })(jQuery);
