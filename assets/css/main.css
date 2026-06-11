@@ -2370,7 +2370,7 @@ body:not(.homepage) #header hr {
 		padding: 1.5em 0 2em 0;
 		z-index: 10;
 		overflow: hidden;
-		background-image: url("/images/volcan-trait.svg");
+		background-image: url("./images/volcan-trait.svg");
 		background-position: bottom;
 		background-repeat: no-repeat;
 		pointer-events: none;
@@ -2781,7 +2781,7 @@ body:not(.homepage) #header hr {
 				position: absolute;
 				top: 50%;
 				margin: -1.5em 0 0 0;
-				background: url("images/arrow.svg") no-repeat center center;
+				background: url("./images/arrow.svg") no-repeat center center;
 			}
 
 			.carousel .forward:hover:before, .carousel .backward:hover:before {
