@@ -216,10 +216,10 @@
 
 		// --- CONFIGURATION DU SLIDER FOOTER ---
 	var imagesDisponibles = [
-		"/images/santiaguito/01.jpg", "/images/santiaguito/05.jpg", 
-		"/images/santiaguito/10.jpg", "/images/santiaguito/18.jpg",
-		"/images/literole/01.jpg", "/images/literole/06.jpg",
-		"/images/literole/12.jpg", "/images/literole/15.jpg"
+		"./images/santiaguito/01.jpg", "./images/santiaguito/05.jpg", 
+		"./images/santiaguito/10.jpg", "./images/santiaguito/18.jpg",
+		"./images/literole/01.jpg", "./images/literole/06.jpg",
+		"./images/literole/12.jpg", "./images/literole/15.jpg"
 	];
 
 	// --- FONCTION POUR CHARGER LE FOOTER ET LANCER LE SLIDER ---
