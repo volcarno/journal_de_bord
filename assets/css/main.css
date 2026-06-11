@@ -2520,7 +2520,7 @@ body:not(.homepage) #header hr {
     
 	position: relative;
     /* L'image et l'effet */
-    background-image: url("/images/a-propos-bandeau.jpg");
+    background-image: url("./images/a-propos-bandeau.jpg");
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -2532,7 +2532,7 @@ body:not(.homepage) #header hr {
 	}
 
 .banner-santiaguito{
-    background-image: url("/images/santiaguito/santiaguito-daytime-guatemala.png");
+    background-image: url("./images/santiaguito/santiaguito-daytime-guatemala.png");
 	background-position: bottom;
 }
 
