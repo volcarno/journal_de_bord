@@ -2520,7 +2520,7 @@ body:not(.homepage) #header hr {
     
 	position: relative;
     /* L'image et l'effet */
-    background-image: url("./images/a-propos-bandeau.jpg");
+    background-image: url("../images/a-propos-bandeau.jpg");
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
