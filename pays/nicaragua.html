@@ -17,7 +17,7 @@
     <!-- Header -->
 <div id="header-placeholder"></div>
 
-<section class="hero-country" style="background-image: url('/images/nicaragua/24.jpg'); background-position: center;">
+<section class="hero-country" style="background-image: url('../images/nicaragua/24.jpg'); background-position: center;">
     <div class="hero-container">
         <h1>Nicaragua</h1>
         <p>Entre volcan et caraïbes</p>
@@ -587,57 +587,57 @@
     </article>
 
     <article>
-      <a href="volcan-html-files/fuego.html" class="image featured"><img src="../images/fuego.jpg" alt="" /></a>
+      <a href="../volcan-html-files/fuego.html" class="image featured"><img src="../images/fuego.jpg" alt="" /></a>
       <header>
-        <h3><a href="volcan-html-files/fuego.html">Fuego - Guatemala</a></h3>
+        <h3><a href="../volcan-html-files/fuego.html">Fuego - Guatemala</a></h3>
       </header>
       <p>Un des volcans les plus connus au monde, en éruption continue, à la forme parfaite.</p>
     </article>
 
     <article>
-      <a href="volcan-html-files/santaana.html" class="image featured"><img src="../images/santaana.jpg" alt="" /></a>
+      <a href="../volcan-html-files/santaana.html" class="image featured"><img src="../images/santaana.jpg" alt="" /></a>
       <header>
-        <h3><a href="volcan-html-files/santaana.html">Santa Ana - Salvador</a></h3>
+        <h3><a href="../volcan-html-files/santaana.html">Santa Ana - Salvador</a></h3>
       </header>
       <p>Un cratère digne d'une autre planète, un lac acide aux couleurs époustouflantes.</p>
     </article>
 
     <article>
-      <a href="volcan-html-files/sancristobal.html" class="image featured"><img src="../images/sancristobal.jpg" alt="" /></a>
+      <a href="../volcan-html-files/sancristobal.html" class="image featured"><img src="../images/sancristobal.jpg" alt="" /></a>
       <header>
-        <h3><a href="volcan-html-files/sancristobal.html">San Cristobal - Nicaragua</a></h3>
+        <h3><a href="../volcan-html-files/sancristobal.html">San Cristobal - Nicaragua</a></h3>
       </header>
       <p>Un volcan qui se mérite, en pleine jungle, aux émissions de vapeurs souffrées gigantesques.</p>
     </article>
 
     <article>
-      <a href="volcan-html-files/telica.html" class="image featured"><img src="../images/telica.jpg" alt="" /></a>
+      <a href="../volcan-html-files/telica.html" class="image featured"><img src="../images/telica.jpg" alt="" /></a>
       <header>
-        <h3><a href="volcan-html-files/telica.html">Telica - Nicaragua</a></h3>
+        <h3><a href="../volcan-html-files/telica.html">Telica - Nicaragua</a></h3>
       </header>
       <p>Un cratère aux dimensions exceptionnelles, insaisissables, au fond rougeoyant.</p>
     </article>
 
     <article>
-      <a href="volcan-html-files/cerronegro.html" class="image featured"><img src="../images/cerronegro.jpg" alt="" /></a>
+      <a href="../volcan-html-files/cerronegro.html" class="image featured"><img src="../images/cerronegro.jpg" alt="" /></a>
       <header>
-        <h3><a href="volcan-html-files/cerronegro.html">Cerro Negro - Nicaragua</a></h3>
+        <h3><a href="../volcan-html-files/cerronegro.html">Cerro Negro - Nicaragua</a></h3>
       </header>
       <p>Un des plus jeunes volcans d'Amérique, tout en contraste avec la jungle environnantes.</p>
     </article>
 
     <article>
-      <a href="volcan-html-files/irazu.html" class="image featured"><img src="../images/irazu.jpg" alt="" /></a>
+      <a href="../volcan-html-files/irazu.html" class="image featured"><img src="../images/irazu.jpg" alt="" /></a>
       <header>
-        <h3><a href="volcan-html-files/irazu.html">Irazu - Costa Rica</a></h3>
+        <h3><a href="../volcan-html-files/irazu.html">Irazu - Costa Rica</a></h3>
       </header>
       <p>Assez proche de la capitale pour y aller en transport public, un géant du Costa Rica.</p>
     </article>
 
     <article>
-      <a href="volcan-html-files/arenal.html" class="image featured"><img src="../images/arenal.jpg" alt="" /></a>
+      <a href="../volcan-html-files/arenal.html" class="image featured"><img src="../images/arenal.jpg" alt="" /></a>
       <header>
-        <h3><a href="volcan-html-files/arenal.html">Arenal - Costa Rica</a></h3>
+        <h3><a href="../volcan-html-files/arenal.html">Arenal - Costa Rica</a></h3>
       </header>
       <p>Un volcan mythique, à l'ascension technique et au sommet très très chaud.</p>
     </article>
@@ -660,7 +660,7 @@
   <script src="../assets/js/util.js"></script>
   <script src="../assets/js/main.js"></script>
   <script>
-			fetch("./header.html")
+			fetch("../header.html")
 				.then(response => response.text())
 				.then(data => {
 					document.getElementById("header-placeholder").outerHTML = data;
@@ -671,7 +671,7 @@
 				});
 			});
 
-			fetch("./footer.html")
+			fetch("../footer.html")
 				.then(response => response.text())
 				.then(data => {
 					document.getElementById("footer-placeholder").outerHTML = data;
