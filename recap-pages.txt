@@ -1,0 +1,234 @@
+RECAP DU SITE VOLCARNO - PAGES ET TEMPLATES
+=============================================
+Généré le 2026-08-26, mis à jour le 2026-08-26 (carte GPX + templates)
+
+
+===================================================
+1. PAGES
+===================================================
+
+--- COMPLETES (contenu réel, à jour) ---
+
+Structure du site :
+  - index.html
+  - header.html
+  - footer.html
+  - galerie.html
+
+Pays / voyages :
+  - pays/guatemala.html
+  - pays/salvador.html
+  - pays/nicaragua.html
+  - pays/costarica.html
+  - pays/canada-quebec.html
+  - pays/canada-montreal.html
+  - pays/canada-rocheuses.html
+  - pays/usa-nord-est.html (page hub)
+  - pays/usa-chicago.html
+  - pays/usa-new-york.html
+  - pays/usa-boston.html
+  - voyage-rando-trail/voyage-lofoten.html
+
+Volcans :
+  - volcan-html-files/santiaguito.html (carte GPX + profil de dénivelé)
+
+Randos / trails :
+  - voyage-rando-trail/rando-montcalm.html (carte GPX + profil de
+    dénivelé ajoutés, ancien bug de double-initialisation de la
+    carte corrigé)
+  - voyage-rando-trail/trail-literole.html (idem)
+
+Autre :
+  - autre/tonio.html
+  - autre/pourquoi-jdb.html
+
+
+--- A REVOIR ---
+
+  - voyage-rando-trail/rando-montcalm.html, trail-literole.html
+      -> le récit et le reste de la page utilisent encore l'ancien
+         header/footer codés en dur (avant le passage à
+         header.html/footer.html + #header-placeholder), donc pas
+         de menu mobile ni de menu déroulant façon dropotron. Seule
+         la carte GPX a été mise à niveau. A moderniser si besoin.
+      -> les fichiers data/montcalm.gpx et data/literole.gpx
+         n'existent pas encore : la carte affiche donc une carte
+         vide (le tracé ne se dessine pas) tant qu'ils ne sont pas
+         ajoutés. Rien n'est cassé, il manque juste les fichiers.
+
+  - pays/usa-new-york.html
+      -> ne contient qu'une seule timeline (passage de nov. 2024).
+         Le 2e passage à New York est à ajouter dès que les infos
+         seront disponibles (structure déjà prévue pour ça,
+         cf. commentaire HTML dans le fichier).
+
+  - pays/nicaragua.html, guatemala.html, salvador.html, costarica.html
+      -> sections "Conseils et astuces" (randos, hébergements,
+         bons plans) laissées en placeholders vides sur toutes
+         les pages pays. A compléter au fil de l'eau.
+
+
+--- A CREER (77 pages en "page en construction") ---
+
+Pays (15) :
+  - pays/amerique-centrale.html
+  - pays/boukhara.html
+  - pays/canada.html
+  - pays/douchambe.html
+  - pays/israel-palestine.html
+  - pays/italie.html
+  - pays/kamtchatka.html
+  - pays/khiva-karakalpakstan.html
+  - pays/norvege.html
+  - pays/ouzbekistan-tadjikistan.html
+  - pays/rando-guat.html
+  - pays/route-pamir.html
+  - pays/samarkand.html
+  - pays/tashkent.html
+  - pays/trondheim.html
+
+Volcans (39) :
+  - volcan-html-files/arenal.html
+  - volcan-html-files/atitlan.html
+  - volcan-html-files/cerronegro.html
+  - volcan-html-files/concepcion.html
+  - volcan-html-files/conchagua.html
+  - volcan-html-files/etna.html
+  - volcan-html-files/fuego.html
+  - volcan-html-files/irazu.html
+  - volcan-html-files/karimski.html
+  - volcan-html-files/klioutchevskoi.html
+  - volcan-html-files/mombacho.html
+  - volcan-html-files/pacaya.html
+  - volcan-html-files/passion-volcan.html
+  - volcan-html-files/sancristobal.html
+  - volcan-html-files/sanpedro.html
+  - volcan-html-files/santaana.html
+  - volcan-html-files/santamaria.html
+  - volcan-html-files/stromboli.html
+  - volcan-html-files/tajumulco.html
+  - volcan-html-files/telica.html
+  - volcan-html-files/tolbachik.html
+  - volcan-html-files/toliman.html
+  - volcan-html-files/vallee-des-geysers.html
+  - volcan-html-files/vesuve.html
+  - volcan-html-files/volcan-ac.html
+  - volcan-html-files/vulcano.html
+  - volcan-html-files/zunil.html
+  - volcan-html-files/science-bonus.html
+  - volcan-html-files/science-connaissances-generales.html
+  - volcan-html-files/science-eruption-dynamisme.html
+  - volcan-html-files/science-eruptions-historiques.html
+  - volcan-html-files/science-geochimie.html
+  - volcan-html-files/science-geodynamique.html
+  - volcan-html-files/science-geophysique.html
+  - volcan-html-files/science-mineralogie.html
+  - volcan-html-files/science-modelisation.html
+  - volcan-html-files/science-surveillance-risques.html
+  - volcan-html-files/science-volcans.html
+  - volcan-html-files/science-vulgarisee.html
+
+Voyage / rando-trail (12) :
+  - voyage-rando-trail/10j-pyr.html
+  - voyage-rando-trail/accueil-voyage-rando-trail.html
+  - voyage-rando-trail/pyrennees.html
+  - voyage-rando-trail/rando-aneto.html
+  - voyage-rando-trail/rando-besines.html
+  - voyage-rando-trail/rando-breche-rolland.html
+  - voyage-rando-trail/rando-lac-tor-riuth.html
+  - voyage-rando-trail/rando-perdiguere-espagnol.html
+  - voyage-rando-trail/rando-petit-vignemale.html
+  - voyage-rando-trail/rando-pic-sauvegarde.html
+  - voyage-rando-trail/rando-turon-neouvielle.html
+  - voyage-rando-trail/rando-vallee-gaube.html
+
+Autre (11) :
+  - autre/accueil-autre.html
+  - autre/astro.html
+  - autre/matos.html
+  - autre/meteo.html
+  - autre/meteo-bases.html
+  - autre/meteo-volcans.html
+  - autre/reflexions.html
+  - autre/reflexions-autres.html
+  - autre/reflexions-fast-fashion.html
+  - autre/tutoriels/index.html
+  - autre/tutoriels/gpx.html
+
+Note : toutes ces pages utilisent déjà le header/footer et le
+menu à jour (nav-data.js) ; il ne manque que le contenu. Elles
+sont donc prêtes à être remplies dès que le texte/les photos
+seront disponibles pour chacune. Pour les randos/trails et les
+volcans de cette liste, les nouveaux templates (voir plus bas)
+incluent déjà la carte GPX avec profil de dénivelé.
+
+
+===================================================
+2. TEMPLATES (dossier template/)
+===================================================
+
+--- COMPLETS (prêts à l'emploi) ---
+
+Tous les templates ont été reconstruits pour utiliser le header/
+footer actuel (#header-placeholder / #footer-placeholder + menu
+nav-data.js), et sont désormais à jour :
+
+  - template/0-modele-pays.html
+      -> page pays complète : hero-country, sommaire, timeline
+         (les 4 catégories cat-ville/cat-ascension/cat-nature/
+         cat-anecdote illustrées), conseils, articles relatifs,
+         liens. Textes en Lorem Ipsum, photos en aplats de couleur.
+
+  - template/0-modele-voyage.html
+      -> même structure que le modèle "pays" (timeline), pensé pour
+         une page de voyage-rando-trail/ (voyage régional/
+         thématique plutôt qu'un pays entier, ex. Lofoten). Seule la
+         section "liens" change de destination (renvoie vers
+         d'autres voyages/randos).
+
+  - template/0-modele-rando.html
+      -> récit + carte GPX avec profil de dénivelé et point de
+         survol synchronisé, exactement comme sur santiaguito.html.
+         Le chemin vers le GPX est un exemple ('../data/exemple.gpx') :
+         tant qu'il n'existe pas, la carte reste affichée mais vide,
+         sans planter.
+
+  - template/0-modele-trail.html
+      -> identique au modèle "rando" (même carte GPX + dénivelé),
+         avec un vocabulaire et des conseils orientés course à pied
+         plutôt que randonnée. Remplace l'ancien template obsolète
+         (mise en page à trois colonnes avec barre latérale et
+         "sorties collectives", qui ne correspondait à aucune page
+         réelle du site).
+
+  - template/0-modele-volcan.html
+      -> fiche scientifique (localisation, composition chimique...)
+         + récit d'ascension + carte GPX avec profil de dénivelé.
+         L'ancien bug de double-initialisation de la carte (le même
+         qui avait été trouvé et corrigé sur santiaguito.html) a été
+         supprimé. Photos remplacées par des aplats de couleur.
+
+  - template/0-modele-science.html
+      -> sous-parties thématiques + galerie + sources + chapitres
+         suivants. Le script de carte GPX mort (qui plantait car la
+         page ne contient pas de carte) a été retiré.
+
+  - template/0-modele-base.html
+      -> squelette générique minimal (paragraphe + image + carrousel
+         de liens), sans timeline ni carte.
+
+  - template/construction.html
+      -> fragment "page en construction" (inséré via
+         #construction-placeholder)
+
+  - template/0-construction.html
+      -> coquille de page complète utilisant le fragment ci-dessus
+
+
+Remarque generale : en creusant pour la mise à jour de la carte
+GPX, il s'est avéré que TOUS les templates dataient d'avant le
+passage au header/footer factorisés (header.html/footer.html) fait
+tout au début de nos échanges : ils utilisaient encore l'ancien
+header codé en dur, et certains la mise en page à barre latérale
+(left-sidebar) qui n'est plus utilisée nulle part sur le site. Tout
+a été remis à niveau à cette occasion.

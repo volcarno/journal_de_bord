@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Volcarno | Nom du voyage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="icon" href="../images/favicon-16x16.png" type="image/png">
+  <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body class="no-sidebar is-preload">
+<!--
+  MODELE "VOYAGE"
+  ================
+  A utiliser pour une page du dossier voyage-rando-trail/ qui raconte un
+  voyage regional ou thematique (pas un pays entier) : ex. les iles Lofoten,
+  un trek de plusieurs jours dans les Pyrenees, etc. La structure est
+  identique au modele "pays" (meme composant timeline), seule la section
+  "liens" en bas change de destination : elle renvoie vers d'autres
+  voyages/randos plutot que vers des pays voisins.
+
+  Toutes les images sont des aplats de couleur en attendant les vraies
+  photos : chercher "PLACEHOLDER" pour les repérer. Les textes de
+  demonstration sont en Lorem Ipsum (latin) : chercher "Lorem ipsum".
+
+  Les 4 catégories d'étape de la timeline :
+    - cat-ville / style-white       -> Ville & culture
+    - cat-ascension / style-ascension -> Ascension / rando
+    - cat-nature / style-sauge      -> Nature
+    - cat-anecdote / style-terracotta -> Anecdote
+-->
+    <!-- Header -->
+<div id="header-placeholder"></div>
+
+<section class="hero-country" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%271600%27 height=%271000%27%3E%3Crect width=%271600%27 height=%271000%27 fill=%27%234a6fa5%27/%3E%3C/svg%3E'); background-position: center;">
+    <div class="hero-container">
+        <h1>Nom du voyage</h1>
+        <p>Une courte accroche qui résume l'esprit du voyage</p>
+    </div>
+</section>
+
+<section id="sommaire" class="wrapper style-summary">
+    <div class="container">
+        <div class="row aln-middle">
+            <div class="col-6 col-12-mobile">
+                <div class="summary-content">
+                    <header>
+                        <h2 class="summary-title">Au programme</h2>
+                    </header>
+                    <ul class="summary-links">
+                        <li><a href="#Presentation">Description du voyage</a></li>
+                        <li><a href="#timeline">Mon parcours</a></li>
+                        <li><a href="#conseils">Liens et infos pratiques, voire très pratiques !</a></li>
+                        <li><a href="#liens">Liens</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-6 col-12-mobile">
+              <figure>
+                <span class="image photo-rounded">
+                    <!-- PLACEHOLDER photo sommaire -->
+                    <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23748071'/%3E%3C/svg%3E" alt="Photo a venir" />
+                </span>
+                <figcaption>Legende de la photo mise en avant dans le sommaire.</figcaption>
+              </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="Presentation" class="section-orange">
+  <div class="custom-shape-divider-top-1772917837">
+      <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+          <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+          <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+      </svg>
+  </div>
+  <div class="container">
+    <header>
+      <h2>Nom du voyage</h2>
+    </header>
+    <h2>Une phrase d'accroche descriptive sur le voyage</h2>
+  </div>
+</section>
+
+<!--Transition section orange-->
+<div class="airplane-trail-container">
+    <svg viewBox="0 0 1000 150" preserveAspectRatio="none" class="trail-svg">
+        <path d="M0,150 Q250,150 500,75 T1000,0 L1000,150 Z" fill="#ffffff" />
+        <path d="M0,150 Q250,150 500,75 T1000,0"
+              fill="none"
+              stroke="#000000"
+              stroke-width="5"
+              stroke-dasharray="10,10"
+              class="flight-path" />
+    </svg>
+    <i class="fas fa-plane airplane-icon"></i>
+</div>
+
+
+<section id="timeline" class="wrapper style1">
+    <div class="container">
+        <header class="major">
+            <h2>Mon parcours en N étapes</h2>
+        </header>
+        <div class="row aln-middle">
+          <div class="col-4">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-8">
+            <figure>
+              <!-- PLACEHOLDER photo d'intro -->
+              <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'%3E%3Crect width='1200' height='700' fill='%23a3b18a'/%3E%3C/svg%3E" alt="Photo a venir"></span>
+              <figcaption>Legende de la photo d'introduction du parcours.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="timeline-wrapper">
+            <div class="guide-line"></div>
+
+            <!-- Exemple d'etape : cat-nature / style-sauge -->
+            <article class="journey-step">
+                <div class="step-dot cat-nature"><svg viewBox="0 0 24 24"><path d="M12 3 L18 12 H15 L19 18 H5 L9 12 H6 Z M12 18 V22"/></svg></div>
+                <div class="step-box style-sauge">
+                    <p class="kicker">Étape 1 · Nature</p>
+                    <h3>Titre de la première étape</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur blandit tempus porttitor. Cras mattis consectetur purus sit amet fermentum.</p>
+                    <p>Aenean lacinia bibendum nulla sed consectetur. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <div class="row">
+                      <div class="col-3 col-12-mobile">
+                        <span class="image fit photo-rounded">
+                          <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23748071'/%3E%3C/svg%3E" alt="Photo a venir">
+                        </span>
+                      </div>
+                      <div class="col-3 col-12-mobile">
+                        <h2></h2>
+                        <span class="image fit photo-rounded">
+                          <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%234a6fa5'/%3E%3C/svg%3E" alt="Photo a venir">
+                        </span>
+                      </div>
+                      <div class="col-3 col-12-mobile">
+                        <span class="image fit photo-rounded">
+                          <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23a3b18a'/%3E%3C/svg%3E" alt="Photo a venir">
+                        </span>
+                      </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Exemple d'etape : cat-ascension / style-ascension -->
+            <article class="journey-step">
+                <div class="step-dot cat-ascension"><svg viewBox="0 0 24 24"><path d="M3 19 L10 6 L12 9 L14 6 L21 19 Z M15 5 Q17.5 3 15.5 1"/></svg></div>
+                <div class="step-box style-ascension">
+                    <p class="kicker">Étape 2 · Ascension</p>
+                    <h3>Titre de la deuxième étape</h3>
+                    <p>Sed posuere consectetur est at lobortis. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes.</p>
+                    <p>Nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                    <div class="row">
+                      <div class="col-3 col-12-mobile">
+                        <span class="image fit photo-rounded">
+                          <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%235f6a6b'/%3E%3C/svg%3E" alt="Photo a venir">
+                        </span>
+                      </div>
+                      <div class="col-3 col-12-mobile">
+                        <h2></h2>
+                        <span class="image fit photo-rounded">
+                          <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%238a6d3b'/%3E%3C/svg%3E" alt="Photo a venir">
+                        </span>
+                      </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Exemple d'etape : cat-anecdote / style-terracotta -->
+            <article class="journey-step">
+                <div class="step-dot cat-anecdote"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 8 L13 13 L9 15 L11 10 Z"/></svg></div>
+                <div class="step-box style-terracotta">
+                    <p class="kicker">Étape 3 · Anecdote</p>
+                    <h3>Titre de la dernière étape</h3>
+                    <p>Curabitur blandit tempus porttitor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                    <div class="row">
+                      <div class="col-3 col-12-mobile">
+                        <span class="image fit photo-rounded">
+                          <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23d8722f'/%3E%3C/svg%3E" alt="Photo a venir">
+                        </span>
+                      </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+
+<section id="conseils" class="wrapper style1">
+  <div class="container">
+    <header>
+        <h3 class="titre-style-volcan">Conseils et astuces...</h3>
+    </header>
+    <h3>🚶‍♂️Randonnées</h3>
+    <h3>🛌 Lieux pour dormir</h3>
+    <h3>📍A faire sur place</h3>
+    <h3>💡Autres tips !</h3>
+  </div>
+</section>
+
+ <section id="liens" class="wrapper style1">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 3em;">
+        <a href="../voyage-rando-trail/accueil-voyage-rando-trail.html" class="button scrolly">Retour vers Voyages & Rando-Trail</a>
+     </div>
+        <header>
+            <h2>Continuer l'aventure vers d'autres voyages</h2>
+        </header>
+
+        <div class="row">
+            <div class="col-4 col-12-mobile">
+                <a href="#" class="country-card">
+                    <div class="card-image">
+                        <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%235f6a6b'/%3E%3C/svg%3E" alt="Photo a venir" />
+                    </div>
+                    <div class="card-overlay">
+                        <h3>Autre voyage 1</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-4 col-12-mobile">
+                <a href="#" class="country-card">
+                    <div class="card-image">
+                        <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23d8722f'/%3E%3C/svg%3E" alt="Photo a venir" />
+                    </div>
+                    <div class="card-overlay">
+                        <h3>Autre voyage 2</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-4 col-12-mobile">
+                <a href="#" class="country-card">
+                    <div class="card-image">
+                        <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23748071'/%3E%3C/svg%3E" alt="Photo a venir" />
+                    </div>
+                    <div class="card-overlay">
+                        <h3>Une randonnée du secteur</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/jquery.dropotron.min.js"></script>
+  <script src="../assets/js/jquery.scrolly.min.js"></script>
+  <script src="../assets/js/jquery.scrollex.min.js"></script>
+  <script src="../assets/js/browser.min.js"></script>
+  <script src="../assets/js/breakpoints.min.js"></script>
+  <script src="../assets/js/util.js"></script>
+  <script src="../assets/js/gallery-data.js"></script>
+  <script src="../assets/js/nav-data.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

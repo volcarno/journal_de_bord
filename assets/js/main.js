@@ -35,45 +35,8 @@
 			}, 100);
 		});
 
-	// Dropdowns.
-		$('#nav > ul').dropotron({
-			mode: 'fade',
-			speed: 350,
-			noOpenerFade: true,
-			alignment: 'center'
-		});
-
 	// Scrolly.
 		$('.scrolly').scrolly();
-
-	// Nav.
-
-		// Button.
-			$(
-				'<div id="navButton">' +
-					'<a href="#navPanel" class="toggle"></a>' +
-				'</div>'
-			)
-				.appendTo($body);
-
-		// Panel.
-			$(
-				'<div id="navPanel">' +
-					'<nav>' +
-						$('#nav').navList() +
-					'</nav>' +
-				'</div>'
-			)
-				.appendTo($body)
-				.panel({
-					delay: 500,
-					hideOnClick: true,
-					hideOnSwipe: true,
-					resetScroll: true,
-					resetForms: true,
-					target: $body,
-					visibleClass: 'navPanel-visible'
-				});
 
 	// Carousels.
 		$('.carousel').each(function() {
@@ -215,45 +178,241 @@
 		});
 
 		// --- CONFIGURATION DU SLIDER FOOTER ---
-	var imagesDisponibles = [
-		"./images/santiaguito/01.jpg", "./images/santiaguito/05.jpg", 
-		"./images/santiaguito/10.jpg", "./images/santiaguito/18.jpg",
-		"./images/literole/01.jpg", "./images/literole/06.jpg",
-		"./images/literole/12.jpg", "./images/literole/15.jpg"
-	];
+	// Chemins absolus depuis la racine du site (fonctionne quelle que soit la
+	// profondeur de la page), généré à partir de GALLERY_DATA (assets/js/
+	// gallery-data.js, la même liste que celle utilisée par galerie.html) :
+	// toutes les photos du site sont donc éligibles, dans un ordre mélangé
+	// tiré au hasard à chaque chargement de page.
+	function pad(n) { return (n < 10 ? '0' : '') + n; }
 
-	// --- FONCTION POUR CHARGER LE FOOTER ET LANCER LE SLIDER ---
-	function loadAndInitFooter() {
-		var $placeholder = $('#footer-placeholder');
-		if ($placeholder.length > 0) {
-			fetch('footer.html')
-				.then(response => response.text())
-				.then(data => {
-					$placeholder.html(data);
-					
-					// Une fois injecté, on lance la boucle de défilement
-					var startIdx = 0;
-					var $container = $('#footer-slideshow');
-					
-					if ($container.length > 0) {
-						var $imgElements = $container.find('img');
-						
-						setInterval(function() {
-							$imgElements.each(function(i) {
-								var $img = $(this);
-								var nextImg = imagesDisponibles[(startIdx + i) % imagesDisponibles.length];
-								
-								$img.css('opacity', '0');
-								setTimeout(function() {
-									$img.attr('src', nextImg);
-									$img.css('opacity', '1');
-								}, 600);
-							});
-							startIdx = (startIdx + 1) % imagesDisponibles.length;
-						}, 5000);
-					}
-				});
+	function shuffle(array) {
+		var i, j, tmp;
+		for (i = array.length - 1; i > 0; i--) {
+			j = Math.floor(Math.random() * (i + 1));
+			tmp = array[i];
+			array[i] = array[j];
+			array[j] = tmp;
 		}
+		return array;
+	}
+
+	var imagesDisponibles = (function() {
+		var base = '/journal_de_bord/images/',
+			list = [],
+			i;
+
+		if (typeof GALLERY_DATA === 'undefined')
+			return list;
+
+		GALLERY_DATA.forEach(function(entry) {
+			for (i = 0; i < entry.count; i++)
+				list.push(base + entry.folder + '/' + pad(entry.start + i) + '.jpg');
+		});
+
+		return shuffle(list);
+	})();
+
+	// --- MENU (desktop + mobile) ---
+	// Construit le HTML du menu <ul><li> à partir de NAV_DATA (assets/js/nav-data.js).
+	// Ajouter une page au site = ajouter une entrée dans ce fichier, pas ici.
+	function renderNavItem(item) {
+
+		if (item.home) {
+			return '<li class="home-logo">' +
+				'<a href="/journal_de_bord/index.html">' +
+					'<img src="/journal_de_bord/images/flamme.png" alt="Retour à l\'accueil" />' +
+				'</a>' +
+			'</li>';
+		}
+
+		var html = '<li><a href="' + item.url + '">' + item.title + '</a>';
+
+		if (item.children && item.children.length)
+			html += renderNavList(item.children);
+
+		html += '</li>';
+
+		return html;
+
+	}
+
+	function renderNavList(items) {
+		return '<ul>' + items.map(renderNavItem).join('') + '</ul>';
+	}
+
+	function renderNav() {
+		if (typeof NAV_DATA === 'undefined')
+			return;
+
+		$('#nav').html(renderNavList(NAV_DATA));
+	}
+
+	// Construit le menu déroulant et le panneau burger mobile. Doit être appelé
+	// une fois que #nav existe réellement dans le DOM (donc après l'injection du
+	// header par loadIncludes), sinon le panneau mobile est construit vide.
+	function initNav() {
+
+		renderNav();
+
+		// Panneau mobile : on clone la structure réelle de #nav (avant que
+		// dropotron n'y touche) pour garder les sous-menus imbriqués, repliés
+		// par défaut. Chaque catégorie ayant des enfants reçoit une flèche qui
+		// déplie/replie uniquement sa propre sous-liste (accordéon), au lieu
+		// d'afficher tous les niveaux d'un coup comme navList().
+			var $mobileList = $('#nav > ul').clone(true).addClass('mobile-nav-list');
+
+		// Dans le panneau mobile, l'entrée "accueil" devient un simple texte
+		// (pas d'image flamme ni de fond volcan, uniquement visible ici).
+			$mobileList.children('li.home-logo')
+				.find('img').remove().end()
+				.find('a').text('Accueil');
+
+			$mobileList.find('li').each(function() {
+
+				var $li = $(this),
+					$childUl = $li.children('ul');
+
+				if ($childUl.length === 0)
+					return;
+
+				$li.addClass('has-children');
+				$childUl.hide();
+
+				$('<span class="nav-toggle"><i class="fas fa-chevron-down"></i></span>')
+					.appendTo($li)
+					.on('click', function(event) {
+						event.preventDefault();
+						event.stopPropagation();
+						$li.toggleClass('nav-open');
+						$childUl.stop(true, true).slideToggle(250);
+					});
+
+			});
+
+			$(
+				'<div id="navPanel">' +
+					'<nav class="mobile-nav"></nav>' +
+				'</div>'
+			)
+				.appendTo($body)
+				.find('nav')
+					.append($mobileList)
+				.end()
+				.panel({
+					delay: 500,
+					hideOnClick: true,
+					hideOnSwipe: true,
+					resetScroll: true,
+					resetForms: true,
+					target: $body,
+					visibleClass: 'navPanel-visible'
+				});
+
+		// Bouton burger (mobile).
+			$(
+				'<div id="navButton">' +
+					'<a href="#navPanel" class="toggle"></a>' +
+				'</div>'
+			)
+				.appendTo($body);
+
+		// Dropdowns (desktop). Appelé après le clone ci-dessus pour que le
+		// panneau mobile parte d'un #nav intact, non modifié par dropotron.
+			$('#nav > ul').dropotron({
+				mode: 'fade',
+				speed: 350,
+				noOpenerFade: true,
+				alignment: 'center',
+				selector: '> li:not(.home-logo)'
+			});
+
+		// Bouton GO : sur la page d'accueil elle-même, on veut un défilement
+		// fluide vers #banner plutôt qu'un saut instantané. Le plugin scrolly
+		// n'accroche que les liens dont le href commence par "#" (voir
+		// jquery.scrolly.min.js), donc on ne peut pas l'utiliser tel quel sur
+		// un lien "/journal_de_bord/index.html#banner". Sur les autres pages,
+		// on garde ce lien complet pour revenir à l'accueil normalement.
+		// Comme le header est injecté après coup (fetch asynchrone), le
+		// $('.scrolly').scrolly() lancé plus haut dans ce fichier n'a pas pu
+		// accrocher ce bouton : il faut le refaire ici, une fois le bouton
+		// réellement présent dans le DOM.
+			var $go = $('#header .button.scrolly');
+
+			if (/\/journal_de_bord\/(index\.html)?$/.test(location.pathname))
+				$go.attr('href', '#banner');
+
+			$go.scrolly();
+
+	}
+
+	// --- DIAPORAMA DU FOOTER ---
+	function initFooterSlideshow() {
+
+		var $container = $('#footer-slideshow');
+
+		if ($container.length === 0)
+			return;
+
+		var startIdx = 0;
+		var $imgElements = $container.find('img');
+
+		setInterval(function() {
+			$imgElements.each(function(i) {
+				var $img = $(this);
+				var nextSrc = imagesDisponibles[(startIdx + i) % imagesDisponibles.length];
+
+				// On précharge la prochaine photo en arrière-plan avant de
+				// l'afficher : sur une connexion lente (ou beaucoup d'images
+				// à charger en même temps ailleurs sur la page), la photo
+				// affichée resterait sinon remplacée par le tour suivant
+				// avant même d'avoir fini de charger, et ne s'afficherait
+				// jamais. Ici l'ancienne photo reste visible le temps qu'il
+				// faut, sans jamais montrer de vignette vide.
+				var preloader = new Image();
+				preloader.onload = function() {
+					$img.css('opacity', '0');
+					setTimeout(function() {
+						$img.attr('src', nextSrc);
+						$img.css('opacity', '1');
+					}, 300);
+				};
+				preloader.src = nextSrc;
+			});
+			startIdx = (startIdx + $imgElements.length) % imagesDisponibles.length;
+		}, 5000);
+
+	}
+
+	// --- CHARGEMENT DES FRAGMENTS COMMUNS (header, footer, page en construction) ---
+	// Chemin absolu depuis la racine du site : fonctionne quelle que soit la
+	// profondeur de la page (racine, pays/, volcan-html-files/, ...) sans avoir
+	// à ajuster le chemin à la main dans chaque fichier HTML.
+	function loadFragment(placeholderSelector, path, onLoaded) {
+
+		var $placeholder = $(placeholderSelector);
+
+		if ($placeholder.length === 0)
+			return;
+
+		fetch(path)
+			.then(response => response.text())
+			.then(data => {
+				$placeholder.replaceWith(data);
+
+				if (onLoaded)
+					onLoaded();
+			});
+
+	}
+
+	function loadIncludes() {
+
+		var base = '/journal_de_bord/';
+
+		loadFragment('#header-placeholder', base + 'header.html', initNav);
+		loadFragment('#footer-placeholder', base + 'footer.html', initFooterSlideshow);
+		loadFragment('#construction-placeholder', base + 'template/construction.html');
+
 	}
 
 	// --- FONCTION POUR LA GALERIE (LIGHTBOX) ---
@@ -277,8 +436,9 @@
 	}
 
 	// --- LANCEMENT ---
+	loadIncludes();
+
 	$window.on('load', function() {
-		loadAndInitFooter();
 		initGalleryLightbox();
 	});
 

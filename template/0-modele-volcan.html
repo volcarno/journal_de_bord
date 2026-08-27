@@ -1,67 +1,123 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Volcan - Pays</title>
+    <title>Nom du volcan - Pays</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="icon" href="../images/favicon-16x16.png" type="image/png">
     <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
-          	integrity="sha512-K…(truncated)…" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Leaflet CSS pour carte -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-        #map { height: 400px; margin: 2em 0; }
+        #map {
+            height: 400px;
+            margin: 2em 0 0.75em 0;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        #map .leaflet-container { border-radius: 16px; }
+        #gpx-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5em 1.5em;
+            margin: 0 0 2em 0;
+            font-size: 0.85em;
+            color: #767676;
+        }
+        #gpx-stats strong { color: #483949; }
+        #gpx-error {
+            display: none;
+            height: 400px;
+            margin: 2em 0;
+            border-radius: 16px;
+            background: #f6f6f6;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2em;
+            color: #767676;
+        }
+        #elevation-profile {
+            margin: 0 0 2em 0;
+            padding: 1em 1.25em 0.5em 1.25em;
+            border-radius: 16px;
+            background: #f9f9f9;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+        #elevation-profile svg { display: block; width: 100%; height: auto; overflow: visible; }
+        #elevation-profile .elevation-area { fill: rgba(211, 84, 0, 0.15); }
+        #elevation-profile .elevation-line { fill: none; stroke: #d35400; stroke-width: 2; stroke-linejoin: round; }
+        #elevation-profile .elevation-axis { stroke: #ddd; stroke-width: 1; }
+        #elevation-profile .elevation-label { font-size: 11px; fill: #999; font-family: 'Source Sans Pro', sans-serif; }
+        #elevation-profile .elevation-cursor { stroke: #483949; stroke-width: 1; opacity: 0; pointer-events: none; }
+        #elevation-profile .elevation-cursor-dot { fill: #d35400; stroke: #fff; stroke-width: 1.5; opacity: 0; pointer-events: none; }
+        #elevation-profile .elevation-overlay { fill: transparent; cursor: crosshair; }
     </style>
 </head>
 <body class="no-sidebar is-preload">
+<!--
+  MODELE "VOLCAN"
+  ================
+  A utiliser pour une nouvelle fiche volcan dans volcan-html-files/, sur le
+  modele de santiaguito.html : fiche scientifique + recit d'ascension +
+  carte GPX avec profil de denivelé et point de survol synchronisé.
+
+  A adapter :
+    1. Le bandeau tout en haut (distance, denivele, meteo, risques, duree,
+       point de depart)
+    2. La fiche scientifique (localisation, altitude, type, activite,
+       composition chimique)
+    3. Le recit de l'ascension
+    4. Les coordonnees de centrage de la carte (ligne "center: [...]")
+    5. Le chemin du fichier GPX (variable "gpx" dans le script) : tant que
+       ce fichier n'existe pas dans data/, la carte affichera proprement
+       le message d'erreur plutot que de planter.
+    6. Les conseils, la galerie et les volcans apparentés en bas de page
+
+  Les photos sont des aplats de couleur en attendant les vraies :
+  chercher "PLACEHOLDER". Les textes de demonstration sont en Lorem Ipsum
+  (latin) : chercher "Lorem ipsum" / "Commodo id natoque...".
+-->
 <div id="page-wrapper">
 
      <!-- Header -->
-    <div id="header">
-        <div class="inner">
-            <header>
-                <h1>
-                <a href="../index.html" id="logo">
-                    <img src="../images/maison.png" alt="Accueil" style="height: 70px; vertical-align: middle;">
-                </a>
-                </h1>
-            </header>
-        </div>
-    </div>
+    <div id="header-placeholder"></div>
+
     <div class="bandeau">
         <div class="texte-defilant">
-            <span>Paramètres de l'ascension :</span>
-            <span>Distance : xx km</span>
-            <span>Dénivelé : xx km</span>
+            <span>Distance : xx km AR</span>
+            <span>Dénivelé : xx m</span>
+            <span>Sentier : xx</span>
             <span>Météo : xx</span>
-            <span>Durée : x h x min</span>     
+            <span>Risques : xx</span>
+            <span>Durée : x h x min</span>
+            <span>Point de départ : xx</span>
         </div>
     </div>
 
-    
+
     <!-- Main -->
     <div class="wrapper style1">
         <div class="container">
             <article id="main" class="special">
                 <header>
-                    <h2><a href="#">Volcan</a></h2>
+                    <h2><a href="#">Nom du volcan</a></h2>
                     <p>Type - Pays - Ville proche</p>
                 </header>
                 <hr>
                 <section id="fiche-scientifique">
                     <h3>Fiche scientifique volcan</h3>
-                    <section id="descritpion">
+                    <section id="description">
                         <div class="row">
                             <div class="col-9">
                                 <p>
-                                    Paragraphe descriptif : Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-										posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-										lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-										consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-										interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-										natoque aenean scelerisque vel lacinia mollis quam sodales congue.
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
+                                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                                    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                                 </p>
                             </div>
                             <div class="row-3">
@@ -69,14 +125,15 @@
                                 <!-- Ligne avec la photo -->
                                 <tr>
                                     <td colspan="2" style="text-align: center;">
-                                    <img src="../images/volcan.jpg" alt="Photo du volcan" style="width:20%; height:auto;">
+                                    <!-- PLACEHOLDER photo -->
+                                    <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Crect width='400' height='400' fill='%235f6a6b'/%3E%3C/svg%3E" alt="Photo a venir" style="width:20%; height:auto;">
                                     </td>
                                 </tr>
-                                
+
                                 <!-- Ligne avec localisation -->
                                 <tr>
                                     <td><strong>Localisation</strong></td>
-                                    <td>loc</td>
+                                    <td>xx</td>
                                 </tr>
 
                                 <!-- Ligne avec altitude -->
@@ -106,26 +163,20 @@
                             </div>
                         </div>
                     </section>
-                    <section id="géographie">
+                    <section id="geographie">
                         <h3>Géographie</h3>
                             <p>
-                                Paragraphe correspondant : Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-										posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-										lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-										consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-										interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-										natoque aenean scelerisque vel lacinia mollis quam sodales congue.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
+                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                             </p>
                     </section>
                     <section id="composition">
                         <h3>Type de roche et composition chimique</h3>
                             <p>
-                                Paragraphe descriptif : Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-										posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-										lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-										consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-										interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-										natoque aenean scelerisque vel lacinia mollis quam sodales congue.
+                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur blandit tempus
+                                porttitor. Cras mattis consectetur purus sit amet fermentum.
                             </p>
                             <table class="default">
                             <thead>
@@ -179,14 +230,10 @@
                     <section id="type">
                         <h3>Type de volcanisme</h3>
                             <p>
-                                Paragraphe correspondant : Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-										posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-										lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-										consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-										interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-										natoque aenean scelerisque vel lacinia mollis quam sodales congue.
+                                Nullam quis risus eget urna mollis ornare vel eu leo. Sed posuere consectetur est at lobortis. Fusce dapibus, tellus
+                                ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
                             </p>
-                    </section>      
+                    </section>
                 </section>
 
                 <hr>
@@ -195,21 +242,14 @@
 
                 <section id="etape-voyage">
                 <p>
-                    Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-					posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-					lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-					consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-					interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-					natoque aenean scelerisque vel lacinia mollis quam sodales congue.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                 </p>
 
                 <p>
-                    Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-					posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-					lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-					consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-					interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-					natoque aenean scelerisque vel lacinia mollis quam sodales congue.
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Cum sociis
+                    natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla.
                 </p>
                 </section>
 
@@ -218,62 +258,45 @@
                         <h3>Mon ascension</h3>
                     </header>
                     <p>
-                        Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-					posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-					lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-					consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-					interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-					natoque aenean scelerisque vel lacinia mollis quam sodales congue.
+                        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur blandit tempus porttitor.
+                        Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur. Nullam quis risus eget
+                        urna mollis ornare vel eu leo.
                     </p>
                     <p>
-                        Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-					    posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-					    lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-					    consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-					    interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-					    natoque aenean scelerisque vel lacinia mollis quam sodales congue.
+                        Sed posuere consectetur est at lobortis. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut
+                        fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                     </p>
                     <div class="row">
                         <div class="col-9">
                             <p>
-                            Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-                            posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-                            lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-                            consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-                            interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-                            natoque aenean scelerisque vel lacinia mollis quam sodales congue.
+                            Donec ullamcorper nulla non metus auctor fringilla. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
+                            auctor. Maecenas faucibus mollis interdum. Etiam porta sem malesuada magna mollis euismod. Donec id elit non mi porta
+                            gravida at eget metus.
                             </p>
                         </div>
                         <div class="col-3">
                             <span class="image fit">
-                            <img src="../images/santiaguito/07.jpg" atl="forêt disparait" style="width:100%; height:auto;">
+                            <!-- PLACEHOLDER photo -->
+                            <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%238a6d3b'/%3E%3C/svg%3E" alt="Photo a venir" style="width:100%; height:auto;">
                             </span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3">
                             <span class="image fit">
-                                <img src="../images/santiaguito/18.jpg"
+                                <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23a3b18a'/%3E%3C/svg%3E" alt="Photo a venir">
                             </span>
                         </div>
                         <div class="col-9">
                             <p>
-                                Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-                                posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-                                lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-                                consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-                                interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-                                natoque aenean scelerisque vel lacinia mollis quam sodales congue.
+                                Cras justo odio, dapibus ac facilisis in, egestas eget quam. Aenean eu leo quam. Pellentesque ornare sem lacinia
+                                quam venenatis vestibulum. Donec sed odio dui. Nullam id dolor id nibh ultricies vehicula ut id elit.
                             </p>
                         </div>
                     </div>
                     <p>
-                        Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-                        posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-                        lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-                        consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-                        interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-                        natoque aenean scelerisque vel lacinia mollis quam sodales congue.
+                        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla vitae elit libero, a
+                        pharetra augue. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
                     </p>
                 </section>
 
@@ -282,7 +305,10 @@
                         <h3>Carte des parcours</h3>
                     </header>
                     <div id="map"></div>
-                    <p>Cette carte peut afficher vos données GPX. Utilisez le contrôle en haut à droite pour changer de fond de carte.</p>
+                    <div id="gpx-error"><p>Le tracé GPX n'a pas pu être chargé pour le moment. Réessayez un peu plus tard !</p></div>
+                    <div id="gpx-stats"></div>
+                    <div id="elevation-profile"></div>
+                    <p>Vous pouvez afficher le tracé GPX de l'ascension ci-dessus. Utilisez le contrôle en haut à droite pour changer de fond de carte, et survolez le profil de dénivelé pour voir la position correspondante sur la carte.</p>
                 </section>
 
                 <!-- Scripts Leaflet et GPX -->
@@ -299,9 +325,9 @@
                         attribution: '© Google Maps'
                     });
 
-                    // Carte centrée sur le Santiaguito
+                    // Carte centrée sur le volcan -- A ADAPTER
                     var map = L.map('map', {
-                        center: [14.75, -91.55], // coordonnées approximatives du Santiaguito
+                        center: [45.0, 5.0],
                         zoom: 12,
                         layers: [osm] // couche par défaut
                     });
@@ -312,12 +338,212 @@
                         "Satellite": satellite
                     };
                     L.control.layers(baseMaps).addTo(map);
+                    L.control.scale({ imperial: false }).addTo(map);
 
-                    // Ajouter le GPX
-                    var gpx = '../data/santiaguito.gpx'; // fichier GPX dans le même dossier relatif
-                    new L.GPX(gpx, { async: true }).on('loaded', function(e) {
-                        map.fitBounds(e.target.getBounds());
-                    }).addTo(map);
+                    // Profil de dénivelé, dessiné en SVG à partir des données du GPX
+                    // (pas de librairie supplémentaire), avec un point qui suit la
+                    // position sur la carte quand on survole le graphique.
+                    var elevationCursorMarker = null;
+
+                    function drawElevationProfile(track) {
+                        var data = track.get_elevation_data();
+                        var container = document.getElementById('elevation-profile');
+
+                        if (!data || data.length < 2) {
+                            container.style.display = 'none';
+                            return;
+                        }
+
+                        // get_elevation_data() ne fournit pas les coordonnées GPS (juste
+                        // "distance, km, altitude m" en texte) : on récupère donc séparément
+                        // les points du tracé dessiné sur la carte, dans l'ordre, pour pouvoir
+                        // positionner le repère au bon endroit pendant le survol.
+                        var trackLatLngs = [];
+                        (function collectLatLngs(layer) {
+                            if (typeof layer.getLatLngs === 'function') {
+                                var latlngs = layer.getLatLngs();
+                                var flat = Array.isArray(latlngs[0]) ? latlngs.reduce(function(a, b) { return a.concat(b); }, []) : latlngs;
+                                trackLatLngs = trackLatLngs.concat(flat);
+                            } else if (typeof layer.eachLayer === 'function') {
+                                layer.eachLayer(collectLatLngs);
+                            }
+                        })(track);
+
+                        var width = 800, height = 85;
+                        var padding = { top: 8, right: 10, bottom: 20, left: 38 };
+                        var innerW = width - padding.left - padding.right;
+                        var innerH = height - padding.top - padding.bottom;
+
+                        var maxDist = data[data.length - 1][0];
+                        var elevations = data.map(function(d) { return d[1]; });
+                        var minElev = Math.min.apply(null, elevations);
+                        var maxElev = Math.max.apply(null, elevations);
+                        var elevRange = (maxElev - minElev) || 1;
+
+                        function toX(d) { return padding.left + (d[0] / maxDist) * innerW; }
+                        function toY(d) { return padding.top + innerH - ((d[1] - minElev) / elevRange) * innerH; }
+
+                        var linePath = data.map(function(d, i) {
+                            return (i === 0 ? 'M' : 'L') + toX(d).toFixed(1) + ',' + toY(d).toFixed(1);
+                        }).join(' ');
+
+                        var baseY = padding.top + innerH;
+                        var areaPath = linePath +
+                            ' L' + toX(data[data.length - 1]).toFixed(1) + ',' + baseY +
+                            ' L' + toX(data[0]).toFixed(1) + ',' + baseY + ' Z';
+
+                        var svgNS = 'http://www.w3.org/2000/svg';
+                        var svg = document.createElementNS(svgNS, 'svg');
+                        svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+
+                        function addPath(d, className) {
+                            var p = document.createElementNS(svgNS, 'path');
+                            p.setAttribute('d', d);
+                            p.setAttribute('class', className);
+                            svg.appendChild(p);
+                            return p;
+                        }
+
+                        function addLine(x1, y1, x2, y2, className) {
+                            var l = document.createElementNS(svgNS, 'line');
+                            l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+                            l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+                            l.setAttribute('class', className);
+                            svg.appendChild(l);
+                            return l;
+                        }
+
+                        function addText(x, y, anchor, text) {
+                            var t = document.createElementNS(svgNS, 'text');
+                            t.setAttribute('x', x); t.setAttribute('y', y);
+                            t.setAttribute('text-anchor', anchor);
+                            t.setAttribute('class', 'elevation-label');
+                            t.textContent = text;
+                            svg.appendChild(t);
+                        }
+
+                        // Axe bas + repères de distance
+                        addLine(padding.left, baseY, padding.left + innerW, baseY, 'elevation-axis');
+                        addText(padding.left, height - 4, 'start', '0 km');
+                        addText(padding.left + innerW, height - 4, 'end', maxDist.toFixed(1) + ' km');
+
+                        // Repères d'altitude min / max
+                        addText(padding.left - 6, toY([0, maxElev]) + 4, 'end', Math.round(maxElev) + ' m');
+                        addText(padding.left - 6, toY([0, minElev]) + 4, 'end', Math.round(minElev) + ' m');
+
+                        // Courbe
+                        addPath(areaPath, 'elevation-area');
+                        addPath(linePath, 'elevation-line');
+
+                        // Curseur (invisible tant qu'on ne survole pas)
+                        var cursorLine = addLine(0, padding.top, 0, baseY, 'elevation-cursor');
+                        var cursorDot = document.createElementNS(svgNS, 'circle');
+                        cursorDot.setAttribute('r', 4);
+                        cursorDot.setAttribute('class', 'elevation-cursor-dot');
+                        svg.appendChild(cursorDot);
+
+                        // Zone invisible qui capte la souris sur toute la largeur
+                        var overlay = document.createElementNS(svgNS, 'rect');
+                        overlay.setAttribute('x', padding.left);
+                        overlay.setAttribute('y', padding.top);
+                        overlay.setAttribute('width', innerW);
+                        overlay.setAttribute('height', innerH);
+                        overlay.setAttribute('class', 'elevation-overlay');
+                        svg.appendChild(overlay);
+
+                        function showCursor(clientX) {
+                            var box = svg.getBoundingClientRect();
+                            var ratio = width / box.width;
+                            var xInSvg = (clientX - box.left) * ratio;
+                            var t = Math.min(1, Math.max(0, (xInSvg - padding.left) / innerW));
+                            var index = Math.round(t * (data.length - 1));
+                            var d = data[index];
+
+                            var px = toX(d), py = toY(d);
+                            cursorLine.setAttribute('x1', px);
+                            cursorLine.setAttribute('x2', px);
+                            cursorLine.style.opacity = 1;
+                            cursorDot.setAttribute('cx', px);
+                            cursorDot.setAttribute('cy', py);
+                            cursorDot.style.opacity = 1;
+
+                            if (trackLatLngs.length) {
+                                var latlngIndex = Math.round(t * (trackLatLngs.length - 1));
+                                var latlng = trackLatLngs[latlngIndex];
+
+                                if (!elevationCursorMarker) {
+                                    elevationCursorMarker = L.circleMarker(latlng, {
+                                        radius: 7,
+                                        color: '#fff',
+                                        weight: 2,
+                                        fillColor: '#d35400',
+                                        fillOpacity: 1
+                                    }).addTo(map);
+                                } else {
+                                    elevationCursorMarker.setLatLng(latlng);
+                                }
+                            }
+                        }
+
+                        function hideCursor() {
+                            cursorLine.style.opacity = 0;
+                            cursorDot.style.opacity = 0;
+                            if (elevationCursorMarker) {
+                                map.removeLayer(elevationCursorMarker);
+                                elevationCursorMarker = null;
+                            }
+                        }
+
+                        overlay.addEventListener('mousemove', function(ev) { showCursor(ev.clientX); });
+                        overlay.addEventListener('mouseleave', hideCursor);
+                        overlay.addEventListener('touchmove', function(ev) {
+                            if (ev.touches && ev.touches[0]) showCursor(ev.touches[0].clientX);
+                        });
+                        overlay.addEventListener('touchend', hideCursor);
+
+                        container.innerHTML = '';
+                        container.appendChild(svg);
+                    }
+
+                    // Ajouter le tracé GPX, avec le style du site (orange volcan)
+                    // A ADAPTER : chemin vers le fichier GPX de l'ascension
+                    var gpx = '../data/exemple.gpx';
+                    new L.GPX(gpx, {
+                        async: true,
+                        polyline_options: {
+                            color: '#d35400',
+                            weight: 4,
+                            opacity: 0.85,
+                            lineJoin: 'round'
+                        },
+                        marker_options: {
+                            startIconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                            endIconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                            shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
+                        }
+                    })
+                        .on('loaded', function(e) {
+                            var track = e.target;
+                            map.fitBounds(track.getBounds());
+
+                            // Statistiques réelles calculées à partir du fichier GPX
+                            var distanceKm = (track.get_distance() / 1000).toFixed(1);
+                            var gain = Math.round(track.get_elevation_gain());
+                            var loss = Math.round(track.get_elevation_loss());
+
+                            document.getElementById('gpx-stats').innerHTML =
+                                '<span>📏 <strong>' + distanceKm + ' km</strong> parcourus</span>' +
+                                '<span>⬆️ <strong>+' + gain + ' m</strong> de dénivelé</span>' +
+                                '<span>⬇️ <strong>-' + loss + ' m</strong></span>';
+
+                            drawElevationProfile(track);
+                        })
+                        .on('error', function() {
+                            document.getElementById('map').style.display = 'none';
+                            document.getElementById('elevation-profile').style.display = 'none';
+                            document.getElementById('gpx-error').style.display = 'flex';
+                        })
+                        .addTo(map);
                 </script>
 
                     <section>
@@ -331,7 +557,7 @@
                             <li>Tip 4 : xx</li>
                             <li>Tip 5 : xx</li>
                         </ul>
-                    </section>                
+                    </section>
                 </article>
 
             <hr />
@@ -339,20 +565,20 @@
             <!-- Galerie simple -->
             <section id="galerie">
                 <header>
-                    <h2><a href="../galerie.html?tag=Santiaguito">Galerie photo - Santiaguito</a></h2>
+                    <h2><a href="../galerie.html?tag=exemple">Galerie photo - Nom du volcan</a></h2>
                 </header>
                 <div class="row gtr-25">
                     <div class="col-3">
-                        <span class="image fit"><img src="../images/santiaguito/01.jpg" alt="Galerie 1" /></span>
+                        <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23d35400'/%3E%3C/svg%3E" alt="Galerie 1" /></span>
                     </div>
                     <div class="col-3">
-                        <span class="image fit"><img src="../images/santiaguito/02.jpg" alt="Galerie 2" /></span>
+                        <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%234a6fa5'/%3E%3C/svg%3E" alt="Galerie 2" /></span>
                     </div>
                     <div class="col-3">
-                        <span class="image fit"><img src="../images/santiaguito/03.jpg" alt="Galerie 3" /></span>
+                        <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23748071'/%3E%3C/svg%3E" alt="Galerie 3" /></span>
                     </div>
                     <div class="col-3">
-                        <span class="image fit"><img src="../images/santiaguito/04.jpg" alt="galerie 4" /></span>
+                        <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%235f6a6b'/%3E%3C/svg%3E" alt="galerie 4" /></span>
                     </div>
                 </div>
             </section>
@@ -365,21 +591,21 @@
             </header>
             <div class="row">
                 <article class="col-4 col-12-mobile special">
-                    <a href="fuego.html" class="image fit"><img src="../images/fuego.jpg" alt="" /></a>
+                    <a href="#" class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23d8722f'/%3E%3C/svg%3E" alt="" /></a>
                     <header>
-                        <h3><a href="fuego.html">Fuego - Guatemala</a></h3>
+                        <h3><a href="#">Volcan voisin 1</a></h3>
                     </header>
                 </article>
                 <article class="col-4 col-12-mobile special">
-                    <a href="acatenango.html" class="image fit"><img src="../images/acatenango.jpg" alt="" /></a>
+                    <a href="#" class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23a3b18a'/%3E%3C/svg%3E" alt="" /></a>
                     <header>
-                        <h3><a href="acatenango.html">Acatenango - Guatemala</a></h3>
+                        <h3><a href="#">Volcan voisin 2</a></h3>
                     </header>
                 </article>
                 <article class="col-4 col-12-mobile special">
-                    <a href="pacaya.html" class="image fit"><img src="../images/pacaya.jpg" alt="" /></a>
+                    <a href="#" class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%238a6d3b'/%3E%3C/svg%3E" alt="" /></a>
                     <header>
-                        <h3><a href="pacaya.html">Pacaya - Guatemala</a></h3>
+                        <h3><a href="#">Volcan voisin 3</a></h3>
                     </header>
                 </article>
             </div>
@@ -388,71 +614,7 @@
     </div>
 
     <!-- Footer -->
-			<div id="footer">
-				<div class="container">
-
-					<!-- Ligne 1 : Contact -->
-					<div class="row">
-						<div class="col-12">
-							<section class="contact">
-								<header>
-									<h3>Contactez-moi</h3>
-								</header>
-								<p>Pour toute question, information ou suggestion, n'hésitez pas à me contacter : arno.rabault@gmail.com</p>
-								<ul class="icons">
-									<li><a href="https://www.linkedin.com/in/arno-rabault-a2b931212" class="icon brands fa-linkedin-in"></a></li>
-									<li><a href="https://www.instagram.com/arno_rblt" class="icon brands fa-instagram"></a></li>
-									<li><a href="https://www.polarsteps.com/arnocracheurdefeu" class="fa-solid fa-earth-americas"></a></li>
-									<li><a href="https://www.cagnotte.com/lien" class="icon fa-credit-card"></a></li>
-								</ul>
-							</section>
-						</div>
-					</div>
-
-					<hr />
-
-					<!-- Ligne 2 : Galerie photo -->
-					<div class="row">
-						<div class="col-12">
-							<section class="footer-gallery">
-								<header>
-									<h3><a href="../galerie.html">Galerie</a></h3>
-								</header>
-								<div class="row gtr-25">
-									<div class="col-3">
-										<a href="../galerie.html" class="image fit"><img src="../images/pic10.jpg" alt="" /></a>
-									</div>
-									<div class="col-3">
-										<a href="../galerie.html" class="image fit"><img src="../images/pic11.jpg" alt="" /></a>
-									</div>
-									<div class="col-3">
-										<a href="../galerie.html" class="image fit"><img src="../images/pic12.jpg" alt="" /></a>
-									</div>
-									<div class="col-3">
-										<a href="../galerie.html" class="image fit"><img src="../images/pic13.jpg" alt="" /></a>
-									</div>
-								</div>
-							</section>
-						</div>
-					</div>
-
-					<hr />
-
-					<!-- Copyright -->
-					<div class="row">
-						<div class="col-12">
-							<div class="copyright">
-								<ul class="menu">
-									<li>&copy; Volcarno. All rights reserved.</li>
-									<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-
+    <div id="footer-placeholder"></div>
 
 <!-- Scripts -->
 <script src="../assets/js/jquery.min.js"></script>
@@ -462,24 +624,10 @@
 <script src="../assets/js/browser.min.js"></script>
 <script src="../assets/js/breakpoints.min.js"></script>
 <script src="../assets/js/util.js"></script>
-<script src="../assets/js/main.js"></script>
+<script src="../assets/js/gallery-data.js"></script>
+<script src="../assets/js/nav-data.js"></script>
+  <script src="../assets/js/main.js"></script>
 
-<!-- Leaflet JS pour GPX -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
-<script>
-    // Carte
-    var map = L.map('map').setView([10.0, -84.0], 7);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Ajouter un fichier GPX
-    var gpx = '../data/santiaguito.gpx'; // chemin relatif depuis ce fichier
-    new L.GPX(gpx, { async: true }).on('loaded', function(e) {
-        map.fitBounds(e.target.getBounds());
-    }).addTo(map);
-</script>
-
+</div>
 </body>
 </html>

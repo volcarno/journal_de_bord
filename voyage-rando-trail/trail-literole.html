@@ -5,14 +5,56 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="icon" href="../images/favicon-16x16.png" type="image/png">
     <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
-          	integrity="sha512-K…(truncated)…" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Leaflet CSS pour carte -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-        #map { height: 400px; margin: 2em 0; }
+        #map {
+            height: 400px;
+            margin: 2em 0 0.75em 0;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        #map .leaflet-container { border-radius: 16px; }
+        #gpx-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5em 1.5em;
+            margin: 0 0 2em 0;
+            font-size: 0.85em;
+            color: #767676;
+        }
+        #gpx-stats strong { color: #483949; }
+        #gpx-error {
+            display: none;
+            height: 400px;
+            margin: 2em 0;
+            border-radius: 16px;
+            background: #f6f6f6;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2em;
+            color: #767676;
+        }
+        #elevation-profile {
+            margin: 0 0 2em 0;
+            padding: 1em 1.25em 0.5em 1.25em;
+            border-radius: 16px;
+            background: #f9f9f9;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+        #elevation-profile svg { display: block; width: 100%; height: auto; overflow: visible; }
+        #elevation-profile .elevation-area { fill: rgba(211, 84, 0, 0.15); }
+        #elevation-profile .elevation-line { fill: none; stroke: #d35400; stroke-width: 2; stroke-linejoin: round; }
+        #elevation-profile .elevation-axis { stroke: #ddd; stroke-width: 1; }
+        #elevation-profile .elevation-label { font-size: 11px; fill: #999; font-family: 'Source Sans Pro', sans-serif; }
+        #elevation-profile .elevation-cursor { stroke: #483949; stroke-width: 1; opacity: 0; pointer-events: none; }
+        #elevation-profile .elevation-cursor-dot { fill: #d35400; stroke: #fff; stroke-width: 1.5; opacity: 0; pointer-events: none; }
+        #elevation-profile .elevation-overlay { fill: transparent; cursor: crosshair; }
     </style>
 </head>
 <body class="no-sidebar is-preload">
@@ -24,7 +66,7 @@
             <header>
                 <h1>
                 <a href="../index.html" id="logo">
-                    <img src="../images/maison.png" alt="Accueil" style="height: 70px; vertical-align: middle;">
+                    <img loading="lazy" src="../images/flamme.png" alt="Accueil" style="height: 70px; vertical-align: middle;">
                 </a>
                 </h1>
             </header>
@@ -76,7 +118,10 @@
                         <h3>Carte de la sortie</h3>
                     </header>
                     <div id="map"></div>
-                    <p>Cette carte peut afficher vos données GPX. Utilisez le contrôle en haut à droite pour changer de fond de carte.</p>
+                    <div id="gpx-error"><p>Le tracé GPX n'a pas pu être chargé pour le moment. Réessayez un peu plus tard !</p></div>
+                    <div id="gpx-stats"></div>
+                    <div id="elevation-profile"></div>
+                    <p>Vous pouvez afficher le tracé GPX de la sortie ci-dessus. Utilisez le contrôle en haut à droite pour changer de fond de carte, et survolez le profil de dénivelé pour voir la position correspondante sur la carte.</p>
                 </section>
 
                 <!-- Scripts Leaflet et GPX -->
@@ -106,12 +151,211 @@
                         "Satellite": satellite
                     };
                     L.control.layers(baseMaps).addTo(map);
+                    L.control.scale({ imperial: false }).addTo(map);
 
-                    // Ajouter le GPX
+                    // Profil de dénivelé, dessiné en SVG à partir des données du GPX
+                    // (pas de librairie supplémentaire), avec un point qui suit la
+                    // position sur la carte quand on survole le graphique.
+                    var elevationCursorMarker = null;
+
+                    function drawElevationProfile(track) {
+                        var data = track.get_elevation_data();
+                        var container = document.getElementById('elevation-profile');
+
+                        if (!data || data.length < 2) {
+                            container.style.display = 'none';
+                            return;
+                        }
+
+                        // get_elevation_data() ne fournit pas les coordonnées GPS (juste
+                        // "distance, km, altitude m" en texte) : on récupère donc séparément
+                        // les points du tracé dessiné sur la carte, dans l'ordre, pour pouvoir
+                        // positionner le repère au bon endroit pendant le survol.
+                        var trackLatLngs = [];
+                        (function collectLatLngs(layer) {
+                            if (typeof layer.getLatLngs === 'function') {
+                                var latlngs = layer.getLatLngs();
+                                var flat = Array.isArray(latlngs[0]) ? latlngs.reduce(function(a, b) { return a.concat(b); }, []) : latlngs;
+                                trackLatLngs = trackLatLngs.concat(flat);
+                            } else if (typeof layer.eachLayer === 'function') {
+                                layer.eachLayer(collectLatLngs);
+                            }
+                        })(track);
+
+                        var width = 800, height = 85;
+                        var padding = { top: 8, right: 10, bottom: 20, left: 38 };
+                        var innerW = width - padding.left - padding.right;
+                        var innerH = height - padding.top - padding.bottom;
+
+                        var maxDist = data[data.length - 1][0];
+                        var elevations = data.map(function(d) { return d[1]; });
+                        var minElev = Math.min.apply(null, elevations);
+                        var maxElev = Math.max.apply(null, elevations);
+                        var elevRange = (maxElev - minElev) || 1;
+
+                        function toX(d) { return padding.left + (d[0] / maxDist) * innerW; }
+                        function toY(d) { return padding.top + innerH - ((d[1] - minElev) / elevRange) * innerH; }
+
+                        var linePath = data.map(function(d, i) {
+                            return (i === 0 ? 'M' : 'L') + toX(d).toFixed(1) + ',' + toY(d).toFixed(1);
+                        }).join(' ');
+
+                        var baseY = padding.top + innerH;
+                        var areaPath = linePath +
+                            ' L' + toX(data[data.length - 1]).toFixed(1) + ',' + baseY +
+                            ' L' + toX(data[0]).toFixed(1) + ',' + baseY + ' Z';
+
+                        var svgNS = 'http://www.w3.org/2000/svg';
+                        var svg = document.createElementNS(svgNS, 'svg');
+                        svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+
+                        function addPath(d, className) {
+                            var p = document.createElementNS(svgNS, 'path');
+                            p.setAttribute('d', d);
+                            p.setAttribute('class', className);
+                            svg.appendChild(p);
+                            return p;
+                        }
+
+                        function addLine(x1, y1, x2, y2, className) {
+                            var l = document.createElementNS(svgNS, 'line');
+                            l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+                            l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+                            l.setAttribute('class', className);
+                            svg.appendChild(l);
+                            return l;
+                        }
+
+                        function addText(x, y, anchor, text) {
+                            var t = document.createElementNS(svgNS, 'text');
+                            t.setAttribute('x', x); t.setAttribute('y', y);
+                            t.setAttribute('text-anchor', anchor);
+                            t.setAttribute('class', 'elevation-label');
+                            t.textContent = text;
+                            svg.appendChild(t);
+                        }
+
+                        // Axe bas + repères de distance
+                        addLine(padding.left, baseY, padding.left + innerW, baseY, 'elevation-axis');
+                        addText(padding.left, height - 4, 'start', '0 km');
+                        addText(padding.left + innerW, height - 4, 'end', maxDist.toFixed(1) + ' km');
+
+                        // Repères d'altitude min / max
+                        addText(padding.left - 6, toY([0, maxElev]) + 4, 'end', Math.round(maxElev) + ' m');
+                        addText(padding.left - 6, toY([0, minElev]) + 4, 'end', Math.round(minElev) + ' m');
+
+                        // Courbe
+                        addPath(areaPath, 'elevation-area');
+                        addPath(linePath, 'elevation-line');
+
+                        // Curseur (invisible tant qu'on ne survole pas)
+                        var cursorLine = addLine(0, padding.top, 0, baseY, 'elevation-cursor');
+                        var cursorDot = document.createElementNS(svgNS, 'circle');
+                        cursorDot.setAttribute('r', 4);
+                        cursorDot.setAttribute('class', 'elevation-cursor-dot');
+                        svg.appendChild(cursorDot);
+
+                        // Zone invisible qui capte la souris sur toute la largeur
+                        var overlay = document.createElementNS(svgNS, 'rect');
+                        overlay.setAttribute('x', padding.left);
+                        overlay.setAttribute('y', padding.top);
+                        overlay.setAttribute('width', innerW);
+                        overlay.setAttribute('height', innerH);
+                        overlay.setAttribute('class', 'elevation-overlay');
+                        svg.appendChild(overlay);
+
+                        function showCursor(clientX) {
+                            var box = svg.getBoundingClientRect();
+                            var ratio = width / box.width;
+                            var xInSvg = (clientX - box.left) * ratio;
+                            var t = Math.min(1, Math.max(0, (xInSvg - padding.left) / innerW));
+                            var index = Math.round(t * (data.length - 1));
+                            var d = data[index];
+
+                            var px = toX(d), py = toY(d);
+                            cursorLine.setAttribute('x1', px);
+                            cursorLine.setAttribute('x2', px);
+                            cursorLine.style.opacity = 1;
+                            cursorDot.setAttribute('cx', px);
+                            cursorDot.setAttribute('cy', py);
+                            cursorDot.style.opacity = 1;
+
+                            if (trackLatLngs.length) {
+                                var latlngIndex = Math.round(t * (trackLatLngs.length - 1));
+                                var latlng = trackLatLngs[latlngIndex];
+
+                                if (!elevationCursorMarker) {
+                                    elevationCursorMarker = L.circleMarker(latlng, {
+                                        radius: 7,
+                                        color: '#fff',
+                                        weight: 2,
+                                        fillColor: '#d35400',
+                                        fillOpacity: 1
+                                    }).addTo(map);
+                                } else {
+                                    elevationCursorMarker.setLatLng(latlng);
+                                }
+                            }
+                        }
+
+                        function hideCursor() {
+                            cursorLine.style.opacity = 0;
+                            cursorDot.style.opacity = 0;
+                            if (elevationCursorMarker) {
+                                map.removeLayer(elevationCursorMarker);
+                                elevationCursorMarker = null;
+                            }
+                        }
+
+                        overlay.addEventListener('mousemove', function(ev) { showCursor(ev.clientX); });
+                        overlay.addEventListener('mouseleave', hideCursor);
+                        overlay.addEventListener('touchmove', function(ev) {
+                            if (ev.touches && ev.touches[0]) showCursor(ev.touches[0].clientX);
+                        });
+                        overlay.addEventListener('touchend', hideCursor);
+
+                        container.innerHTML = '';
+                        container.appendChild(svg);
+                    }
+
+                    // Ajouter le tracé GPX, avec le style du site (orange volcan)
                     var gpx = '../data/literole.gpx'; // fichier GPX dans le même dossier relatif
-                    new L.GPX(gpx, { async: true }).on('loaded', function(e) {
-                        map.fitBounds(e.target.getBounds());
-                    }).addTo(map);
+                    new L.GPX(gpx, {
+                        async: true,
+                        polyline_options: {
+                            color: '#d35400',
+                            weight: 4,
+                            opacity: 0.85,
+                            lineJoin: 'round'
+                        },
+                        marker_options: {
+                            startIconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                            endIconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                            shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
+                        }
+                    })
+                        .on('loaded', function(e) {
+                            var track = e.target;
+                            map.fitBounds(track.getBounds());
+
+                            // Statistiques réelles calculées à partir du fichier GPX
+                            var distanceKm = (track.get_distance() / 1000).toFixed(1);
+                            var gain = Math.round(track.get_elevation_gain());
+                            var loss = Math.round(track.get_elevation_loss());
+
+                            document.getElementById('gpx-stats').innerHTML =
+                                '<span>📏 <strong>' + distanceKm + ' km</strong> parcourus</span>' +
+                                '<span>⬆️ <strong>+' + gain + ' m</strong> de dénivelé</span>' +
+                                '<span>⬇️ <strong>-' + loss + ' m</strong></span>';
+
+                            drawElevationProfile(track);
+                        })
+                        .on('error', function() {
+                            document.getElementById('map').style.display = 'none';
+                            document.getElementById('elevation-profile').style.display = 'none';
+                            document.getElementById('gpx-error').style.display = 'flex';
+                        })
+                        .addTo(map);
                 </script>
 
                 <section>
@@ -137,13 +381,13 @@
                 </header>
                 <div class="row gtr-25">
                     <div class="col-4">
-                        <span class="image fit"><img src="../images/literole/01.jpg" alt="Galerie 1" /></span>
+                        <span class="image fit"><img loading="lazy" src="../images/literole/01.jpg" alt="Galerie 1" /></span>
                     </div>
                     <div class="col-4">
-                        <span class="image fit"><img src="../images/literole/02.jpg" alt="Galerie 2" /></span>
+                        <span class="image fit"><img loading="lazy" src="../images/literole/02.jpg" alt="Galerie 2" /></span>
                     </div>
                     <div class="col-4">
-                        <span class="image fit"><img src="../images/literole/14.jpg" alt="Galerie 3" /></span>
+                        <span class="image fit"><img loading="lazy" src="../images/literole/14.jpg" alt="Galerie 3" /></span>
                     </div>
                 </div>
             </section>
@@ -156,19 +400,19 @@
             </header>
             <div class="row">
                 <article class="col-4 col-12-mobile special">
-                    <a href="rando-besines.html" class="image fit"><img src="../images/besines/03.jpg" alt="" /></a>
+                    <a href="rando-besines.html" class="image fit"><img loading="lazy" src="../images/besines/03.jpg" alt="" /></a>
                     <header>
                         <h3><a href="rando-besines.html">Rando des étangs de Besines</a></h3>
                     </header>
                 </article>
                 <article class="col-4 col-12-mobile special">
-                    <a href="rando-montcalm.html" class="image fit"><img src="../images/montcalm/13.jpg" alt="" /></a>
+                    <a href="rando-montcalm.html" class="image fit"><img loading="lazy" src="../images/montcalm/13.jpg" alt="" /></a>
                     <header>
                         <h3><a href="rando-montcalm.html">Rando sommet du Montcalm</a></h3>
                     </header>
                 </article>
                 <article class="col-4 col-12-mobile special">
-                    <a href="rando-turon-neouvielle.html" class="image fit"><img src="../images/neouvielle/11.jpg" alt="" /></a>
+                    <a href="rando-turon-neouvielle.html" class="image fit"><img loading="lazy" src="../images/neouvielle/11.jpg" alt="" /></a>
                     <header>
                         <h3><a href="rando-turon-neouvielle.html">Rando Turon de Néouville</a></h3>
                     </header>
@@ -211,16 +455,16 @@
 								</header>
 								<div class="row gtr-25">
 									<div class="col-3">
-										<a href="../galerie.html" class="image fit"><img src="../images/pic10.jpg" alt="" /></a>
+										<a href="../galerie.html" class="image fit"><img loading="lazy" src="../images/pic10.jpg" alt="" /></a>
 									</div>
 									<div class="col-3">
-										<a href="../galerie.html" class="image fit"><img src="../images/pic11.jpg" alt="" /></a>
+										<a href="../galerie.html" class="image fit"><img loading="lazy" src="../images/pic11.jpg" alt="" /></a>
 									</div>
 									<div class="col-3">
-										<a href="../galerie.html" class="image fit"><img src="../images/pic12.jpg" alt="" /></a>
+										<a href="../galerie.html" class="image fit"><img loading="lazy" src="../images/pic12.jpg" alt="" /></a>
 									</div>
 									<div class="col-3">
-										<a href="../galerie.html" class="image fit"><img src="../images/pic13.jpg" alt="" /></a>
+										<a href="../galerie.html" class="image fit"><img loading="lazy" src="../images/pic13.jpg" alt="" /></a>
 									</div>
 								</div>
 							</section>
@@ -253,24 +497,9 @@
 <script src="../assets/js/browser.min.js"></script>
 <script src="../assets/js/breakpoints.min.js"></script>
 <script src="../assets/js/util.js"></script>
-<script src="../assets/js/main.js"></script>
-
-<!-- Leaflet JS pour GPX -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
-<script>
-    // Carte
-    var map = L.map('map').setView([10.0, -84.0], 7); // Exemple Costa Rica
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Ajouter un fichier GPX
-    var gpx = 'data/mon_parcours.gpx'; // chemin relatif depuis ce fichier
-    new L.GPX(gpx, { async: true }).on('loaded', function(e) {
-        map.fitBounds(e.target.getBounds());
-    }).addTo(map);
-</script>
+<script src="../assets/js/gallery-data.js"></script>
+<script src="../assets/js/nav-data.js"></script>
+  <script src="../assets/js/main.js"></script>
 
 </body>
 </html>

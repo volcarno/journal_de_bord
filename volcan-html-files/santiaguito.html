@@ -5,14 +5,56 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="icon" href="../images/favicon-16x16.png" type="image/png">
     <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
-          	integrity="sha512-K…(truncated)…" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Leaflet CSS pour carte -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
-        #map { height: 400px; margin: 2em 0; }
+        #map {
+            height: 400px;
+            margin: 2em 0 0.75em 0;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        #map .leaflet-container { border-radius: 16px; }
+        #gpx-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5em 1.5em;
+            margin: 0 0 2em 0;
+            font-size: 0.85em;
+            color: #767676;
+        }
+        #gpx-stats strong { color: #483949; }
+        #gpx-error {
+            display: none;
+            height: 400px;
+            margin: 2em 0;
+            border-radius: 16px;
+            background: #f6f6f6;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2em;
+            color: #767676;
+        }
+        #elevation-profile {
+            margin: 0 0 2em 0;
+            padding: 1em 1.25em 0.5em 1.25em;
+            border-radius: 16px;
+            background: #f9f9f9;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+        #elevation-profile svg { display: block; width: 100%; height: auto; overflow: visible; }
+        #elevation-profile .elevation-area { fill: rgba(211, 84, 0, 0.15); }
+        #elevation-profile .elevation-line { fill: none; stroke: #d35400; stroke-width: 2; stroke-linejoin: round; }
+        #elevation-profile .elevation-axis { stroke: #ddd; stroke-width: 1; }
+        #elevation-profile .elevation-label { font-size: 11px; fill: #999; font-family: 'Source Sans Pro', sans-serif; }
+        #elevation-profile .elevation-cursor { stroke: #483949; stroke-width: 1; opacity: 0; pointer-events: none; }
+        #elevation-profile .elevation-cursor-dot { fill: #d35400; stroke: #fff; stroke-width: 1.5; opacity: 0; pointer-events: none; }
+        #elevation-profile .elevation-overlay { fill: transparent; cursor: crosshair; }
     </style>
 </head>
 <body class="no-sidebar is-preload">
@@ -75,7 +117,7 @@
                 </div>
                 <div class="col-4">
                     <div class="photo-rounded">
-                        <img src="../images/santiaguito/17.jpg" alt="profil" style="width:100%; height:auto;">
+                        <img loading="lazy" src="../images/santiaguito/17.jpg" alt="profil" style="width:100%; height:auto;">
                     </div>
                 </div>
             </div>
@@ -126,7 +168,7 @@
                         </div>
                         <div class="col-3">
                             <span class="image fit">
-                            <img src="../images/santiaguito/07.jpg" alt="forêt disparait" class="photo-rounded">
+                            <img loading="lazy" src="../images/santiaguito/07.jpg" alt="forêt disparait" class="photo-rounded">
                             </span>
                         </div>
                     </div>
@@ -138,7 +180,7 @@
                     <div class="row">
                         <div class="col-3">
                             <span class="image fit">
-                                <img src="../images/santiaguito/18.jpg" class="photo-rounded">
+                                <img loading="lazy" src="../images/santiaguito/18.jpg" class="photo-rounded">
                             </span>
                         </div>
                         <div class="col-9">
@@ -161,16 +203,16 @@
                     </p>
                     <div class="row gtr-25">
                         <div class="col-3">
-                            <span class="image fit"><img src="../images/santiaguito/06.jpg"></span>
+                            <span class="image fit"><img loading="lazy" src="../images/santiaguito/06.jpg"></span>
                         </div>
                         <div class="col-3">
-                            <span class="image fit"><img src="../images/santiaguito/25.jpg"></span>
+                            <span class="image fit"><img loading="lazy" src="../images/santiaguito/25.jpg"></span>
                         </div>
                         <div class="col-3">
-                            <span class="image fit"><img src="../images/santiaguito/22.jpg"></span>
+                            <span class="image fit"><img loading="lazy" src="../images/santiaguito/22.jpg"></span>
                         </div>
                         <div class="col-3">
-                            <span class="image fit"><img src="../images/santiaguito/21.jpg"></span>
+                            <span class="image fit"><img loading="lazy" src="../images/santiaguito/21.jpg"></span>
                         </div>
                     </div>
                 </section>
@@ -180,7 +222,10 @@
                         <h3 class="titre-style-volcan">Carte du parcours...</h3>
                     </header>
                     <div id="map"></div>
-                    <p>Vous pouvez trouver le tracé de ma randonnée jusqu'au volcan. Il est possible de changer le fond pour une vue satellite, parfois 
+                    <div id="gpx-error"><p>Le tracé GPX n'a pas pu être chargé pour le moment. Réessayez un peu plus tard !</p></div>
+                    <div id="gpx-stats"></div>
+                    <div id="elevation-profile"></div>
+                    <p>Vous pouvez trouver le tracé de ma randonnée jusqu'au volcan. Il est possible de changer le fond pour une vue satellite, parfois
                         permettant de mieux voir et comprendre l'itinéraire.
                     </p>
                     <div class="row aln-middle">
@@ -201,7 +246,7 @@
                         <div class="col-6">
                             <figure>
                                 <span class="image fit">
-                                    <img src="../images/santiaguito/domes.JPG" alt="Différents dômes du Santiaguito" title="Dômes du complexe du Santiaguito" class="photo-rounded">
+                                    <img loading="lazy" src="../images/santiaguito/domes.jpg" alt="Différents dômes du Santiaguito" title="Dômes du complexe du Santiaguito" class="photo-rounded">
                                 </span>
                                 <figcaption>
                                     <a href="https://laculturevolcan.blogspot.com/2016/01/volcan-santiaguito-dou-viennent-ses.html" target="_blank">Différents dômes du santiaguito vus du Sud.</a>
@@ -239,12 +284,211 @@
                         "Satellite": satellite
                     };
                     L.control.layers(baseMaps).addTo(map);
+                    L.control.scale({ imperial: false }).addTo(map);
 
-                    // Ajouter le GPX
+                    // Profil de dénivelé, dessiné en SVG à partir des données du GPX
+                    // (pas de librairie supplémentaire), avec un point qui suit la
+                    // position sur la carte quand on survole le graphique.
+                    var elevationCursorMarker = null;
+
+                    function drawElevationProfile(track) {
+                        var data = track.get_elevation_data();
+                        var container = document.getElementById('elevation-profile');
+
+                        if (!data || data.length < 2) {
+                            container.style.display = 'none';
+                            return;
+                        }
+
+                        // get_elevation_data() ne fournit pas les coordonnées GPS (juste
+                        // "distance, km, altitude m" en texte) : on récupère donc séparément
+                        // les points du tracé dessiné sur la carte, dans l'ordre, pour pouvoir
+                        // positionner le repère au bon endroit pendant le survol.
+                        var trackLatLngs = [];
+                        (function collectLatLngs(layer) {
+                            if (typeof layer.getLatLngs === 'function') {
+                                var latlngs = layer.getLatLngs();
+                                var flat = Array.isArray(latlngs[0]) ? latlngs.reduce(function(a, b) { return a.concat(b); }, []) : latlngs;
+                                trackLatLngs = trackLatLngs.concat(flat);
+                            } else if (typeof layer.eachLayer === 'function') {
+                                layer.eachLayer(collectLatLngs);
+                            }
+                        })(track);
+
+                        var width = 800, height = 85;
+                        var padding = { top: 8, right: 10, bottom: 20, left: 38 };
+                        var innerW = width - padding.left - padding.right;
+                        var innerH = height - padding.top - padding.bottom;
+
+                        var maxDist = data[data.length - 1][0];
+                        var elevations = data.map(function(d) { return d[1]; });
+                        var minElev = Math.min.apply(null, elevations);
+                        var maxElev = Math.max.apply(null, elevations);
+                        var elevRange = (maxElev - minElev) || 1;
+
+                        function toX(d) { return padding.left + (d[0] / maxDist) * innerW; }
+                        function toY(d) { return padding.top + innerH - ((d[1] - minElev) / elevRange) * innerH; }
+
+                        var linePath = data.map(function(d, i) {
+                            return (i === 0 ? 'M' : 'L') + toX(d).toFixed(1) + ',' + toY(d).toFixed(1);
+                        }).join(' ');
+
+                        var baseY = padding.top + innerH;
+                        var areaPath = linePath +
+                            ' L' + toX(data[data.length - 1]).toFixed(1) + ',' + baseY +
+                            ' L' + toX(data[0]).toFixed(1) + ',' + baseY + ' Z';
+
+                        var svgNS = 'http://www.w3.org/2000/svg';
+                        var svg = document.createElementNS(svgNS, 'svg');
+                        svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+
+                        function addPath(d, className) {
+                            var p = document.createElementNS(svgNS, 'path');
+                            p.setAttribute('d', d);
+                            p.setAttribute('class', className);
+                            svg.appendChild(p);
+                            return p;
+                        }
+
+                        function addLine(x1, y1, x2, y2, className) {
+                            var l = document.createElementNS(svgNS, 'line');
+                            l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+                            l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+                            l.setAttribute('class', className);
+                            svg.appendChild(l);
+                            return l;
+                        }
+
+                        function addText(x, y, anchor, text) {
+                            var t = document.createElementNS(svgNS, 'text');
+                            t.setAttribute('x', x); t.setAttribute('y', y);
+                            t.setAttribute('text-anchor', anchor);
+                            t.setAttribute('class', 'elevation-label');
+                            t.textContent = text;
+                            svg.appendChild(t);
+                        }
+
+                        // Axe bas + repères de distance
+                        addLine(padding.left, baseY, padding.left + innerW, baseY, 'elevation-axis');
+                        addText(padding.left, height - 4, 'start', '0 km');
+                        addText(padding.left + innerW, height - 4, 'end', maxDist.toFixed(1) + ' km');
+
+                        // Repères d'altitude min / max
+                        addText(padding.left - 6, toY([0, maxElev]) + 4, 'end', Math.round(maxElev) + ' m');
+                        addText(padding.left - 6, toY([0, minElev]) + 4, 'end', Math.round(minElev) + ' m');
+
+                        // Courbe
+                        addPath(areaPath, 'elevation-area');
+                        addPath(linePath, 'elevation-line');
+
+                        // Curseur (invisible tant qu'on ne survole pas)
+                        var cursorLine = addLine(0, padding.top, 0, baseY, 'elevation-cursor');
+                        var cursorDot = document.createElementNS(svgNS, 'circle');
+                        cursorDot.setAttribute('r', 4);
+                        cursorDot.setAttribute('class', 'elevation-cursor-dot');
+                        svg.appendChild(cursorDot);
+
+                        // Zone invisible qui capte la souris sur toute la largeur
+                        var overlay = document.createElementNS(svgNS, 'rect');
+                        overlay.setAttribute('x', padding.left);
+                        overlay.setAttribute('y', padding.top);
+                        overlay.setAttribute('width', innerW);
+                        overlay.setAttribute('height', innerH);
+                        overlay.setAttribute('class', 'elevation-overlay');
+                        svg.appendChild(overlay);
+
+                        function showCursor(clientX) {
+                            var box = svg.getBoundingClientRect();
+                            var ratio = width / box.width;
+                            var xInSvg = (clientX - box.left) * ratio;
+                            var t = Math.min(1, Math.max(0, (xInSvg - padding.left) / innerW));
+                            var index = Math.round(t * (data.length - 1));
+                            var d = data[index];
+
+                            var px = toX(d), py = toY(d);
+                            cursorLine.setAttribute('x1', px);
+                            cursorLine.setAttribute('x2', px);
+                            cursorLine.style.opacity = 1;
+                            cursorDot.setAttribute('cx', px);
+                            cursorDot.setAttribute('cy', py);
+                            cursorDot.style.opacity = 1;
+
+                            if (trackLatLngs.length) {
+                                var latlngIndex = Math.round(t * (trackLatLngs.length - 1));
+                                var latlng = trackLatLngs[latlngIndex];
+
+                                if (!elevationCursorMarker) {
+                                    elevationCursorMarker = L.circleMarker(latlng, {
+                                        radius: 7,
+                                        color: '#fff',
+                                        weight: 2,
+                                        fillColor: '#d35400',
+                                        fillOpacity: 1
+                                    }).addTo(map);
+                                } else {
+                                    elevationCursorMarker.setLatLng(latlng);
+                                }
+                            }
+                        }
+
+                        function hideCursor() {
+                            cursorLine.style.opacity = 0;
+                            cursorDot.style.opacity = 0;
+                            if (elevationCursorMarker) {
+                                map.removeLayer(elevationCursorMarker);
+                                elevationCursorMarker = null;
+                            }
+                        }
+
+                        overlay.addEventListener('mousemove', function(ev) { showCursor(ev.clientX); });
+                        overlay.addEventListener('mouseleave', hideCursor);
+                        overlay.addEventListener('touchmove', function(ev) {
+                            if (ev.touches && ev.touches[0]) showCursor(ev.touches[0].clientX);
+                        });
+                        overlay.addEventListener('touchend', hideCursor);
+
+                        container.innerHTML = '';
+                        container.appendChild(svg);
+                    }
+
+                    // Ajouter le tracé GPX, avec le style du site (orange volcan)
                     var gpx = '../data/santiaguito.gpx'; // fichier GPX dans le même dossier relatif
-                    new L.GPX(gpx, { async: true }).on('loaded', function(e) {
-                        map.fitBounds(e.target.getBounds());
-                    }).addTo(map);
+                    new L.GPX(gpx, {
+                        async: true,
+                        polyline_options: {
+                            color: '#d35400',
+                            weight: 4,
+                            opacity: 0.85,
+                            lineJoin: 'round'
+                        },
+                        marker_options: {
+                            startIconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                            endIconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                            shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png'
+                        }
+                    })
+                        .on('loaded', function(e) {
+                            var track = e.target;
+                            map.fitBounds(track.getBounds());
+
+                            // Statistiques réelles calculées à partir du fichier GPX
+                            var distanceKm = (track.get_distance() / 1000).toFixed(1);
+                            var gain = Math.round(track.get_elevation_gain());
+                            var loss = Math.round(track.get_elevation_loss());
+
+                            document.getElementById('gpx-stats').innerHTML =
+                                '<span>📏 <strong>' + distanceKm + ' km</strong> parcourus</span>' +
+                                '<span>⬆️ <strong>+' + gain + ' m</strong> de dénivelé</span>' +
+                                '<span>⬇️ <strong>-' + loss + ' m</strong></span>';
+
+                            drawElevationProfile(track);
+                        })
+                        .on('error', function() {
+                            document.getElementById('map').style.display = 'none';
+                            document.getElementById('elevation-profile').style.display = 'none';
+                            document.getElementById('gpx-error').style.display = 'flex';
+                        })
+                        .addTo(map);
                 </script>
 
                     <section id="conseils">
@@ -253,7 +497,7 @@
                         </header>
                         <h3>🚶‍♂️Randonnée du volcan Santiaguito</h3>
                         <ul>
-                            <li>Comme souvent, j'ai trouvé l'itinéraire sur <a href="https://fr.wikiloc.com/" target="_blank">Wikiloc</a>. Vous pouvez accéder au guide où j'explique comment trouver et utiliser un itinéraire en format GPX en cliquant sur le satellite !<a href="../autre/Tutoriels/GPX.html">🛰️</a></li>
+                            <li>Comme souvent, j'ai trouvé l'itinéraire sur <a href="https://fr.wikiloc.com/" target="_blank">Wikiloc</a>. Vous pouvez accéder au guide où j'explique comment trouver et utiliser un itinéraire en format GPX en cliquant sur le satellite !<a href="../autre/tutoriels/gpx.html">🛰️</a></li>
                             <li>Etant donné le caractère très actif et imprévisible du complexe, mieux vaut observer les activités du volcan en amont sur le site de <a href="https://insivumeh.gob.gt/"> l'observatoire du volcan </a>pour être informé. Aussi, les prédictions météorologiques sont bien a observer en amont, mais il faut être conscient que la zone est très complexe (altitude 2500m, proximité Pacifique, humidité constante...) : le temps peut changer a tout moment, le brouillard peut réduire voire couper la visibilité, il faut être prêt.</li>
                             <li>Y aller équipé, de préférence avec un casque, en connaissance des risques.</li>
                             <li>Parfois, selon divers retours d'expérience, un paysans demande une taxe de passsage, car le sentier passe sur son terrain. Le sentier est soumis a une interdiction gouvernementale liée aux risques volcaniques.</li>
@@ -281,7 +525,7 @@
                             <div class="col-6">
                                 <figure>
                                     <a href="https://maps.app.goo.gl/LPu8k6q35Kp3vKEr7" target="_blank">
-                                        <img src="../images/santiaguito/carte.png" class="photo-rounded" title="Liste Maps aux environs de Xela">
+                                        <img loading="lazy" src="../images/santiaguito/carte.png" class="photo-rounded" title="Liste Maps aux environs de Xela">
                                     </a>
                                     <figcaption>Carte de Quetzaltenango et ses environs, points intéressants.</figcaption>
                                 </figure>
@@ -289,7 +533,7 @@
                             <div class="col-3">
                                 <figure>
                                     <a href="https://www.french.hostelworld.com/pwa/hosteldetails.php/Kasa-Kiwi-Hostel-Travel-Agency/Quetzaltenango/279671?from=2026-03-11&to=2026-03-13&HostelNumber=279671&guests=2&Type=1&aff2=FR_x_desktop&utm_medium=metasearch&utm_source=googlehotelfinder&utm_content=hpa_11_03_2026_2_mapresults_279671_FR_desktop_default_22191996929__2&utm_campaign=FR&lead_time=0&campaign_id=22191996929&hpa_click_type=hotel&hpa_date_search_type=default&hpa_site_property=mapresults&hpa_occupancy=2&hpa_d_tax=0.00&hpa_d_total=39.22&hpa_rateplan_id=661935%7C2&hpa_u_country=FR&hpa_u_currency=EUR&hpa_u_lang=fr&hpa_u_list_id&number_of_guests=2&hpa_room_id=856752&hpa_pos=fr&source=googlehotelads_x_desktop_x_22191996929&gad_source=6&gad_campaignid=22191996929&gbraid=0AAAAAD9QXQYBEYhnL_B7la-khCzbSBpA9&gclid=CjwKCAjwpcTNBhA5EiwAdO1S9s-SvNyHryPCsuEaZMMwuY3s0hBxOstrXWWfqfMJGoELBFkwiePy4hoClpMQAvD_BwE&utm_source=shared_property&utm_medium=clipboard&utm_campaign=279671&source=web_shared_property-279671" target="_blank">
-                                        <img src="../images/santiaguito/kiwi.png" class="photo-rounded" title="Kasa Kiwi">
+                                        <img loading="lazy" src="../images/santiaguito/kiwi.png" class="photo-rounded" title="Kasa Kiwi">
                                     </a>
                                     <figcaption>Meilleure auberge de Xela !</figcaption>
                                 </figure>
@@ -297,7 +541,7 @@
                             <div class="col-3">
                                 <figure>
                                     <a href="" target="_blank">
-                                        <img src="../images/santiaguito/fuentes.png" class="photo-rounded" title="Fuentes Georginas">
+                                        <img loading="lazy" src="../images/santiaguito/fuentes.png" class="photo-rounded" title="Fuentes Georginas">
                                     </a>
                                     <figcaption>Sources volcaniques magnifiques.</figcaption>
                                 </figure>
@@ -337,16 +581,16 @@
                 </header>
                 <div class="row gtr-25">
                     <div class="col-3">
-                        <span class="image fit"><img src="../images/santiaguito/01.jpg" alt="Galerie 1" class="footer-sq" /></span>
+                        <span class="image fit"><img loading="lazy" src="../images/santiaguito/01.jpg" alt="Galerie 1" class="footer-sq" /></span>
                     </div>
                     <div class="col-3">
-                        <span class="image fit"><img src="../images/santiaguito/02.jpg" alt="Galerie 2" class="footer-sq"/></span>
+                        <span class="image fit"><img loading="lazy" src="../images/santiaguito/02.jpg" alt="Galerie 2" class="footer-sq"/></span>
                     </div>
                     <div class="col-3">
-                        <span class="image fit"><img src="../images/santiaguito/03.jpg" alt="Galerie 3" class="footer-sq"/></span>
+                        <span class="image fit"><img loading="lazy" src="../images/santiaguito/03.jpg" alt="Galerie 3" class="footer-sq"/></span>
                     </div>
                     <div class="col-3">
-                        <span class="image fit"><img src="../images/santiaguito/04.jpg" alt="galerie 4" class="footer-sq"/></span>
+                        <span class="image fit"><img loading="lazy" src="../images/santiaguito/04.jpg" alt="galerie 4" class="footer-sq"/></span>
                     </div>
                 </div>
             </section>
@@ -366,7 +610,7 @@
             <div class="col-4 col-12-mobile">
                 <a href="../volcan-html-files/fuego.html" class="country-card">
                     <div class="card-image">
-                        <img src="../images/fuego.jpg" alt="Fuego" />
+                        <img loading="lazy" src="../images/fuego.jpg" alt="Fuego" />
                     </div>
                     <div class="card-overlay">
                         <h3>Fuego</h3>
@@ -377,7 +621,7 @@
             <div class="col-4 col-12-mobile">
                 <a href="../volcan-html-files/zunil.html" class="country-card">
                     <div class="card-image">
-                        <img src="../images/guatemala/61.jpg" alt="Volcan Zunil" />
+                        <img loading="lazy" src="../images/guatemala/61.jpg" alt="Volcan Zunil" />
                     </div>
                     <div class="card-overlay">
                         <h3>Zunil</h3>
@@ -388,7 +632,7 @@
             <div class="col-4 col-12-mobile">
                 <a href="../volcan-html-files/pacaya.html" class="country-card">
                     <div class="card-image">
-                        <img src="../images/pacaya.jpg" alt="Pacaya" />
+                        <img loading="lazy" src="../images/pacaya.jpg" alt="Pacaya" />
                     </div>
                     <div class="card-overlay">
                         <h3>Pacaya</h3>
@@ -411,42 +655,9 @@
 <script src="../assets/js/browser.min.js"></script>
 <script src="../assets/js/breakpoints.min.js"></script>
 <script src="../assets/js/util.js"></script>
-<script src="../assets/js/main.js"></script>
-
-<!-- Leaflet JS pour GPX -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
-<script>
-    // Carte
-    var map = L.map('map').setView([10.0, -84.0], 7);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Ajouter un fichier GPX
-    var gpx = '../data/santiaguito.gpx'; // chemin relatif depuis ce fichier
-    new L.GPX(gpx, { async: true }).on('loaded', function(e) {
-        map.fitBounds(e.target.getBounds());
-    }).addTo(map);
-</script>
-<script>
-			fetch("../header.html")
-				.then(response => response.text())
-				.then(data => {
-					document.getElementById("header-placeholder").outerHTML = data;
-
-					$('#nav > ul').dropotron({
-					alignment: 'center',
-					selector: '> li:not(.home-logo)'
-				});
-			});
-
-			fetch("../footer.html")
-				.then(response => response.text())
-				.then(data => {
-					document.getElementById("footer-placeholder").outerHTML = data;
-				});
-	</script>
+<script src="../assets/js/gallery-data.js"></script>
+<script src="../assets/js/nav-data.js"></script>
+  <script src="../assets/js/main.js"></script>
 
 </body>
 </html>

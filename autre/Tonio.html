@@ -7,6 +7,7 @@
   
   <!-- CSS principal -->
   <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="icon" href="../images/favicon-16x16.png" type="image/png">
   <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 
   <!-- Font Awesome -->
@@ -19,7 +20,7 @@
 <section class="wrapper style1">
   <div class="container aln-middle">
     <span class="image small photo-polaroid">
-        <img src="../images/tonio/Tonio.jpg">
+        <img loading="lazy" src="../images/tonio/tonio.jpg">
     </span>
     <p>Bienvenou ici c'est les aventures dou meilleur Toniou.
         Je suis un ours ou chien, je traffique dou sourcre avec les autres nounours
@@ -28,7 +29,7 @@
     </p>
     <p></p>
     <span class="image medium">
-      <img src="../images/nicaragua/39.jpg" alt="Tonio à l'auberge à Big Corn">
+      <img loading="lazy" src="../images/nicaragua/39.jpg" alt="Tonio à l'auberge à Big Corn">
     </span>
   </div>
   </section>
@@ -44,24 +45,8 @@
   <script src="../assets/js/browser.min.js"></script>
   <script src="../assets/js/breakpoints.min.js"></script>
   <script src="../assets/js/util.js"></script>
+  <script src="../assets/js/gallery-data.js"></script>
+  <script src="../assets/js/nav-data.js"></script>
   <script src="../assets/js/main.js"></script>
-   <script>
-			fetch("../header.html")
-				.then(response => response.text())
-				.then(data => {
-					document.getElementById("header-placeholder").outerHTML = data;
-
-					$('#nav > ul').dropotron({
-					alignment: 'center',
-					selector: '> li:not(.home-logo)'
-				});
-			});
-
-			fetch("../footer.html")
-				.then(response => response.text())
-				.then(data => {
-					document.getElementById("footer-placeholder").outerHTML = data;
-				});
-	</script>
 </body>
 </html>
