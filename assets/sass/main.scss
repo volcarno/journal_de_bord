@@ -115,7 +115,7 @@
 		font-weight: 300;
 
 		// Stops initial animations until page loads.
-			&.is-preload {
+			&.js-loading {
 				*, *:before, *:after {
 					@include vendor('animation', 'none !important');
 					@include vendor('transition', 'none !important');
@@ -811,7 +811,7 @@
 			}
 		}
 
-		&.is-preload {
+		&.js-loading {
 			#header {
 				&:after {
 					opacity: 1;

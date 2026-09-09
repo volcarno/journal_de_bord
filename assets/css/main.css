@@ -88,7 +88,7 @@ input, select, textarea {
 		font-weight: 300;
 	}
 
-		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
+		body.js-loading *, body.js-loading *:before, body.js-loading *:after {
 			-moz-animation: none !important;
 			-webkit-animation: none !important;
 			-ms-animation: none !important;
@@ -2304,8 +2304,8 @@ body.homepage #header:after {
 	pointer-events: none;
 }
 
-/* État pendant que la page charge (is-preload est ajouté par le JS) */
-body.homepage.is-preload #header:after {
+/* État pendant que la page charge (js-loading est retiré par le JS une fois prêt) */
+body.homepage.js-loading #header:after {
     opacity: 1;
 }
 

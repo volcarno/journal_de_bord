@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://volcarno.github.io/journal_de_bord/sitemap.xml

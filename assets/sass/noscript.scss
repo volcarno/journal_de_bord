@@ -20,7 +20,7 @@
 /* Header */
 
 	body.homepage {
-		&.is-preload {
+		&.js-loading {
 			#header {
 				&:after {
 					opacity: 0;
