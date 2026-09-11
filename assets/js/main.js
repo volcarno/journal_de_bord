@@ -419,14 +419,53 @@
 	function initGalleryLightbox() {
 		var $lightbox = $('#lightbox');
 		var $lightboxImg = $('#lightbox-img');
+		var $lightboxInfo = $('#lightbox-info');
+		var $lightboxTitle = $('#lightbox-title');
+		var $lightboxLink = $('#lightbox-link');
+		var $lightboxPending = $('#lightbox-link-pending');
 
 		if ($lightbox.length > 0) {
-			// Au clic sur une image de la galerie
+			// Au clic sur une image de la galerie : affiche la photo en
+			// grand, plus son titre et un lien vers l'article qui
+			// l'utilise (donnees GALLERY_DATA, portees par le div .image
+			// parent via data-title / data-article). Si aucun article
+			// n'est encore associe, affiche "en attente" a la place du
+			// lien plutot que d'en inventer un.
 			$(document).on('click', '.gallery img', function() {
 				var src = $(this).attr('src');
+				var $parent = $(this).closest('.image');
+				var title = $parent.data('title');
+				var article = $parent.data('article');
+
 				$lightboxImg.attr('src', src);
+
+				if ($lightboxTitle.length) {
+					$lightboxTitle.text(title || '');
+					$lightboxTitle.toggle(!!title);
+				}
+
+				if ($lightboxLink.length && $lightboxPending.length) {
+					if (article) {
+						$lightboxLink.attr('href', article).show();
+						$lightboxPending.hide();
+					} else {
+						$lightboxLink.hide();
+						$lightboxPending.show();
+					}
+				}
+
 				$lightbox.css('display', 'flex');
 			});
+
+			// Le panneau titre/lien ne doit pas fermer la lightbox a lui
+			// tout seul (sinon impossible de cliquer le lien "voir
+			// l'article"). Le clic sur l'image ou le fond continue de
+			// fermer normalement.
+			if ($lightboxInfo.length) {
+				$lightboxInfo.on('click', function(e) {
+					e.stopPropagation();
+				});
+			}
 
 			// Fermer la lightbox
 			$lightbox.on('click', function() {

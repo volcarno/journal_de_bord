@@ -21,17 +21,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="icon" href="images/favicon-16x16.png" type="image/png">
+  <link rel="icon" href="images/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="images/favicon-48x48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
   <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     .gallery { display: flex; flex-wrap: wrap; gap: 0.5em; justify-content: center; }
-    .gallery .image { width: calc(12.5% - 0.5em); min-width: 120px; cursor: pointer; }
+    .gallery .image { position: relative; width: calc(12.5% - 0.5em); min-width: 120px; cursor: pointer; overflow: hidden; border-radius: 4px; }
     .gallery img {
         width: 100%;
         aspect-ratio: 1 / 1; /* Rendu carré */
         object-fit: cover;
         border-radius: 4px;
         transition: transform 0.2s;
+    }
+    /* Titre au survol (existe deja pour chaque photo : le label du
+       dossier dans GALLERY_DATA, deja utilise pour l'attribut alt). */
+    .gallery .image-caption {
+        position: absolute;
+        inset: auto 0 0 0;
+        padding: 1.4em 0.6em 0.4em;
+        background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+        color: #fff;
+        font-size: 0.78em;
+        line-height: 1.3em;
+        opacity: 0;
+        transform: translateY(4px);
+        transition: opacity 0.2s, transform 0.2s;
+        pointer-events: none;
+    }
+    .gallery .image:hover .image-caption,
+    .gallery .image:focus-within .image-caption {
+        opacity: 1;
+        transform: translateY(0);
     }
     .hidden { display: none; }
     .filter {
@@ -83,8 +107,13 @@
 
   <div id="footer-placeholder"></div>
 
-<div id="lightbox" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); cursor:pointer; align-items:center; justify-content:center;">
-      <img loading="lazy" id="lightbox-img" src="" style="max-width:95%; max-height:95%; border:3px solid white; border-radius:5px;">
+<div id="lightbox" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); cursor:pointer; align-items:center; justify-content:center; flex-direction:column;">
+      <img loading="lazy" id="lightbox-img" src="" style="max-width:95%; max-height:85vh; border:3px solid white; border-radius:5px;">
+      <div id="lightbox-info" style="cursor:default; margin-top:1em; text-align:center; color:#fff; font-size:1.1em;">
+          <div id="lightbox-title" style="margin-bottom:0.4em; font-weight:600;"></div>
+          <a id="lightbox-link" href="#" style="color:#fff; text-decoration:underline;">Voir l'article de cette photo →</a>
+          <span id="lightbox-link-pending" style="display:none; color:#bbb; font-style:italic;">Lien vers l'article en attente</span>
+      </div>
   </div>
 
   <!-- Scripts -->
@@ -96,6 +125,7 @@
   <script src="assets/js/breakpoints.min.js"></script>
   <script src="assets/js/util.js"></script>
   <script src="assets/js/gallery-data.js"></script>
+  <script src="assets/js/photo-captions.js"></script>
   <script src="assets/js/nav-data.js"></script>
   <script src="assets/js/main.js"></script>
 
@@ -122,18 +152,35 @@
             var tags = entry.tags.join(' ');
             entry.tags.forEach(function(t) { allTags[t] = true; });
 
+            var fallbackTitle = entry.label || 'Titre à compléter';
+            var captions = (typeof PHOTO_CAPTIONS !== 'undefined') ? PHOTO_CAPTIONS : {};
+
             for (var i = 0; i < entry.count; i++) {
-                var src = 'images/' + entry.folder + '/' + pad(entry.start + i) + '.jpg';
+                var filename = pad(entry.start + i) + '.jpg';
+                var src = 'images/' + entry.folder + '/' + filename;
+                // Description specifique de cette photo si elle existe deja
+                // quelque part sur le site (voir photo-captions.js), sinon
+                // repli sur le label du dossier - jamais de texte invente.
+                var title = captions[entry.folder + '/' + filename] || fallbackTitle;
+
                 var div = document.createElement('div');
                 div.className = 'image';
                 div.dataset.tags = tags;
+                div.dataset.title = title;
+                div.dataset.article = entry.article || '';
 
                 var img = document.createElement('img');
                 img.loading = 'lazy';
                 img.src = src;
-                img.alt = entry.label;
+                img.alt = title;
+                img.title = title;
+
+                var caption = document.createElement('span');
+                caption.className = 'image-caption';
+                caption.textContent = title;
 
                 div.appendChild(img);
+                div.appendChild(caption);
                 fragment.appendChild(div);
             }
         });

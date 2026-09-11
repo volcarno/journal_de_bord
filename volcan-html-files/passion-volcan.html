@@ -2,38 +2,127 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <title>Page en construction</title>
+  <title>Volcarno | Volcans</title>
   <!-- Open Graph / Twitter Card (genere automatiquement, a affiner si besoin) -->
-  <meta name="description" content="Cette page est encore en cours de redaction. Retrouvez deja mes recits d&#x27;ascensions volcaniques et de voyages sur Volcarno, mon carnet de bord !">
+  <meta name="description" content="Introduction aux volcans et carte interactive des volcans gravis, d'Amérique Centrale au Kamtchatka.">
   <link rel="canonical" href="https://volcarno.github.io/journal_de_bord/volcan-html-files/passion-volcan.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Volcarno">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:title" content="Volcans | Volcarno">
-  <meta property="og:description" content="Cette page est encore en cours de redaction. Retrouvez deja mes recits d&#x27;ascensions volcaniques et de voyages sur Volcarno, mon carnet de bord !">
+  <meta property="og:description" content="Introduction aux volcans et carte interactive des volcans gravis, d'Amérique Centrale au Kamtchatka.">
   <meta property="og:url" content="https://volcarno.github.io/journal_de_bord/volcan-html-files/passion-volcan.html">
-  <meta property="og:image" content="https://volcarno.github.io/journal_de_bord/images/header.jpg">
+  <meta property="og:image" content="https://volcarno.github.io/journal_de_bord/images/fuego.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Volcans | Volcarno">
-  <meta name="twitter:description" content="Cette page est encore en cours de redaction. Retrouvez deja mes recits d&#x27;ascensions volcaniques et de voyages sur Volcarno, mon carnet de bord !">
-  <meta name="twitter:image" content="https://volcarno.github.io/journal_de_bord/images/header.jpg">
+  <meta name="twitter:description" content="Introduction aux volcans et carte interactive des volcans gravis, d'Amérique Centrale au Kamtchatka.">
+  <meta name="twitter:image" content="https://volcarno.github.io/journal_de_bord/images/fuego.jpg">
   <!-- /Open Graph -->
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
   <!-- CSS principal -->
   <link rel="stylesheet" href="../assets/css/main.css" />
   <link rel="icon" href="../images/favicon-16x16.png" type="image/png">
+  <link rel="icon" href="../images/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../images/favicon-48x48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
   <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Leaflet (carte interactive), deja utilise sur santiaguito.html -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #world-map {
+        height: 520px;
+        margin: 1.5em 0;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    #world-map .leaflet-container { border-radius: 16px; }
+    .leaflet-popup-content b { color: #483949; }
+    .leaflet-popup-content a { color: #d35400; font-weight: 600; }
+    .map-legende {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.2em 2em;
+        margin: 0 0 0.5em 0;
+        font-size: 0.85em;
+        color: #767676;
+    }
+    .map-legende span { display: inline-flex; align-items: center; gap: 0.5em; }
+    .map-legende i {
+        width: 12px; height: 12px; border-radius: 50%; display: inline-block;
+        border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+  </style>
 </head>
 <body class="js-loading">
   <div id="page-wrapper">
 
     <div id="header-placeholder"></div>
 
-    <div id="construction-placeholder"></div>
+    <section class="hero-country" style="background-image: url('../images/fuego.jpg'); background-position: center;">
+        <div class="hero-container">
+            <h1>Les volcans</h1>
+            <p>Ma passion, racontée volcan par volcan</p>
+        </div>
+    </section>
+
+    <div class="wrapper style1">
+        <div class="container">
+
+            <article id="main">
+                <!--
+                  Texte de depart a ajuster / remplacer a ton gout - rien
+                  d'invente sur ton experience personnelle au-dela de ce
+                  qui est deja visible sur le site (les regions que tu as
+                  documentees : Amerique Centrale, Kamtchatka, Italie).
+                -->
+                <header>
+                    <h2>Pourquoi les volcans ?</h2>
+                </header>
+
+                <p>
+                    Un volcan, c'est une fenêtre ouverte sur l'intérieur de la Terre : de la roche en fusion qui
+                    remonte depuis des dizaines de kilomètres de profondeur, parfois en silence, parfois dans un
+                    fracas de cendres et de lave. Certains dorment depuis des siècles, d'autres sont en activité
+                    presque continue — c'est justement cette activité, ce mélange de beauté et de danger, qui rend
+                    chaque ascension unique : pas deux volcans qui se ressemblent, pas deux éruptions qui racontent
+                    la même histoire.
+                </p>
+
+                <p>
+                    <!-- Paragraphe "experience perso" a completer/reecrire avec ton propre recit -->
+                    Ma passion pour les volcans est née [à compléter : où / quand / à l'occasion de quoi]. Depuis,
+                    j'ai eu la chance d'en gravir plusieurs, entre les volcans actifs d'Amérique Centrale, ceux du
+                    Kamtchatka et les incontournables d'Italie. Chaque ascension m'a appris quelque chose de
+                    différent — sur la géologie, sur la préparation qu'elle demande, et sur les paysages qu'on ne
+                    croise nulle part ailleurs. Cette page rassemble tous les volcans que j'ai eu l'occasion de
+                    visiter : clique sur un point de la carte pour retrouver le récit complet de chaque ascension.
+                </p>
+
+                <header>
+                    <h2>Les volcans gravis</h2>
+                </header>
+
+                <p class="map-legende">
+                    <span><i style="background:#d35400"></i> Amérique Centrale</span>
+                    <span><i style="background:#748071"></i> Kamtchatka</span>
+                    <span><i style="background:#5f6a6b"></i> Italie</span>
+                </p>
+
+                <div id="world-map"></div>
+                <p style="font-size:0.85em; color:#9b9b9b;">
+                    Coordonnées approximatives (source : littérature volcanologique générale) — clique sur un point pour ouvrir l'article correspondant.
+                </p>
+
+            </article>
+
+        </div>
+    </div>
 
   </div>
 
@@ -50,5 +139,79 @@
   <script src="../assets/js/gallery-data.js"></script>
   <script src="../assets/js/nav-data.js"></script>
   <script src="../assets/js/main.js"></script>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Liste des volcans gravis, reprise de la navigation du site
+    // (assets/js/nav-data.js) : region, nom, page associee, et
+    // coordonnees approximatives (litterature volcanologique generale -
+    // a verifier/ajuster si besoin, notamment pour les moins connus).
+    var VOLCANS_GRAVIS = [
+        // --- Amérique Centrale (Guatemala) ---
+        { nom: 'Pacaya', region: 'ac', coords: [14.3808, -90.6011], url: 'pacaya.html' },
+        { nom: 'Fuego et Acatenango', region: 'ac', coords: [14.4749, -90.8806], url: 'fuego.html' },
+        { nom: 'San Pedro', region: 'ac', coords: [14.6558, -91.2658], url: 'sanpedro.html' },
+        { nom: 'Atitlán', region: 'ac', coords: [14.5833, -91.1861], url: 'atitlan.html' },
+        { nom: 'Tolimán', region: 'ac', coords: [14.6111, -91.1878], url: 'toliman.html' },
+        { nom: 'Zunil', region: 'ac', coords: [14.7311, -91.4636], url: 'zunil.html' },
+        { nom: 'Tajumulco', region: 'ac', coords: [15.0417, -91.9042], url: 'tajumulco.html' },
+        { nom: 'Santiaguito', region: 'ac', coords: [14.7550, -91.5522], url: 'santiaguito.html' },
+        { nom: 'Santa María', region: 'ac', coords: [14.7565, -91.5518], url: 'santamaria.html' },
+        // --- Amérique Centrale (Salvador) ---
+        { nom: 'Santa Ana', region: 'ac', coords: [13.8536, -89.6297], url: 'santaana.html' },
+        { nom: 'Conchagua', region: 'ac', coords: [13.2727, -87.7511], url: 'conchagua.html' },
+        // --- Amérique Centrale (Nicaragua) ---
+        { nom: 'San Cristóbal', region: 'ac', coords: [12.7022, -87.0042], url: 'sancristobal.html' },
+        { nom: 'Telica', region: 'ac', coords: [12.6019, -86.8447], url: 'telica.html' },
+        { nom: 'Cerro Negro', region: 'ac', coords: [12.5061, -86.7028], url: 'cerronegro.html' },
+        { nom: 'Mombacho', region: 'ac', coords: [11.8422, -85.9694], url: 'mombacho.html' },
+        { nom: 'Concepción', region: 'ac', coords: [11.5383, -85.6222], url: 'concepcion.html' },
+        // --- Amérique Centrale (Costa Rica) ---
+        { nom: 'Arenal', region: 'ac', coords: [10.4630, -84.7030], url: 'arenal.html' },
+        { nom: 'Irazú', region: 'ac', coords: [9.9792, -83.8522], url: 'irazu.html' },
+        // --- Kamtchatka ---
+        { nom: 'Tolbachik', region: 'kamtchatka', coords: [55.8306, 160.3269], url: 'tolbachik.html' },
+        { nom: 'Klioutchevskoï', region: 'kamtchatka', coords: [56.0558, 160.6417], url: 'klioutchevskoi.html' },
+        { nom: 'Karimski', region: 'kamtchatka', coords: [54.0486, 159.4431], url: 'karimski.html' },
+        { nom: 'Vallée des geysers', region: 'kamtchatka', coords: [54.4300, 160.1367], url: 'vallee-des-geysers.html' },
+        // --- Italie ---
+        { nom: 'Etna', region: 'italie', coords: [37.7510, 14.9934], url: 'etna.html' },
+        { nom: 'Vésuve', region: 'italie', coords: [40.8214, 14.4260], url: 'vesuve.html' },
+        { nom: 'Stromboli', region: 'italie', coords: [38.7892, 15.2131], url: 'stromboli.html' },
+        { nom: 'Vulcano', region: 'italie', coords: [38.4044, 14.9619], url: 'vulcano.html' }
+    ];
+
+    var REGION_COLORS = { ac: '#d35400', kamtchatka: '#748071', italie: '#5f6a6b' };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var map = L.map('world-map', { scrollWheelZoom: true });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        var markers = [];
+
+        VOLCANS_GRAVIS.forEach(function(v) {
+            var color = REGION_COLORS[v.region] || '#d35400';
+            var marker = L.circleMarker(v.coords, {
+                radius: 8,
+                weight: 2,
+                color: '#fff',
+                fillColor: color,
+                fillOpacity: 0.9
+            }).addTo(map);
+
+            marker.bindPopup('<b>' + v.nom + '</b><br><a href="' + v.url + '">Voir l\'article →</a>');
+            markers.push(marker);
+        });
+
+        if (markers.length) {
+            var group = L.featureGroup(markers);
+            map.fitBounds(group.getBounds(), { padding: [30, 30] });
+        }
+    });
+  </script>
+
 </body>
 </html>

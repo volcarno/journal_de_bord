@@ -1827,6 +1827,11 @@ input, select, textarea {
 			margin: 0 2em 2em 0;
 		}
 
+		.image.right {
+			float: right;
+			margin: 0 0 2em 2em;
+		}
+
 		.image.centered {
 			display: block;
 			margin: 0 0 2em 0;
@@ -2794,6 +2799,7 @@ body:not(.homepage) #header hr {
 
 		.carousel article {
 			display: inline-block;
+			vertical-align: top;
 			width: 18em;
 			background: #fff;
 			text-align: center;
@@ -3767,8 +3773,13 @@ figcaption {
     border-radius: 14px;
     padding: 2em;
     margin-bottom: 3em;
-    transition: transform 0.3s ease;
-    box-shadow: 0 10px 26px -14px rgba(30,20,10,0.35); /* Ombre plus douce et diffuse */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Ombre a deux couches : une fine et nette pour definir le contour,
+       une large et diffuse pour l'effet "suspendu" - plus moderne que
+       l'ombre unique et tres diffuse d'avant. Les variantes de couleur
+       ci-dessous heritent de cette ombre (elles ne la redefinissent
+       plus) pour que toutes les cases se ressemblent. */
+    box-shadow: 0 1px 2px rgba(30,20,10,0.08), 0 10px 24px -10px rgba(30,20,10,0.3);
 }
 
 .step-box h3{
@@ -3798,21 +3809,27 @@ figcaption {
     opacity: 1;
 }
 
-/* Variante : Fond Blanc / Texte Noir */
+/* Variante : Fond Blanc / Texte Noir. Liseré un peu plus marque qu'avant
+   (les cases blanches etaient les plus "plates", limite invisibles sur
+   fond blanc). L'ombre vient de .step-box, pas redefinie ici. */
 .style-white {
     background: #ffffff;
     color: #444;
-    border: 1px solid #eee;
+    border: 1px solid #e5ded2;
 }
 
-/* --- VARIANTES DE COULEURS POUR LES BOITES (TEXTE BLANC) --- */
+/* --- VARIANTES DE COULEURS POUR LES BOITES (TEXTE BLANC) ---
+   Liseré clair et fin (liseret interieur) pour donner un bord net aux
+   aplats de couleur, qui n'en avaient aucun jusqu'ici (border: none) et
+   ne se distinguaient que par la couleur elle-meme. L'ombre commune vient
+   de .step-box : les 3 variantes n'en redefinissent plus une chacune,
+   pour que toutes les cases de la timeline se ressemblent. */
 
 /* 1. Terracotta Adouci - Très cohérent avec ton orange principal */
 .style-terracotta {
     background-color: #E67E22;
     color: #ffffff !important;
-    border: none;
-    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 .style-terracotta h3 { color: #ffffff !important; }
 
@@ -3820,8 +3837,7 @@ figcaption {
 .style-sauge {
     background-color: #829B89;
     color: #ffffff !important;
-    border: none;
-    box-shadow: 0 4px 12px rgba(130, 155, 137, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 .style-sauge h3 { color: #ffffff !important; }
 
@@ -3829,8 +3845,7 @@ figcaption {
 .style-ascension {
     background-color: #707B7C;
     color: #ffffff !important;
-    border: none;
-    box-shadow: 0 4px 12px rgba(112, 123, 124, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 .style-ascension h3 { color: #ffffff !important; }
 
@@ -4069,5 +4084,290 @@ figcaption {
     display: inline-block;
     margin-left: 40px; /* C'est ton espace "Tab" */
 }
+
+/* ============================================================
+   Pages "science" : lecture par niveaux de profondeur
+   (vulgarisé -> approfondi -> technique), voir template/0-modele-science.html
+   ============================================================ */
+
+/* Bloc <details> "Pour aller plus loin" : ferme par defaut, le lecteur
+   choisit lui-meme d'approfondir. Peut etre imbrique pour un 2e niveau. */
+.approfondir {
+    margin: 1.5em 0;
+    border: 1px solid #e5d5c8;
+    border-radius: 8px;
+    background: #fdfaf7;
+    overflow: hidden;
+}
+
+    .approfondir > summary {
+        cursor: pointer;
+        list-style: none;
+        padding: 0.85em 1.2em;
+        font-weight: 600;
+        color: #d35400;
+        display: flex;
+        align-items: center;
+        gap: 0.6em;
+        background: #fff6ef;
+        transition: background 0.2s;
+    }
+
+    .approfondir > summary::-webkit-details-marker { display: none; }
+
+    .approfondir > summary:hover { background: #ffeee0; }
+
+    .approfondir > summary i.fa-chevron-right {
+        transition: transform 0.2s;
+        font-size: 0.8em;
+    }
+
+    .approfondir[open] > summary i.fa-chevron-right {
+        transform: rotate(90deg);
+    }
+
+    .approfondir > summary .badge-niveau {
+        margin-left: auto;
+        font-size: 0.7em;
+        font-weight: 400;
+        color: #9b9b9b;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+    }
+
+    .approfondir-contenu {
+        padding: 1.1em 1.2em 1.3em 1.2em;
+        border-top: 1px solid #f0e4d8;
+    }
+
+    .approfondir-contenu > *:last-child { margin-bottom: 0; }
+
+    /* Niveau imbrique (encore plus technique) : teinte violette pour le
+       distinguer visuellement du niveau "approfondi" orange */
+    .approfondir .approfondir { background: #fbf7fd; border-color: #e6dcec; }
+    .approfondir .approfondir > summary { color: #483949; background: #f5eef8; }
+    .approfondir .approfondir > summary:hover { background: #efe3f5; }
+    .approfondir .approfondir > summary i.fa-chevron-right { color: #483949; }
+
+/* Encarts : mise en avant ponctuelle (bon a savoir, attention, formule) */
+.encart {
+    margin: 1.5em 0;
+    padding: 1em 1.2em;
+    border-radius: 8px;
+    border-left: 4px solid;
+    display: flex;
+    gap: 0.8em;
+    align-items: flex-start;
+}
+
+    .encart .encart-icone {
+        font-size: 1.3em;
+        line-height: 1.4;
+        flex-shrink: 0;
+    }
+
+    .encart p:last-child { margin-bottom: 0; }
+    .encart strong.encart-titre { display: block; margin-bottom: 0.3em; }
+
+    .encart-savoir { background: #eef6f4; border-color: #4a9d8f; }
+    .encart-savoir strong.encart-titre { color: #3d8377; }
+
+    .encart-attention { background: #fdf1ea; border-color: #d35400; }
+    .encart-attention strong.encart-titre { color: #d35400; }
+
+    .encart-formule { background: #f5eef8; border-color: #483949; }
+    .encart-formule strong.encart-titre { color: #483949; }
+
+/* Termes techniques avec definition au survol / focus (glossaire inline) */
+.terme {
+    border-bottom: 1px dotted #d35400;
+    cursor: help;
+    position: relative;
+    color: #483949;
+    font-weight: 600;
+}
+
+    .terme:hover::after,
+    .terme:focus::after {
+        content: attr(data-def);
+        position: absolute;
+        left: 0;
+        bottom: 1.6em;
+        background: #2b252c;
+        color: #fff;
+        padding: 0.6em 0.9em;
+        border-radius: 6px;
+        font-size: 0.8em;
+        font-weight: 400;
+        width: max-content;
+        max-width: 260px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+    }
+
+/* Mise en page du chapitre : grille a 3 colonnes (marge / contenu / marge)
+   pour que le corps central ne contienne vraiment que le texte, centre a
+   largeur de lecture fixe, et que le sommaire vive dans la marge de
+   gauche plutot que de partager une colonne avec le contenu (ce qui
+   decalait tout vers la droite). Les deux colonnes de marge sont des 1fr
+   identiques => le contenu du milieu est toujours parfaitement centre. */
+.chapitre-layout {
+    position: relative; /* ancre pour .sommaire-wrap (position: absolute) */
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) min(760px, 100%) minmax(0, 1fr);
+    column-gap: 2.5em;
+}
+
+    .chapitre-contenu {
+        grid-column: 2;
+        min-width: 0; /* evite le debordement des tableaux/code dans la grille */
+    }
+
+@media screen and (max-width: 1200px) {
+    /* En dessous de 1200px, la marge de gauche est trop etroite pour
+       accueillir le sommaire sans chevaucher le contenu : on repasse en
+       une seule colonne, sommaire au-dessus. */
+    .chapitre-layout { display: block; }
+}
+
+/* Rail du sommaire : place horizontalement dans la marge de gauche via
+   position: absolute, calcule pour venir exactement affleurer le bord
+   gauche du contenu centre (50% + moitie de sa largeur + l'espacement),
+   quelle que soit la largeur du conteneur. Volontairement separe de
+   .sommaire-lateral (sticky) ci-dessous : combiner position:sticky
+   directement a un item de grille avec justify-self s'est avere ignore
+   par Chrome dans ce montage precis. En sortant le rail de la grille via
+   position:absolute, le sticky de l'enfant fonctionne normalement. */
+.sommaire-wrap {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: calc(50% + 380px + 2.5em); /* 380px = moitie des 760px de .chapitre-contenu */
+    width: 160px;
+}
+
+@media screen and (max-width: 1200px) {
+    .sommaire-wrap { position: static; width: 100%; margin-bottom: 1.5em; }
+}
+
+/* Sommaire lateral sticky (scrollspy), a l'interieur du rail ci-dessus.
+   Pas sticky en dessous de 1200px : il passe au-dessus du contenu,
+   pleine largeur, et resterait sinon epingle en permanence au detriment
+   de l'espace de lecture. Reste volontairement compact (petit label,
+   liens serres) pour rester un repere discret plutot qu'un bloc qui
+   concurrence le contenu. */
+.sommaire-lateral {
+    position: sticky;
+    top: 2em;
+}
+
+@media screen and (max-width: 1200px) {
+    .sommaire-lateral { position: static; }
+}
+
+/* Separateurs entre sous-parties d'un chapitre : volontairement distincts
+   du <hr> du site (qui est decale de 1em vers le bas via position:relative
+   et chevauche le contenu suivant, voir plus haut). */
+.chapitre-contenu section + section {
+    margin-top: 2.5em;
+    padding-top: 2.5em;
+    border-top: 1px solid #e5e5e5;
+}
+
+/* Force le passage sous une image flottante (.image.left / .image.right)
+   quand un element doit reprendre toute la largeur juste apres. */
+.clear { clear: both; }
+
+/* Combinaison .left/.right avec .small/.medium (image flottante et
+   etroite) : .image.small/.medium (plus haut dans ce fichier) mettent
+   margin-left/right a auto pour centrer l'image seule, ce qui annule le
+   retrait laisse par .image.left/.right et colle le texte contre l'image.
+   Selecteur a 3 classes = plus specifique, s'applique quel que soit
+   l'ordre dans le fichier. */
+.image.left.small, .image.left.medium {
+    margin: 0 2em 1.5em 0;
+}
+.image.right.small, .image.right.medium {
+    margin: 0 0 1.5em 2em;
+}
+
+/* Separateur du footer (fond sombre) : le <hr> du site est decale de
+   1em vers le bas (position: relative; top: 1em dans main.css) et
+   chevauche le texte juste en dessous (ex. le titre "Galerie"). Remplace
+   toutes les proprietes problematiques plutot que d'en ajouter par-dessus. */
+.footer-divider {
+    position: static;
+    top: auto;
+    height: 0;
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin: 0 0 1.5em 0;
+}
+
+/* Mot ou valeur en style code (unite, variable, extrait technique) */
+code {
+    background: #f5f0eb;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: #483949;
+}
+
+    .sommaire-lateral h4 {
+        font-size: 0.75em;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #9b9b9b;
+        margin-bottom: 0.6em;
+    }
+
+    .sommaire-lateral nav a {
+        display: block;
+        padding: 0.25em 0 0.25em 0.7em;
+        border-left: 2px solid #e5e5e5;
+        color: #767676;
+        font-size: 0.85em;
+        line-height: 1.3em;
+        transition: all 0.15s;
+    }
+
+    .sommaire-lateral nav a:hover { color: #d35400; }
+
+    .sommaire-lateral nav a.actif {
+        border-left-color: #d35400;
+        color: #d35400;
+        font-weight: 600;
+    }
+
+/* Barre de progression de lecture, fixee en haut de la fenetre */
+#reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: #d35400;
+    z-index: 9999;
+    width: 0%;
+}
+
+/* Apparition douce au scroll (piloté par jquery.scrollex, deja charge
+   sur toutes les pages) */
+.reveal-scroll {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+    .reveal-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+/* Variante sombre du tableau par defaut, pour les donnees techniques
+   (composition, indices, mesures...) */
+table.donnees-tech thead { background: #483949; }
+table.donnees-tech th { color: #fff; }
 
 /*  * { outline: 1px solid rgba(255, 0, 0, 0.3) !important; } */

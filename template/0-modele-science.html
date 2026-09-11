@@ -12,16 +12,34 @@
 </head>
 <body class="js-loading">
 <!--
-  MODELE "SCIENCE"
-  =================
+  MODELE "SCIENCE" - lecture par niveaux de profondeur
+  =======================================================
   A utiliser pour un nouveau chapitre scientifique dans volcan-html-files/
-  (science-*.html) : sous-parties thématiques, galerie de schémas, sources,
-  et liens vers les chapitres suivants.
+  (science-*.html).
+
+  Principe : chaque section commence par une explication vulgarisée
+  toujours visible. Le lecteur qui veut aller plus loin ouvre les blocs
+  "Pour aller plus loin" (<details class="approfondir">), qui peuvent
+  eux-memes contenir un niveau encore plus technique imbrique. Personne
+  n'est oblige de tout lire, mais le contenu pointu est la pour qui le
+  veut.
+
+  Composants disponibles (cherche ces classes dans le fichier) :
+   - .approfondir            bloc depliable "Pour aller plus loin"
+   - .encart-savoir / -attention / -formule   encarts colores
+   - .terme                  mot avec definition au survol/focus (glossaire)
+   - .sommaire-lateral       sommaire sticky qui suit le scroll
+   - #reading-progress       barre de progression de lecture (deja dans le HTML)
+   - .reveal-scroll          fait apparaitre une section en douceur au scroll
+   - table.default.donnees-tech   tableau de donnees, en-tete sombre
 
   Les photos/schemas sont des aplats de couleur en attendant les vrais :
-  chercher "PLACEHOLDER". Les textes de demonstration sont en Lorem Ipsum
-  (latin) : chercher "Lorem ipsum" / "Commodo id natoque...".
+  chercher "PLACEHOLDER". Les textes de demonstration sont indicatifs :
+  remplace-les par le vrai contenu, garde la structure.
 -->
+
+<div id="reading-progress"></div>
+
 <div id="page-wrapper">
 
      <!-- Header -->
@@ -36,111 +54,250 @@
         </div>
     </div>
 
-
     <!-- Main -->
     <div class="wrapper style1">
         <div class="container">
+
             <article id="main" class="special">
                 <header>
                     <h2><a href="#">Nom du chapitre</a></h2>
-                    <p>Pourquoi ce chapitre</p>
+                    <p>Pourquoi ce chapitre : une phrase qui donne envie de lire, pas un resume technique.</p>
                 </header>
-                <hr>
-                    <section id="sous-partie-1">
-                        <header>
-                        <h3>Sous partie 1</h3>
-                        </header>
-                            <h4>Sous sous partie 1</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
-                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            </p>
-                    </section>
+                <!-- Pas de <hr> ici : le hr du site est decale de 1em vers le
+                     bas (position: relative; top: 1em dans main.css), ce qui
+                     le fait chevaucher le contenu juste en dessous. Les
+                     marges du header suffisent pour l'espacement. -->
+            </article>
 
-                    <section id="sous-partie-2">
-                        <header>
-                        <h3>Sous partie 2</h3>
-                        </header>
-                            <p>
-                                Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur blandit tempus
-                                porttitor. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur. Nullam
-                                quis risus eget urna mollis ornare vel eu leo.
-                            </p>
-                    </section>
-                    <section id="sous-partie-3">
-                        <header>
-                        <h3>Sous partie 3</h3>
-                        </header>
-                            <p>
-                                Sed posuere consectetur est at lobortis. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-                                ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
-                                ridiculus mus.
-                            </p>
-                    </section>
+            <div class="chapitre-layout">
 
+                <!-- Sommaire lateral, sticky : suit le scroll, met en
+                     surbrillance la section en cours de lecture (voir le
+                     script en bas de page). Rail etroit dans la marge du
+                     contenu (pas une vraie colonne large) pour que le
+                     contenu reste visuellement centre sur la page. Passe
+                     au-dessus du contenu, en pleine largeur, sous 1200px.
 
-            <!-- Galerie simple -->
-            <section id="galerie">
-                <header>
-                    <h2><a href="../galerie.html?tag=exemple">Galerie photo, graphes et schémas</a></h2>
-                </header>
-                <div class="row gtr-25">
-                    <div class="col-3">
-                        <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%235f6a6b'/%3E%3C/svg%3E" alt="Galerie 1" /></span>
-                    </div>
-                    <div class="col-3">
-                        <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%234a6fa5'/%3E%3C/svg%3E" alt="Galerie 2" /></span>
-                    </div>
-                    <div class="col-3">
-                        <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23748071'/%3E%3C/svg%3E" alt="Galerie 3" /></span>
-                    </div>
-                    <div class="col-3">
-                        <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23d8722f'/%3E%3C/svg%3E" alt="galerie 4" /></span>
-                    </div>
+                     Structure en 2 niveaux : .sommaire-wrap (position
+                     absolute) place le rail horizontalement dans la marge
+                     sans participer a la grille ; .sommaire-lateral
+                     (position sticky) gere le suivi vertical au scroll a
+                     l'interieur. Les deux ensemble sur le meme element ne
+                     fonctionnent pas de façon fiable (sticky combine a un
+                     item de grille avec justify-self semble ignore par
+                     Chrome dans ce cas). -->
+                <div class="sommaire-wrap">
+                <aside class="sommaire-lateral">
+                    <h4>Dans ce chapitre</h4>
+                    <nav>
+                        <a href="#sous-partie-1">Sous-partie 1</a>
+                        <a href="#sous-partie-2">Sous-partie 2</a>
+                        <a href="#sous-partie-3">Sous-partie 3</a>
+                        <a href="#references">Références</a>
+                    </nav>
+                </aside>
                 </div>
-            </section>
 
-            <hr />
+                <div class="chapitre-contenu">
 
-            <section id="references">
-                <header>
-                    <h3>Références utilisées</h3>
-                </header>
-                <ul>
-                    <li>Global Volcanism Program (GVP), Smithsonian Institution — <a href="https://volcano.si.edu/" target="_blank">volcano.si.edu</a></li>
-                    <li>Observatoire volcanologique et sismologique [Nom] — rapports annuels</li>
-                    <li>[Auteur, Année]. <em>Titre de l'article scientifique</em>, Journal, DOI:xxxx</li>
-                    <li>USGS Volcano Hazards Program — <a href="https://volcanoes.usgs.gov/" target="_blank">volcanoes.usgs.gov</a></li>
-                </ul>
-                </section>
+                    <!-- ============ SOUS-PARTIE 1 ============ -->
+                    <section id="sous-partie-1" class="reveal-scroll">
+                        <header>
+                            <h3>Sous-partie 1</h3>
+                        </header>
 
+                        <p>
+                            Le niveau "vulgarisé" reste toujours visible : une explication claire, avec des
+                            analogies si besoin, compréhensible sans bagage scientifique. C'est ici qu'on
+                            introduit par exemple le <span class="terme" tabindex="0" data-def="Dôme de lave : accumulation de magma trop visqueux pour s'écouler, qui s'empile au-dessus de l'évent volcanique.">dôme de lave</span>
+                            et pourquoi il se forme.
+                        </p>
 
-            <!-- Section à trois colonnes -->
-            <header>
-                <h2>Chapitres suivants</h2>
-            </header>
-            <div class="row">
-                <article class="col-4 col-12-mobile special">
-                    <a href="#" class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%235f6a6b'/%3E%3C/svg%3E" alt="" /></a>
+                        <div class="encart encart-savoir">
+                            <span class="encart-icone">🔬</span>
+                            <div>
+                                <strong class="encart-titre">Le savais-tu ?</strong>
+                                <p>Un encart pour une info marquante, une anecdote ou un chiffre surprenant — ça casse le texte et ça aide à mémoriser.</p>
+                            </div>
+                        </div>
+
+                        <!-- Niveau 2 : approfondissement, ferme par defaut -->
+                        <details class="approfondir">
+                            <summary>
+                                <i class="fa-solid fa-chevron-right"></i>
+                                Pour aller plus loin : le mécanisme en détail
+                                <span class="badge-niveau">niveau 2</span>
+                            </summary>
+                            <div class="approfondir-contenu">
+                                <p>
+                                    Ici, le contenu devient plus technique : mécanismes physiques, chiffres précis,
+                                    vocabulaire spécialisé. Le lecteur qui a ouvert ce bloc est déjà motivé pour
+                                    aller plus loin, on peut être plus dense.
+                                </p>
+
+                                <div class="encart encart-formule">
+                                    <span class="encart-icone">📐</span>
+                                    <div>
+                                        <strong class="encart-titre">Formule</strong>
+                                        <p>Indice d'explosivité volcanique (VEI) ≈ log₁₀(volume de matériel éjecté en m³) − 5</p>
+                                    </div>
+                                </div>
+
+                                <!-- Niveau 3 : encore plus pointu, imbrique dans le niveau 2 -->
+                                <details class="approfondir">
+                                    <summary>
+                                        <i class="fa-solid fa-chevron-right"></i>
+                                        Données et sources techniques
+                                        <span class="badge-niveau">niveau 3</span>
+                                    </summary>
+                                    <div class="approfondir-contenu">
+                                        <p>Le niveau le plus pointu : tableaux de mesures, comparaisons, références aux études. Réservé à qui veut vraiment creuser.</p>
+
+                                        <table class="default donnees-tech">
+                                            <thead>
+                                                <tr><th>Éruption</th><th>Année</th><th>VEI</th><th>Volume éjecté</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td>Exemple A</td><td>19xx</td><td>4</td><td>~0,1 km³</td></tr>
+                                                <tr><td>Exemple B</td><td>19xx</td><td>6</td><td>~10 km³</td></tr>
+                                                <tr><td>Exemple C</td><td>20xx</td><td>3</td><td>~0,01 km³</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </details>
+                            </div>
+                        </details>
+                    </section>
+
+                    <!-- ============ SOUS-PARTIE 2 ============ -->
+                    <section id="sous-partie-2" class="reveal-scroll">
+                        <header>
+                            <h3>Sous-partie 2</h3>
+                        </header>
+
+                        <p>
+                            Chaque sous-partie suit le même principe : texte accessible d'abord, puis
+                            approfondissement optionnel. Pas besoin d'utiliser tous les composants à chaque
+                            fois — un encart "attention" par exemple, pour nuancer une idée reçue :
+                        </p>
+
+                        <div class="encart encart-attention">
+                            <span class="encart-icone">⚠️</span>
+                            <div>
+                                <strong class="encart-titre">Idée reçue</strong>
+                                <p>À utiliser pour corriger une confusion fréquente ou nuancer une simplification faite plus haut dans le texte.</p>
+                            </div>
+                        </div>
+
+                        <details class="approfondir">
+                            <summary>
+                                <i class="fa-solid fa-chevron-right"></i>
+                                Pour aller plus loin
+                                <span class="badge-niveau">niveau 2</span>
+                            </summary>
+                            <div class="approfondir-contenu">
+                                <p>Contenu approfondi de la sous-partie 2.</p>
+                            </div>
+                        </details>
+                    </section>
+
+                    <!-- ============ SOUS-PARTIE 3 ============ -->
+                    <section id="sous-partie-3" class="reveal-scroll">
+                        <header>
+                            <h3>Sous-partie 3</h3>
+                        </header>
+
+                        <!-- Image flottante a gauche (.image.left), texte qui
+                             s'enroule autour : ideal pour une petite photo ou
+                             un schema au milieu d'un paragraphe. .small la
+                             limite a 40% de large (voir aussi .medium, 65%). -->
+                        <span class="image left small">
+                            <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='400'%3E%3Crect width='500' height='400' fill='%234a6fa5'/%3E%3C/svg%3E" alt="Schema explicatif (PLACEHOLDER)" />
+                        </span>
+
+                        <p>
+                            Une sous-partie peut aussi n'avoir que le niveau vulgarisé, sans bloc
+                            "approfondir" — tous les composants sont optionnels, à utiliser seulement
+                            quand ça a du sens pour le sujet traité. Une image flottante comme celle-ci
+                            à gauche fonctionne bien pour un schéma explicatif qui accompagne le texte
+                            sans l'interrompre : le paragraphe continue de s'enrouler autour d'elle sur
+                            plusieurs lignes, comme dans un article de presse. Pense à décrire l'image
+                            dans l'attribut <code>alt</code> pour l'accessibilité et le référencement
+                            Google Images.
+                        </p>
+
+                        <!-- Image pleine largeur avec legende (figure + figcaption),
+                             le style deja utilise sur tes pages pays. clear:both via
+                             la classe "clear" evite qu'elle ne chevauche le flottant
+                             ci-dessus si le texte est court. -->
+                        <figure class="clear">
+                            <span class="image fit">
+                                <img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='500'%3E%3Crect width='1200' height='500' fill='%23748071'/%3E%3C/svg%3E" alt="Vue d'ensemble (PLACEHOLDER)" />
+                            </span>
+                            <figcaption>Légende de l'image, ou crédit photo — comme sur tes pages pays.</figcaption>
+                        </figure>
+                    </section>
+
+                    <!-- Galerie simple -->
+                    <section id="galerie" class="reveal-scroll">
+                        <header>
+                            <h2><a href="../galerie.html?tag=exemple">Galerie photo, graphes et schémas</a></h2>
+                        </header>
+                        <div class="row gtr-25">
+                            <div class="col-3">
+                                <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%235f6a6b'/%3E%3C/svg%3E" alt="Galerie 1" /></span>
+                            </div>
+                            <div class="col-3">
+                                <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%234a6fa5'/%3E%3C/svg%3E" alt="Galerie 2" /></span>
+                            </div>
+                            <div class="col-3">
+                                <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23748071'/%3E%3C/svg%3E" alt="Galerie 3" /></span>
+                            </div>
+                            <div class="col-3">
+                                <span class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23d8722f'/%3E%3C/svg%3E" alt="galerie 4" /></span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="references" class="reveal-scroll">
+                        <header>
+                            <h3>Références utilisées</h3>
+                        </header>
+                        <ul>
+                            <li>Global Volcanism Program (GVP), Smithsonian Institution — <a href="https://volcano.si.edu/" target="_blank">volcano.si.edu</a></li>
+                            <li>Observatoire volcanologique et sismologique [Nom] — rapports annuels</li>
+                            <li>[Auteur, Année]. <em>Titre de l'article scientifique</em>, Journal, DOI:xxxx</li>
+                            <li>USGS Volcano Hazards Program — <a href="https://volcanoes.usgs.gov/" target="_blank">volcanoes.usgs.gov</a></li>
+                        </ul>
+                    </section>
+
+                    <!-- Section à trois colonnes -->
                     <header>
-                        <h3><a href="#">Nom du chapitre n+1</a></h3>
+                        <h2>Chapitres suivants</h2>
                     </header>
-                </article>
-                <article class="col-4 col-12-mobile special">
-                    <a href="#" class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%234a6fa5'/%3E%3C/svg%3E" alt="" /></a>
-                    <header>
-                        <h3><a href="#">Nom du chapitre n+2</a></h3>
-                    </header>
-                </article>
-                <article class="col-4 col-12-mobile special">
-                    <a href="#" class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23748071'/%3E%3C/svg%3E" alt="" /></a>
-                    <header>
-                        <h3><a href="#">Nom du chapitre n+3</a></h3>
-                    </header>
-                </article>
-            </div>
+                    <div class="row">
+                        <article class="col-4 col-12-mobile special">
+                            <a href="#" class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%235f6a6b'/%3E%3C/svg%3E" alt="" /></a>
+                            <header>
+                                <h3><a href="#">Nom du chapitre n+1</a></h3>
+                            </header>
+                        </article>
+                        <article class="col-4 col-12-mobile special">
+                            <a href="#" class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%234a6fa5'/%3E%3C/svg%3E" alt="" /></a>
+                            <header>
+                                <h3><a href="#">Nom du chapitre n+2</a></h3>
+                            </header>
+                        </article>
+                        <article class="col-4 col-12-mobile special">
+                            <a href="#" class="image fit"><img loading="lazy" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450'%3E%3Crect width='600' height='450' fill='%23748071'/%3E%3C/svg%3E" alt="" /></a>
+                            <header>
+                                <h3><a href="#">Nom du chapitre n+3</a></h3>
+                            </header>
+                        </article>
+                    </div>
+
+                </div><!-- /.chapitre-contenu -->
+            </div><!-- /.chapitre-layout -->
 
         </div>
     </div>
@@ -159,6 +316,64 @@
 <script src="../assets/js/gallery-data.js"></script>
 <script src="../assets/js/nav-data.js"></script>
   <script src="../assets/js/main.js"></script>
+
+<script>
+    // Fonctionnalites propres au modele "science" : barre de progression,
+    // apparition au scroll et sommaire actif. Isole ici (pas dans main.js)
+    // car specifique a ce type de page.
+    document.addEventListener("DOMContentLoaded", function() {
+
+        // --- Barre de progression de lecture ---
+        var $progress = document.getElementById('reading-progress');
+        function updateProgress() {
+            var scrollTop = window.scrollY;
+            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            $progress.style.width = pct + '%';
+        }
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress();
+
+        // --- Apparition douce au scroll ---
+        // Verification manuelle (getBoundingClientRect) plutot que scrollex :
+        // en mode "middle", la zone de declenchement se situe au milieu de
+        // la fenetre, donc sur un ecran haut la toute premiere section
+        // (pres du haut de page) ne passe jamais par cette zone et reste
+        // invisible en permanence. Ici, tout ce qui est deja visible au
+        // chargement apparait immediatement ; le reste apparait des qu'il
+        // entre dans la fenetre.
+        var revealEls = document.querySelectorAll('.reveal-scroll');
+        function revealOnScroll() {
+            revealEls.forEach(function(el) {
+                if (el.classList.contains('is-visible')) return;
+                if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+                    el.classList.add('is-visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealOnScroll, { passive: true });
+        revealOnScroll();
+
+        // --- Sommaire lateral actif selon la section visible ---
+        var sections = Array.prototype.slice.call(document.querySelectorAll('#main, section[id]'))
+            .filter(function(s) { return s.id; });
+        var links = document.querySelectorAll('.sommaire-lateral nav a');
+
+        function updateSommaire() {
+            var current = null;
+            sections.forEach(function(s) {
+                if (s.getBoundingClientRect().top < window.innerHeight * 0.4) {
+                    current = s.id;
+                }
+            });
+            links.forEach(function(a) {
+                a.classList.toggle('actif', a.getAttribute('href') === '#' + current);
+            });
+        }
+        window.addEventListener('scroll', updateSommaire, { passive: true });
+        updateSommaire();
+    });
+</script>
 
 </div>
 </body>
