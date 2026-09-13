@@ -2591,9 +2591,14 @@ body:not(.homepage) #header hr {
 @media screen and (max-width: 736px) {
     .hero-country {
         min-height: 40vh;
+        /* background-attachment: fixed n'est pas supporte sur Safari iOS (image invisible) */
+        background-attachment: scroll;
     }
     .hero-country h1 {
         font-size: 2.5em;
+    }
+    .hero-custom {
+        background-attachment: scroll;
     }
 }
 
@@ -4369,5 +4374,126 @@ code {
    (composition, indices, mesures...) */
 table.donnees-tech thead { background: #483949; }
 table.donnees-tech th { color: #fff; }
+
+/* ============================================================
+   Quiz (QCM) : meme esprit visuel que les encarts / .approfondir
+   ci-dessus (mêmes couleurs, mêmes rayons de bordure). Feedback
+   immediat par question au clic, pas de bouton "valider" global :
+   voir le script quiz en bas de template/0-modele-science.html.
+   ============================================================ */
+.quiz-question {
+    margin: 1.5em 0;
+    padding: 1.2em 1.3em;
+    border: 1px solid #e5d5c8;
+    border-radius: 8px;
+    background: #fdfaf7;
+}
+
+    .quiz-enonce {
+        font-weight: 600;
+        color: #483949;
+        margin-bottom: 0.9em;
+    }
+
+    .quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6em;
+    }
+
+    .quiz-option {
+        display: flex;
+        align-items: center;
+        gap: 0.7em;
+        width: 100%;
+        text-align: left;
+        padding: 0.7em 1em;
+        border: 1px solid #e5d5c8;
+        border-radius: 6px;
+        background: #fff;
+        color: #5b5b5b;
+        font: inherit;
+        font-size: 0.95em;
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+    }
+
+    .quiz-option:hover:not(:disabled) {
+        background: #fff6ef;
+        border-color: #d35400;
+        color: #5b5b5b; /* le survol global "button:hover" du site passe le texte en blanc, on le reprend ici */
+    }
+
+    .quiz-option:disabled { cursor: default; }
+
+    .quiz-option .quiz-option-icone {
+        flex-shrink: 0;
+        width: 1.2em;
+        text-align: center;
+        opacity: 0;
+    }
+
+    .quiz-option.is-correct {
+        background: #eef6f4;
+        border-color: #4a9d8f;
+        color: #3d8377;
+        font-weight: 600;
+    }
+
+    .quiz-option.is-incorrect {
+        background: #fdf1ea;
+        border-color: #d35400;
+        color: #d35400;
+        font-weight: 600;
+    }
+
+    .quiz-option.is-correct .quiz-option-icone,
+    .quiz-option.is-incorrect .quiz-option-icone { opacity: 1; }
+
+    .quiz-option.is-faded { opacity: 0.5; }
+
+    .quiz-explication {
+        display: none;
+        margin: 0.9em 0 0 0;
+        padding: 0.8em 1em;
+        border-radius: 6px;
+        background: #f5eef8;
+        border-left: 4px solid #483949;
+        font-size: 0.9em;
+        color: #483949;
+    }
+
+    .quiz-question.is-answered .quiz-explication { display: block; }
+
+.quiz-resultat {
+    margin: 1.8em 0 0.5em 0;
+    padding: 1.1em 1.3em;
+    border-radius: 8px;
+    background: #483949;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+    /* couleur explicite : la regle globale "strong, b { color: #483949 }" du
+       site rendrait sinon le chiffre invisible sur ce fond violet fonce */
+    .quiz-resultat .quiz-score strong { font-size: 1.3em; color: #fff; }
+
+    .quiz-reset {
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: transparent;
+        color: #fff;
+        padding: 0.5em 1.1em;
+        border-radius: 6px;
+        cursor: pointer;
+        font: inherit;
+        font-size: 0.9em;
+        transition: background 0.2s;
+    }
+
+    .quiz-reset:hover { background: rgba(255, 255, 255, 0.15); }
 
 /*  * { outline: 1px solid rgba(255, 0, 0, 0.3) !important; } */

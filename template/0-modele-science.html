@@ -51,6 +51,7 @@
             <span><a href="#sous-partie-1">Sous-partie 1</a></span>
             <span><a href="#sous-partie-2">Sous-partie 2</a></span>
             <span><a href="#sous-partie-3">Sous-partie 3</a></span>
+            <span><a href="#quiz">Quiz</a></span>
         </div>
     </div>
 
@@ -93,6 +94,7 @@
                         <a href="#sous-partie-1">Sous-partie 1</a>
                         <a href="#sous-partie-2">Sous-partie 2</a>
                         <a href="#sous-partie-3">Sous-partie 3</a>
+                        <a href="#quiz">Quiz</a>
                         <a href="#references">Références</a>
                     </nav>
                 </aside>
@@ -259,6 +261,85 @@
                         </div>
                     </section>
 
+                    <!-- ============ QUIZ ============
+                         QCM avec correction immediate au clic (pas de bouton
+                         "valider" global) : voir le script en bas de page.
+                         Chaque reponse porte data-correct="true|false" ; le
+                         bouton clique et, s'il est faux, la bonne reponse
+                         sont mis en evidence, l'explication apparait, et le
+                         score global (encart sombre en bas) se met a jour.
+                         Duplique ce bloc <div class="quiz-question"> pour
+                         ajouter une question. -->
+                    <section id="quiz" class="reveal-scroll">
+                        <header>
+                            <h2>Quiz : teste tes connaissances</h2>
+                            <p>Cinq questions pour vérifier ce que tu as retenu. Clique une réponse pour voir tout de suite si c'est la bonne.</p>
+                        </header>
+
+                        <div class="quiz" id="quiz-volcans">
+
+                            <div class="quiz-question" data-quiz-question>
+                                <p class="quiz-enonce">1. Qu'est-ce qui distingue un volcan effusif d'un volcan explosif ?</p>
+                                <div class="quiz-options">
+                                    <button type="button" class="quiz-option" data-correct="false">La couleur de la lave</button>
+                                    <button type="button" class="quiz-option" data-correct="true">La viscosité du magma</button>
+                                    <button type="button" class="quiz-option" data-correct="false">L'altitude du sommet</button>
+                                    <button type="button" class="quiz-option" data-correct="false">La présence de neige au sommet</button>
+                                </div>
+                                <p class="quiz-explication">Un magma fluide (peu visqueux) laisse échapper les gaz facilement : l'éruption est effusive, avec des coulées de lave. Un magma visqueux piège les gaz, la pression monte, et l'éruption devient explosive.</p>
+                            </div>
+
+                            <div class="quiz-question" data-quiz-question>
+                                <p class="quiz-enonce">2. Quel gaz est émis en plus grande quantité par les volcans ?</p>
+                                <div class="quiz-options">
+                                    <button type="button" class="quiz-option" data-correct="false">Le dioxyde de carbone (CO₂)</button>
+                                    <button type="button" class="quiz-option" data-correct="false">Le dioxyde de soufre (SO₂)</button>
+                                    <button type="button" class="quiz-option" data-correct="true">La vapeur d'eau (H₂O)</button>
+                                    <button type="button" class="quiz-option" data-correct="false">Le méthane (CH₄)</button>
+                                </div>
+                                <p class="quiz-explication">La vapeur d'eau représente en général plus de la moitié des gaz émis, loin devant le CO₂ et le SO₂ — même si ces derniers sont ceux qu'on surveille le plus pour évaluer le risque d'éruption.</p>
+                            </div>
+
+                            <div class="quiz-question" data-quiz-question>
+                                <p class="quiz-enonce">3. Comment s'appelle l'échelle qui mesure la puissance d'une éruption ?</p>
+                                <div class="quiz-options">
+                                    <button type="button" class="quiz-option" data-correct="false">L'échelle de Richter</button>
+                                    <button type="button" class="quiz-option" data-correct="true">L'indice d'explosivité volcanique (VEI)</button>
+                                    <button type="button" class="quiz-option" data-correct="false">L'échelle de Fujita</button>
+                                    <button type="button" class="quiz-option" data-correct="false">L'échelle de Beaufort</button>
+                                </div>
+                                <p class="quiz-explication">Richter mesure les séismes, Fujita les tornades, Beaufort le vent. Pour les éruptions, on utilise le VEI, une échelle logarithmique basée sur le volume de matériel éjecté.</p>
+                            </div>
+
+                            <div class="quiz-question" data-quiz-question>
+                                <p class="quiz-enonce">4. Qu'est-ce qu'un dôme de lave ?</p>
+                                <div class="quiz-options">
+                                    <button type="button" class="quiz-option" data-correct="false">Le cratère au sommet du volcan</button>
+                                    <button type="button" class="quiz-option" data-correct="false">Un nuage de cendres en forme de champignon</button>
+                                    <button type="button" class="quiz-option" data-correct="true">Un magma trop visqueux pour s'écouler, qui s'empile au-dessus de l'évent</button>
+                                    <button type="button" class="quiz-option" data-correct="false">Un lac de lave permanent</button>
+                                </div>
+                                <p class="quiz-explication">Le dôme de lave s'accumule directement sur l'évent au lieu de couler, comme sur le Santiaguito. Son instabilité peut provoquer des effondrements soudains et des coulées pyroclastiques.</p>
+                            </div>
+
+                            <div class="quiz-question" data-quiz-question>
+                                <p class="quiz-enonce">5. Qu'est-ce que la « ceinture de feu du Pacifique » ?</p>
+                                <div class="quiz-options">
+                                    <button type="button" class="quiz-option" data-correct="false">Une chaîne de volcans en Islande</button>
+                                    <button type="button" class="quiz-option" data-correct="true">Une zone qui encercle l'océan Pacifique, concentrant la majorité des volcans actifs du monde</button>
+                                    <button type="button" class="quiz-option" data-correct="false">Le nom donné aux éruptions les plus chaudes</button>
+                                    <button type="button" class="quiz-option" data-correct="false">Une zone volcanique en Antarctique</button>
+                                </div>
+                                <p class="quiz-explication">Environ 75% des volcans actifs de la planète et 90% des séismes se trouvent le long de cette bordure du Pacifique, du Guatemala au Kamtchatka en passant par le Japon.</p>
+                            </div>
+
+                            <div class="quiz-resultat" data-quiz-resultat>
+                                <span class="quiz-score">Score : <strong data-quiz-score>0</strong>/<span data-quiz-total>5</span> bonnes réponses</span>
+                                <button type="button" class="quiz-reset" data-quiz-reset>Recommencer le quiz</button>
+                            </div>
+                        </div>
+                    </section>
+
                     <section id="references" class="reveal-scroll">
                         <header>
                             <h3>Références utilisées</h3>
@@ -372,6 +453,73 @@
         }
         window.addEventListener('scroll', updateSommaire, { passive: true });
         updateSommaire();
+
+        // --- Quiz (QCM) : correction immediate au clic sur une reponse,
+        // pas de bouton "valider" global. Defensif : ne fait rien si la
+        // page n'a pas de section .quiz (composant optionnel).
+        document.querySelectorAll('.quiz').forEach(function(quiz) {
+            var questions = quiz.querySelectorAll('[data-quiz-question]');
+            var scoreEl = quiz.querySelector('[data-quiz-score]');
+            var totalEl = quiz.querySelector('[data-quiz-total]');
+            var resetBtn = quiz.querySelector('[data-quiz-reset]');
+            var score = 0;
+
+            if (totalEl) totalEl.textContent = questions.length;
+
+            function updateScore() {
+                if (scoreEl) scoreEl.textContent = score;
+            }
+
+            function clearFeedback(question) {
+                question.classList.remove('is-answered');
+                question.querySelectorAll('.quiz-option').forEach(function(opt) {
+                    opt.disabled = false;
+                    opt.classList.remove('is-correct', 'is-incorrect', 'is-faded');
+                    var icone = opt.querySelector('.quiz-option-icone');
+                    if (icone) icone.remove();
+                });
+            }
+
+            questions.forEach(function(question) {
+                var options = question.querySelectorAll('.quiz-option');
+                options.forEach(function(option) {
+                    option.addEventListener('click', function() {
+                        if (question.classList.contains('is-answered')) return;
+                        question.classList.add('is-answered');
+
+                        if (option.dataset.correct === 'true') {
+                            score++;
+                            updateScore();
+                        }
+
+                        options.forEach(function(opt) {
+                            opt.disabled = true;
+                            var isCorrectOpt = opt.dataset.correct === 'true';
+                            if (isCorrectOpt || opt === option) {
+                                var icone = document.createElement('span');
+                                icone.className = 'quiz-option-icone';
+                                icone.textContent = isCorrectOpt ? '✓' : '✗';
+                                opt.prepend(icone);
+                                opt.classList.add(isCorrectOpt ? 'is-correct' : 'is-incorrect');
+                            } else {
+                                opt.classList.add('is-faded');
+                            }
+                        });
+                    });
+                });
+            });
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', function() {
+                    score = 0;
+                    updateScore();
+                    questions.forEach(clearFeedback);
+                    if (questions[0]) {
+                        questions[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            }
+        });
     });
 </script>
 
