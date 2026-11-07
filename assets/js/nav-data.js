@@ -181,6 +181,7 @@ var NAV_DATA = [
 		children: [
 			{ title: "Matériel", url: "/journal_de_bord/autre/matos.html" },
 			{ title: "Astronomie", url: "/journal_de_bord/autre/astro.html" },
+			{ title: "Textures", url: "/journal_de_bord/autre/texture.html" },
 			{
 				title: "Météorologie",
 				url: "/journal_de_bord/autre/meteo.html",

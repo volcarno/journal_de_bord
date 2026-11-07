@@ -142,7 +142,7 @@ Voyage / rando-trail (12) :
   - voyage-rando-trail/rando-turon-neouvielle.html
   - voyage-rando-trail/rando-vallee-gaube.html
 
-Autre (11) :
+Autre (12) :
   - autre/accueil-autre.html
   - autre/astro.html
   - autre/matos.html
@@ -152,6 +152,7 @@ Autre (11) :
   - autre/reflexions.html
   - autre/reflexions-autres.html
   - autre/reflexions-fast-fashion.html
+  - autre/texture.html (structure + QCM prets, textes latin et photos images/texture/01-20.jpg a fournir)
   - autre/tutoriels/index.html
   - autre/tutoriels/gpx.html
 

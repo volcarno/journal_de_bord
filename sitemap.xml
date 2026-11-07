@@ -46,6 +46,11 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://volcarno.github.io/journal_de_bord/autre/texture.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://volcarno.github.io/journal_de_bord/autre/reflexions.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>

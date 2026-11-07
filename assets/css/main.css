@@ -4496,4 +4496,64 @@ table.donnees-tech th { color: #fff; }
 
     .quiz-reset:hover { background: rgba(255, 255, 255, 0.15); }
 
+/* ============================================================
+   Page Textures (autre/texture.html) : une photo en gros plan +
+   son QCM a cote, en alternance gauche/droite. Reutilise les
+   styles .quiz-* ci-dessus pour les reponses et la description.
+   ============================================================ */
+.banner-texture {
+    background-color: #483949; /* visible tant que bandeau.jpg n'existe pas */
+    background-image: url("../../images/texture/bandeau.jpg");
+    background-position: center;
+}
+
+.texture-intro {
+    max-width: 50em;
+    margin: 0 auto 2.5em auto;
+    text-align: center;
+}
+
+.texture-item.quiz-question {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    align-items: center;
+    margin: 0 0 2.5em 0;
+    padding: 1.5em;
+}
+
+    .texture-item:nth-of-type(even) .texture-photo { order: 2; }
+
+    .texture-photo {
+        aspect-ratio: 1 / 1;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #e5d5c8; /* carre de couleur tant que la photo manque */
+    }
+
+        .texture-photo img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+.texture-appel {
+    max-width: 50em;
+    margin: 3em auto 0 auto;
+    padding: 2em 1.5em;
+    text-align: center;
+    border-top: 1px solid #e5d5c8;
+}
+
+@media screen and (max-width: 736px) {
+    .texture-item.quiz-question {
+        grid-template-columns: 1fr;
+        gap: 1.2em;
+        padding: 1em;
+    }
+
+        .texture-item:nth-of-type(even) .texture-photo { order: 0; }
+}
+
 /*  * { outline: 1px solid rgba(255, 0, 0, 0.3) !important; } */

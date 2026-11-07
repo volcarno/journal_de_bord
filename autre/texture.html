@@ -1,0 +1,538 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Textures</title>
+  <!-- Open Graph / Twitter Card -->
+  <meta name="description" content="Des photos en gros plan de textures étonnantes de la nature : sauras-tu deviner ce qu'elles représentent ?">
+  <link rel="canonical" href="https://volcarno.github.io/journal_de_bord/autre/texture.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Volcarno">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Textures | Volcarno">
+  <meta property="og:description" content="Des photos en gros plan de textures étonnantes de la nature : sauras-tu deviner ce qu'elles représentent ?">
+  <meta property="og:url" content="https://volcarno.github.io/journal_de_bord/autre/texture.html">
+  <meta property="og:image" content="https://volcarno.github.io/journal_de_bord/images/header.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Textures | Volcarno">
+  <meta name="twitter:description" content="Des photos en gros plan de textures étonnantes de la nature : sauras-tu deviner ce qu'elles représentent ?">
+  <meta name="twitter:image" content="https://volcarno.github.io/journal_de_bord/images/header.jpg">
+  <!-- /Open Graph -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="icon" href="../images/favicon-16x16.png" type="image/png">
+  <link rel="icon" href="../images/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="../images/favicon-48x48.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="../images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body class="js-loading">
+<!--
+  PAGE TEXTURES
+  =============
+  - Photos : a deposer dans images/texture/, nommees 01.jpg a 20.jpg.
+    Tant qu'une photo manque, un carre de couleur s'affiche a sa place.
+    Le cadre est carre (aspect-ratio de .texture-photo dans main.css) :
+    la photo est recadree au centre.
+  - QCM : sur chaque bouton, data-correct="true" marque la bonne reponse
+    (une seule par texture). Le texte .quiz-explication apparait apres
+    la reponse. Le score total se met a jour tout seul.
+  - Bandeau : image de fond de .banner-texture (main.css), a placer dans
+    images/texture/bandeau.jpg (fond violet uni tant qu'elle manque).
+  - Textes en latin = a remplacer.
+-->
+  <div id="page-wrapper">
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <section id="banner-image" class="hero-custom banner-texture">
+        <div class="inner">
+            <h2>Textures</h2>
+        </div>
+    </section>
+
+    <!-- Main -->
+    <div class="wrapper style1">
+        <div class="container">
+
+            <p class="texture-intro">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+            <div class="quiz texture-liste" id="quiz-textures">
+
+                <!-- ============ TEXTURE 01 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-01">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/01.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/01.jpg" alt="Texture n°1, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°1 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Aliquip ex ea</button>
+                            <button type="button" class="quiz-option" data-correct="false">Incididunt ut labore</button>
+                            <button type="button" class="quiz-option" data-correct="true">Duis aute irure</button>
+                        </div>
+                        <p class="quiz-explication">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 02 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-02">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/02.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/02.jpg" alt="Texture n°2, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°2 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="true">Sit amet consectetur</button>
+                            <button type="button" class="quiz-option" data-correct="false">Adipiscing elit sed</button>
+                            <button type="button" class="quiz-option" data-correct="false">Occaecat cupidatat</button>
+                        </div>
+                        <p class="quiz-explication">Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 03 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-03">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/03.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/03.jpg" alt="Texture n°3, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°3 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Commodo consequat</button>
+                            <button type="button" class="quiz-option" data-correct="false">Proident sunt in culpa</button>
+                            <button type="button" class="quiz-option" data-correct="true">Sit amet consectetur</button>
+                        </div>
+                        <p class="quiz-explication">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 04 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-04">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/04.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/04.jpg" alt="Texture n°4, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°4 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Ut enim ad minim</button>
+                            <button type="button" class="quiz-option" data-correct="true">Sit amet consectetur</button>
+                            <button type="button" class="quiz-option" data-correct="false">Adipiscing elit sed</button>
+                        </div>
+                        <p class="quiz-explication">Nulla gravida orci a odio, et tempus feugiat. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 05 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-05">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/05.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/05.jpg" alt="Texture n°5, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°5 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="true">Reprehenderit in voluptate</button>
+                            <button type="button" class="quiz-option" data-correct="false">Adipiscing elit sed</button>
+                            <button type="button" class="quiz-option" data-correct="false">Veniam quis nostrud</button>
+                        </div>
+                        <p class="quiz-explication">Donec lobortis risus a elit. Etiam tempor, ut ullamcorper ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 06 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-06">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/06.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/06.jpg" alt="Texture n°6, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°6 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Occaecat cupidatat</button>
+                            <button type="button" class="quiz-option" data-correct="false">Reprehenderit in voluptate</button>
+                            <button type="button" class="quiz-option" data-correct="true">Sit amet consectetur</button>
+                        </div>
+                        <p class="quiz-explication">Maecenas fermentum consequat mi. Donec fermentum, pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 07 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-07">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/07.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/07.jpg" alt="Texture n°7, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°7 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Eiusmod tempor</button>
+                            <button type="button" class="quiz-option" data-correct="false">Veniam quis nostrud</button>
+                            <button type="button" class="quiz-option" data-correct="true">Sit amet consectetur</button>
+                        </div>
+                        <p class="quiz-explication">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 08 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-08">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/08.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/08.jpg" alt="Texture n°8, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°8 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="true">Proident sunt in culpa</button>
+                            <button type="button" class="quiz-option" data-correct="false">Duis aute irure</button>
+                            <button type="button" class="quiz-option" data-correct="false">Sit amet consectetur</button>
+                        </div>
+                        <p class="quiz-explication">Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 09 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-09">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/09.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/09.jpg" alt="Texture n°9, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°9 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Sit amet consectetur</button>
+                            <button type="button" class="quiz-option" data-correct="true">Occaecat cupidatat</button>
+                            <button type="button" class="quiz-option" data-correct="false">Incididunt ut labore</button>
+                        </div>
+                        <p class="quiz-explication">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 10 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-10">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/10.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/10.jpg" alt="Texture n°10, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°10 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="true">Reprehenderit in voluptate</button>
+                            <button type="button" class="quiz-option" data-correct="false">Incididunt ut labore</button>
+                            <button type="button" class="quiz-option" data-correct="false">Occaecat cupidatat</button>
+                        </div>
+                        <p class="quiz-explication">Nulla gravida orci a odio, et tempus feugiat. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 11 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-11">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/11.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/11.jpg" alt="Texture n°11, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°11 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Proident sunt in culpa</button>
+                            <button type="button" class="quiz-option" data-correct="false">Laboris nisi ut</button>
+                            <button type="button" class="quiz-option" data-correct="true">Occaecat cupidatat</button>
+                        </div>
+                        <p class="quiz-explication">Donec lobortis risus a elit. Etiam tempor, ut ullamcorper ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 12 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-12">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/12.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/12.jpg" alt="Texture n°12, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°12 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Dolore magna aliqua</button>
+                            <button type="button" class="quiz-option" data-correct="true">Eiusmod tempor</button>
+                            <button type="button" class="quiz-option" data-correct="false">Ut enim ad minim</button>
+                        </div>
+                        <p class="quiz-explication">Maecenas fermentum consequat mi. Donec fermentum, pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 13 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-13">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/13.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/13.jpg" alt="Texture n°13, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°13 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Eiusmod tempor</button>
+                            <button type="button" class="quiz-option" data-correct="false">Occaecat cupidatat</button>
+                            <button type="button" class="quiz-option" data-correct="true">Adipiscing elit sed</button>
+                        </div>
+                        <p class="quiz-explication">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 14 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-14">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/14.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/14.jpg" alt="Texture n°14, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°14 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Sit amet consectetur</button>
+                            <button type="button" class="quiz-option" data-correct="false">Ut enim ad minim</button>
+                            <button type="button" class="quiz-option" data-correct="true">Fugiat nulla pariatur</button>
+                        </div>
+                        <p class="quiz-explication">Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 15 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-15">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/15.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/15.jpg" alt="Texture n°15, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°15 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Occaecat cupidatat</button>
+                            <button type="button" class="quiz-option" data-correct="true">Reprehenderit in voluptate</button>
+                            <button type="button" class="quiz-option" data-correct="false">Aliquip ex ea</button>
+                        </div>
+                        <p class="quiz-explication">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 16 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-16">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/16.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/16.jpg" alt="Texture n°16, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°16 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Proident sunt in culpa</button>
+                            <button type="button" class="quiz-option" data-correct="true">Velit esse cillum</button>
+                            <button type="button" class="quiz-option" data-correct="false">Commodo consequat</button>
+                        </div>
+                        <p class="quiz-explication">Nulla gravida orci a odio, et tempus feugiat. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 17 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-17">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/17.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/17.jpg" alt="Texture n°17, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°17 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="true">Veniam quis nostrud</button>
+                            <button type="button" class="quiz-option" data-correct="false">Dolore magna aliqua</button>
+                            <button type="button" class="quiz-option" data-correct="false">Qui officia deserunt</button>
+                        </div>
+                        <p class="quiz-explication">Donec lobortis risus a elit. Etiam tempor, ut ullamcorper ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 18 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-18">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/18.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/18.jpg" alt="Texture n°18, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°18 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Proident sunt in culpa</button>
+                            <button type="button" class="quiz-option" data-correct="true">Laboris nisi ut</button>
+                            <button type="button" class="quiz-option" data-correct="false">Excepteur sint</button>
+                        </div>
+                        <p class="quiz-explication">Maecenas fermentum consequat mi. Donec fermentum, pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 19 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-19">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/19.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/19.jpg" alt="Texture n°19, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°19 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Aliquip ex ea</button>
+                            <button type="button" class="quiz-option" data-correct="false">Velit esse cillum</button>
+                            <button type="button" class="quiz-option" data-correct="true">Laboris nisi ut</button>
+                        </div>
+                        <p class="quiz-explication">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam.</p>
+                    </div>
+                </div>
+
+                <!-- ============ TEXTURE 20 ============ -->
+                <div class="texture-item quiz-question reveal-scroll" data-quiz-question id="texture-20">
+                    <div class="texture-photo">
+                        <!-- Photo : images/texture/20.jpg. Le alt ne doit pas donner la reponse ! -->
+                        <img loading="lazy" src="../images/texture/20.jpg" alt="Texture n°20, en gros plan : à toi de deviner" onerror="this.style.visibility='hidden'" />
+                    </div>
+                    <div class="texture-quiz">
+                        <p class="quiz-enonce">Texture n°20 : qu'est-ce que c'est ?</p>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option" data-correct="false">Adipiscing elit sed</button>
+                            <button type="button" class="quiz-option" data-correct="true">Eiusmod tempor</button>
+                            <button type="button" class="quiz-option" data-correct="false">Excepteur sint</button>
+                        </div>
+                        <p class="quiz-explication">Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-resultat" data-quiz-resultat>
+                    <span class="quiz-score">Score : <strong data-quiz-score>0</strong>/<span data-quiz-total>20</span> textures devinées</span>
+                    <button type="button" class="quiz-reset" data-quiz-reset>Recommencer</button>
+                </div>
+            </div>
+
+            <!-- Appel a contribution : texture du mois envoyee par les lecteurs -->
+            <section class="texture-appel">
+                <h3>Et toi, quelle texture as-tu croisée ?</h3>
+                <p>
+                    Un motif étrange sur une écorce, une roche aux formes géométriques, un détail de la nature
+                    que personne ne remarque… Envoie-moi ta plus belle photo de texture en gros plan, avec quelques
+                    mots sur ce qu'elle représente et où tu l'as prise. Chaque mois, je mettrai en avant une
+                    photo de lecteur ici, dans un nouveau QCM !
+                </p>
+                <a class="button" href="mailto:arno.rabault@gmail.com?subject=Texture%20du%20mois%20-%20Volcarno">Envoyer ma texture</a>
+            </section>
+
+        </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="../assets/js/jquery.dropotron.min.js"></script>
+  <script src="../assets/js/jquery.scrolly.min.js"></script>
+  <script src="../assets/js/jquery.scrollex.min.js"></script>
+  <script src="../assets/js/browser.min.js"></script>
+  <script src="../assets/js/breakpoints.min.js"></script>
+  <script src="../assets/js/util.js"></script>
+  <script src="../assets/js/gallery-data.js"></script>
+  <script src="../assets/js/nav-data.js"></script>
+  <script src="../assets/js/main.js"></script>
+
+<script>
+    // Apparition au scroll + QCM : meme logique que template/0-modele-science.html.
+    document.addEventListener("DOMContentLoaded", function() {
+
+        // --- Apparition douce au scroll ---
+        var revealEls = document.querySelectorAll('.reveal-scroll');
+        function revealOnScroll() {
+            revealEls.forEach(function(el) {
+                if (el.classList.contains('is-visible')) return;
+                if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+                    el.classList.add('is-visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealOnScroll, { passive: true });
+        revealOnScroll();
+
+        // --- QCM : correction immediate au clic, la description apparait ---
+        document.querySelectorAll('.quiz').forEach(function(quiz) {
+            var questions = quiz.querySelectorAll('[data-quiz-question]');
+            var scoreEl = quiz.querySelector('[data-quiz-score]');
+            var totalEl = quiz.querySelector('[data-quiz-total]');
+            var resetBtn = quiz.querySelector('[data-quiz-reset]');
+            var score = 0;
+
+            if (totalEl) totalEl.textContent = questions.length;
+
+            function updateScore() {
+                if (scoreEl) scoreEl.textContent = score;
+            }
+
+            function clearFeedback(question) {
+                question.classList.remove('is-answered');
+                question.querySelectorAll('.quiz-option').forEach(function(opt) {
+                    opt.disabled = false;
+                    opt.classList.remove('is-correct', 'is-incorrect', 'is-faded');
+                    var icone = opt.querySelector('.quiz-option-icone');
+                    if (icone) icone.remove();
+                });
+            }
+
+            questions.forEach(function(question) {
+                var options = question.querySelectorAll('.quiz-option');
+                options.forEach(function(option) {
+                    option.addEventListener('click', function() {
+                        if (question.classList.contains('is-answered')) return;
+                        question.classList.add('is-answered');
+
+                        if (option.dataset.correct === 'true') {
+                            score++;
+                            updateScore();
+                        }
+
+                        options.forEach(function(opt) {
+                            opt.disabled = true;
+                            var isCorrectOpt = opt.dataset.correct === 'true';
+                            if (isCorrectOpt || opt === option) {
+                                var icone = document.createElement('span');
+                                icone.className = 'quiz-option-icone';
+                                icone.textContent = isCorrectOpt ? '✓' : '✗';
+                                opt.prepend(icone);
+                                opt.classList.add(isCorrectOpt ? 'is-correct' : 'is-incorrect');
+                            } else {
+                                opt.classList.add('is-faded');
+                            }
+                        });
+                    });
+                });
+            });
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', function() {
+                    score = 0;
+                    updateScore();
+                    questions.forEach(clearFeedback);
+                    if (questions[0]) {
+                        questions[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
